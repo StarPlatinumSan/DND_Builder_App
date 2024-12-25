@@ -5,17 +5,18 @@ const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY
 
 const express = require("express");
 const cors = require("cors");
-
 const app = express();
 const port = 3000;
 
 app.use(cors());
 app.use(express.json());
 
+/* API endpoints */
 app.get("/", (req, res) => {
 	res.send("Backend is running");
 });
 
+/* le endpoint /data est une route qui permet de récupérer les données d'une table, ici c'est pour la table test de la supabase */
 app.get("/data", async (req, res) => {
 	try {
 		const { data, error } = await supabase.from("test").select("*");
@@ -32,6 +33,7 @@ app.get("/data", async (req, res) => {
 	}
 });
 
+/* Vérifie que le lancement du serveur est correct et affiche le port */
 app.listen(port, () => {
 	console.log(`Server is running on port : ${port}`);
 });
