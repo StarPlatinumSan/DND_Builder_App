@@ -1,0 +1,189 @@
+{
+	"races": {
+		"Dragonborn": {
+			"features": {
+				"Ability Score Increase": "Strength +2, Charisma +1",
+				"Draconic Ancestry": "Choose a dragon type for breath weapon and damage resistance.",
+				"Breath Weapon": "Exhale destructive energy based on your draconic ancestry.",
+				"Damage Resistance": "Resistance to the damage type associated with your ancestry."
+			},
+			"speed": 30,
+			"languages": ["Common", "Draconic"]
+		},
+		"Dwarf": {
+			"features": {
+				"Ability Score Increase": "Constitution +2",
+				"Darkvision": "See in dim light within 60 feet as if it were bright light.",
+				"Dwarven Resilience": "Advantage on saving throws against poison, resistance to poison damage.",
+				"Dwarven Combat Training": "Proficiency with battleaxe, handaxe, throwing hammer, and warhammer.",
+				"Tool Proficiency": "Proficiency with one set of artisan's tools.",
+				"Stonecunning": "Advantage on History checks related to the origin of stonework."
+			},
+			"subraces": {
+				"Hill Dwarf": {
+					"features": {
+						"Ability Score Increase": "Wisdom +1",
+						"Dwarven Toughness": "Your hit point maximum increases by 1, and it increases by 1 every time you level."
+					}
+				},
+				"Mountain Dwarf": {
+					"features": {
+						"Ability Score Increase": "Strength +2",
+						"Dwarven Armor Training": "Proficiency with light and medium armor."
+					}
+				}
+			},
+			"speed": 25,
+			"languages": ["Common", "Dwarvish"]
+		},
+		"Elf": {
+			"features": {
+				"Ability Score Increase": "Dexterity +2",
+				"Darkvision": "See in dim light within 60 feet as if it were bright light.",
+				"Keen Senses": "Proficiency in the Perception skill.",
+				"Fey Ancestry": "Advantage on saving throws against being charmed, immune to magic sleep.",
+				"Trance": "Don't need to sleep; meditate for 4 hours to gain a long rest."
+			},
+			"subraces": {
+				"High Elf": {
+					"features": {
+						"Ability Score Increase": "Intelligence +1",
+						"Elf Weapon Training": "Proficiency with longsword, shortsword, shortbow, and longbow.",
+						"Cantrip": "You know one cantrip of your choice from the wizard spell list.",
+						"Extra Language": "You can speak, read, and write one extra language of your choice."
+					}
+				},
+				"Wood Elf": {
+					"features": {
+						"Ability Score Increase": "Wisdom +1",
+						"Elf Weapon Training": "Proficiency with longsword, shortsword, shortbow, and longbow.",
+						"Fleet of Foot": "Your base walking speed increases to 35 feet.",
+						"Mask of the Wild": "You can attempt to hide even when you are only lightly obscured by foliage, heavy rain, falling snow, mist, and other natural phenomena."
+					}
+				},
+				"Dark Elf (Drow)": {
+					"features": {
+						"Ability Score Increase": "Charisma +1",
+						"Superior Darkvision": "See in dim light within 120 feet as if it were bright light.",
+						"Sunlight Sensitivity": "Disadvantage on attack rolls and Perception checks that rely on sight when in direct sunlight.",
+						"Drow Magic": "You know the Dancing Lights cantrip. At level 3, you can cast Faerie Fire once per long rest. At level 5, you can cast Darkness once per long rest.",
+						"Drow Weapon Training": "Proficiency with rapiers, shortswords, and hand crossbows."
+					}
+				}
+			},
+			"speed": 30,
+			"languages": ["Common", "Elvish"]
+		},
+		"Gnome": {
+			"features": {
+				"Ability Score Increase": "Intelligence +2",
+				"Darkvision": "See in dim light within 60 feet as if it were bright light.",
+				"Gnome Cunning": "Advantage on Intelligence, Wisdom, and Charisma saving throws against magic."
+			},
+			"subraces": {
+				"Forest Gnome": {
+					"features": {
+						"Ability Score Increase": "Dexterity +1",
+						"Natural Illusionist": "You know the Minor Illusion cantrip.",
+						"Speak with Small Beasts": "You can communicate simple ideas with Small or smaller beasts."
+					}
+				},
+				"Rock Gnome": {
+					"features": {
+						"Ability Score Increase": "Constitution +1",
+						"Artificer's Lore": "Add twice your proficiency bonus to History checks related to magic items, alchemical objects, or technological devices.",
+						"Tinker": "Use tools to craft small mechanical devices."
+					}
+				}
+			},
+			"speed": 25,
+			"languages": ["Common", "Gnomish"]
+		},
+		"Half-Elf": {
+			"features": {
+				"Ability Score Increase": "Charisma +2, two other ability scores of your choice +1 each.",
+				"Darkvision": "See in dim light within 60 feet as if it were bright light.",
+				"Fey Ancestry": "Advantage on saving throws against being charmed, immune to magic sleep.",
+				"Skill Versatility": "Proficiency in two skills of your choice."
+			},
+			"speed": 30,
+			"languages": ["Common", "Elvish", "One extra language"]
+		},
+		"Half-Orc": {
+			"features": {
+				"Ability Score Increase": "Strength +2, Constitution +1",
+				"Darkvision": "See in dim light within 60 feet as if it were bright light.",
+				"Menacing": "Proficiency in the Intimidation skill.",
+				"Relentless Endurance": "When reduced to 0 HP but not killed outright, drop to 1 HP instead once per long rest.",
+				"Savage Attacks": "When you score a critical hit with a melee weapon, roll one additional damage die."
+			},
+			"speed": 30,
+			"languages": ["Common", "Orc"]
+		},
+		"Halfling": {
+			"features": {
+				"Ability Score Increase": "Dexterity +2",
+				"Lucky": "When you roll a 1 on a d20 for an attack roll, ability check, or saving throw, reroll the die.",
+				"Brave": "Advantage on saving throws against being frightened.",
+				"Halfling Nimbleness": "Move through the space of any creature larger than you."
+			},
+			"subraces": {
+				"Lightfoot Halfling": {
+					"features": {
+						"Ability Score Increase": "Charisma +1",
+						"Naturally Stealthy": "You can attempt to hide even when you are obscured by a creature that is at least one size larger than you."
+					}
+				},
+				"Stout Halfling": {
+					"features": {
+						"Ability Score Increase": "Constitution +1",
+						"Stout Resilience": "Advantage on saving throws against poison, and you have resistance to poison damage."
+					}
+				}
+			},
+			"speed": 25,
+			"languages": ["Common", "Halfling"]
+		},
+		"Human": {
+			"features": {
+				"Ability Score Increase": "All ability scores +1"
+			},
+			"subraces": {
+				"Standard Human": {
+					"features": {
+						"Ability Score Increase": "All ability scores +1"
+					},
+					"description": "Standard Humans are adaptable and versatile, excelling in all areas equally."
+				},
+				"Variant Human": {
+					"features": {
+						"Ability Score Increase": "Two different ability scores of your choice +1 each.",
+						"Skill": "Gain proficiency in one skill of your choice.",
+						"Feat": "Gain one feat of your choice at 1st level."
+					},
+					"description": "Variant Humans forgo a universal ability boost for more focused versatility, gaining a skill proficiency and a feat at 1st level."
+				}
+			},
+			"speed": 30,
+			"languages": ["Common", "One extra language of your choice"]
+		},
+		"Tiefling": {
+			"features": {
+				"Ability Score Increase": "Charisma +2, Intelligence +1",
+				"Darkvision": "See in dim light within 60 feet as if it were bright light.",
+				"Hellish Resistance": "Resistance to fire damage.",
+				"Infernal Legacy": "You know the Thaumaturgy cantrip. At level 3, you can cast Hellish Rebuke once per long rest. At level 5, you can cast Darkness once per long rest."
+			},
+			"speed": 30,
+			"languages": ["Common", "Infernal"]
+		},
+		"Exotic": {
+			"features": {
+				"Ability Score Increase": "Customizable",
+				"Custom Features": []
+			},
+			"speed": "",
+			"languages": ["Common"]
+		}
+	}
+}
