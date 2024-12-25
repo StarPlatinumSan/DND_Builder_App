@@ -1,5 +1,8 @@
-import { useEffect, useState } from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "./client/apiClient";
+import { useEffect, useState } from "react";
+import Home from "./pages/Home";
 
 interface Test {
 	id: number;
@@ -32,20 +35,9 @@ function App() {
 	}, []);
 
 	return (
-		<>
-			<main className="app">
-				<h1>{message}</h1>
-				{error && <p>{error}</p>}
-
-				{data.length > 0 && (
-					<ul>
-						{data.map((item: Test) => (
-							<li key={item.id}>{item.username}</li>
-						))}
-					</ul>
-				)}
-			</main>
-		</>
+		<Routes>
+			<Route path="/" element={<Home />}></Route>
+		</Routes>
 	);
 }
 

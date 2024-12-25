@@ -25,7 +25,6 @@ app.get("/test", async (req, res) => {
 			console.error("Error fetching data: ", error.message);
 			return res.status(500).json({ error: error.message });
 		}
-
 		res.json(data);
 	} catch (err) {
 		console.error("Error: ", err.message);
