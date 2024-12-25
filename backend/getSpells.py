@@ -57,13 +57,23 @@ def byLevel(level):
             'range': cast_range,
             'duration': duration,
             'components': components,
-            'description': description,
+            'description': " ".join(description),
             'at higher levels': higher_levels,
-            'spell lists': spell_lists,
+            'spell lists': ", ".join(spell_lists) if spell_lists else None,
         })
 
     return spells
 
-spells = byLevel(1)
-for spell in spells:
-    print(spell)
+# Gather all spells across all levels
+def gather_all_spells():
+    all_spells = []
+    for level in range(10):  # Cantrips (0) through level 9 spells
+        all_spells.extend(byLevel(level))
+    return all_spells
+
+# Fetch all spells and save to CSV
+all_spells = gather_all_spells()
+df = pd.DataFrame(all_spells)
+df.to_csv("all_spells.csv", index=False)
+
+print("CSV containing all spells has been created: all_spells.csv")
