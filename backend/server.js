@@ -16,8 +16,8 @@ app.get("/", (req, res) => {
 	res.send("Backend is running");
 });
 
-/* le endpoint /data est une route qui permet de récupérer les données d'une table, ici c'est pour la table test de la supabase */
-app.get("/data", async (req, res) => {
+/* le endpoint /test est une route qui permet de récupérer les données d'une table, ici c'est pour la table test de la supabase */
+app.get("/test", async (req, res) => {
 	try {
 		const { data, error } = await supabase.from("test").select("*");
 
