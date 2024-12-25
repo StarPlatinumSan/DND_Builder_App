@@ -1,0 +1,823 @@
+{
+	"spells": {
+		"Absorb Elements": {
+			"school": "Abjuration",
+			"casting_time": "1 Reaction",
+			"range": "Self",
+			"duration": "1 round",
+			"components": ["S"],
+			"description": "The spell captures incoming energy, lessening its effect and storing it for your next melee attack.",
+			"classes": ["Druid", "Ranger", "Sorcerer", "Wizard"]
+		},
+		"Acid Stream (UA)": {
+			"school": "Evocation",
+			"casting_time": "1 Action",
+			"range": "Self (30-foot line)",
+			"duration": "Concentration, up to 1 minute",
+			"components": ["V", "S", "M"],
+			"description": "A stream of acid emanates from you in a straight line, damaging all creatures it passes through.",
+			"classes": ["Sorcerer", "Wizard"]
+		},
+		"Alarm": {
+			"school": "Abjuration",
+			"casting_time": "1 Minute (Ritual)",
+			"range": "30 feet",
+			"duration": "8 Hours",
+			"components": ["V", "S", "M"],
+			"description": "You set an alarm against unwanted intrusion. Choose a door, window, or an area within range.",
+			"classes": ["Ranger", "Wizard"]
+		},
+		"Animal Friendship": {
+			"school": "Enchantment",
+			"casting_time": "1 Action",
+			"range": "30 feet",
+			"duration": "24 hours",
+			"components": ["V", "S", "M"],
+			"description": "This spell lets you convince a beast that you mean it no harm.",
+			"classes": ["Bard", "Druid", "Ranger"]
+		},
+		"Arcane Weapon (UA)": {
+			"school": "Transmutation",
+			"casting_time": "1 Bonus Action",
+			"range": "Self",
+			"duration": "Concentration, up to 1 hour",
+			"components": ["V", "S"],
+			"description": "You channel arcane energy into a weapon, allowing it to deal additional elemental damage.",
+			"classes": ["Artificer (Unearthed Arcana)"]
+		},
+		"Armor of Agathys": {
+			"school": "Abjuration",
+			"casting_time": "1 Action",
+			"range": "Self",
+			"duration": "1 hour",
+			"components": ["V", "S", "M"],
+			"description": "A protective magical force surrounds you, granting temporary hit points and dealing damage to attackers.",
+			"classes": ["Warlock"]
+		},
+		"Arms of Hadar": {
+			"school": "Conjuration",
+			"casting_time": "1 Action",
+			"range": "Self (10-foot radius)",
+			"duration": "Instantaneous",
+			"components": ["V", "S"],
+			"description": "Dark tendrils erupt from you, battering all creatures within range and preventing them from taking reactions.",
+			"classes": ["Warlock"]
+		},
+		"Bane": {
+			"school": "Enchantment",
+			"casting_time": "1 Action",
+			"range": "30 feet",
+			"duration": "Concentration, up to 1 minute",
+			"components": ["V", "S", "M"],
+			"description": "Up to three creatures of your choice must subtract 1d4 from their attack rolls and saving throws.",
+			"classes": ["Bard", "Cleric"]
+		},
+		"Beast Bond": {
+			"school": "Divination",
+			"casting_time": "1 Action",
+			"range": "Touch",
+			"duration": "Concentration, up to 1 minute",
+			"components": ["V", "S", "M"],
+			"description": "You form a telepathic link with a beast that understands your commands.",
+			"classes": ["Druid", "Ranger"]
+		},
+		"Bless": {
+			"school": "Enchantment",
+			"casting_time": "1 Action",
+			"range": "30 feet",
+			"duration": "Concentration, up to 1 minute",
+			"components": ["V", "S", "M"],
+			"description": "You bless up to three creatures, giving them an extra d4 to add to attack rolls and saving throws.",
+			"classes": ["Cleric", "Paladin"]
+		},
+		"Burning Hands": {
+			"school": "Evocation",
+			"casting_time": "1 Action",
+			"range": "Self (15-foot cone)",
+			"duration": "Instantaneous",
+			"components": ["V", "S"],
+			"description": "A thin sheet of flames shoots forth from your hands. Each creature in a 15-foot cone must make a Dexterity saving throw, taking fire damage on a failed save.",
+			"classes": ["Sorcerer", "Wizard"]
+		},
+		"Catapult": {
+			"school": "Transmutation",
+			"casting_time": "1 Action",
+			"range": "60 feet",
+			"duration": "Instantaneous",
+			"components": ["S"],
+			"description": "You choose an object weighing 1 to 5 pounds within range and hurl it in a straight line. If it collides with a creature, that creature must make a Dexterity saving throw or take bludgeoning damage.",
+			"classes": ["Sorcerer", "Wizard"]
+		},
+		"Cause Fear": {
+			"school": "Necromancy",
+			"casting_time": "1 Action",
+			"range": "60 feet",
+			"duration": "Concentration, up to 1 minute",
+			"components": ["V", "S"],
+			"description": "You awaken the sense of mortality in one creature you can see within range, causing it to become frightened unless it succeeds on a Wisdom saving throw.",
+			"classes": ["Warlock", "Wizard"]
+		},
+		"Ceremony": {
+			"school": "Evocation",
+			"casting_time": "1 Action (Ritual)",
+			"range": "Touch",
+			"duration": "Instantaneous",
+			"components": ["V", "S", "M"],
+			"description": "You perform a religious ceremony that grants a creature a blessing, such as a wedding, funeral, or coming-of-age ritual.",
+			"classes": ["Cleric", "Paladin"]
+		},
+		"Chaos Bolt": {
+			"school": "Evocation",
+			"casting_time": "1 Action",
+			"range": "120 feet",
+			"duration": "Instantaneous",
+			"components": ["V", "S"],
+			"description": "You hurl an undulating, warbling mass of chaotic energy at a creature within range. On a hit, the target takes damage of a randomly determined type.",
+			"classes": ["Sorcerer"]
+		},
+		"Charm Person": {
+			"school": "Enchantment",
+			"casting_time": "1 Action",
+			"range": "30 feet",
+			"duration": "1 hour",
+			"components": ["V", "S"],
+			"description": "You attempt to charm a humanoid within range. It must make a Wisdom saving throw, and does so with advantage if you or your companions are fighting it.",
+			"classes": ["Bard", "Druid", "Sorcerer", "Warlock", "Wizard"]
+		},
+		"Chromatic Orb": {
+			"school": "Evocation",
+			"casting_time": "1 Action",
+			"range": "90 feet",
+			"duration": "Instantaneous",
+			"components": ["V", "S", "M"],
+			"description": "You hurl a 4-inch-diameter sphere of energy at a creature that you can see within range. Choose one type of damage to deal: acid, cold, fire, lightning, poison, or thunder.",
+			"classes": ["Sorcerer", "Wizard"]
+		},
+		"Color Spray": {
+			"school": "Illusion",
+			"casting_time": "1 Action",
+			"range": "Self (15-foot cone)",
+			"duration": "1 round",
+			"components": ["V", "S", "M"],
+			"description": "A dazzling array of flashing, colored light springs forth. Roll 6d10 to determine the total hit points of creatures that this spell can affect.",
+			"classes": ["Sorcerer", "Wizard"]
+		},
+		"Command": {
+			"school": "Enchantment",
+			"casting_time": "1 Action",
+			"range": "60 feet",
+			"duration": "1 round",
+			"components": ["V"],
+			"description": "You speak a one-word command to a creature within range. The target must succeed on a Wisdom saving throw or follow the command on its next turn.",
+			"classes": ["Cleric", "Paladin"]
+		},
+		"Compelled Duel": {
+			"school": "Enchantment",
+			"casting_time": "1 Bonus Action",
+			"range": "30 feet",
+			"duration": "Concentration, up to 1 minute",
+			"components": ["V"],
+			"description": "You compel a creature to duel you. The target must make a Wisdom saving throw or be drawn to you, gaining disadvantage on attacks against others.",
+			"classes": ["Paladin"]
+		},
+		"Comprehend Languages": {
+			"school": "Divination",
+			"casting_time": "1 Action (Ritual)",
+			"range": "Self",
+			"duration": "1 hour",
+			"components": ["V", "S", "M"],
+			"description": "You understand the literal meaning of any spoken language you hear and can also read any written language, provided you are touching the surface on which the words are written.",
+			"classes": ["Bard", "Cleric", "Sorcerer", "Warlock", "Wizard"]
+		},
+		"Create or Destroy Water": {
+			"school": "Transmutation",
+			"casting_time": "1 Action",
+			"range": "30 feet",
+			"duration": "Instantaneous",
+			"components": ["V", "S", "M"],
+			"description": "You either create or destroy water in a 30-foot area.",
+			"classes": ["Cleric", "Druid"]
+		},
+		"Cure Wounds": {
+			"school": "Evocation",
+			"casting_time": "1 Action",
+			"range": "Touch",
+			"duration": "Instantaneous",
+			"components": ["V", "S"],
+			"description": "A creature you touch regains hit points equal to 1d8 + your spellcasting ability modifier.",
+			"classes": ["Bard", "Cleric", "Druid", "Paladin", "Ranger"]
+		},
+		"Detect Evil and Good": {
+			"school": "Divination",
+			"casting_time": "1 Action",
+			"range": "Self",
+			"duration": "Concentration, up to 10 minutes",
+			"components": ["V", "S"],
+			"description": "For the duration, you know if there is an aberration, celestial, elemental, fey, fiend, or undead within 30 feet of you.",
+			"classes": ["Cleric", "Paladin"]
+		},
+		"Detect Magic": {
+			"school": "Divination",
+			"casting_time": "1 Action (Ritual)",
+			"range": "Self",
+			"duration": "Concentration, up to 10 minutes",
+			"components": ["V", "S"],
+			"description": "You sense the presence of magic within 30 feet of you.",
+			"classes": ["Bard", "Cleric", "Druid", "Paladin", "Ranger", "Sorcerer", "Wizard"]
+		},
+		"Detect Poison and Disease": {
+			"school": "Divination",
+			"casting_time": "1 Action (Ritual)",
+			"range": "Self",
+			"duration": "Concentration, up to 10 minutes",
+			"components": ["V", "S", "M"],
+			"description": "For the duration, you can sense the presence and location of poisons, poisonous creatures, and diseases within 30 feet of you.",
+			"classes": ["Cleric", "Druid", "Paladin", "Ranger"]
+		},
+		"Disguise Self": {
+			"school": "Illusion",
+			"casting_time": "1 Action",
+			"range": "Self",
+			"duration": "1 hour",
+			"components": ["V", "S"],
+			"description": "You make yourself—including your clothing, armor, weapons, and other belongings—look different.",
+			"classes": ["Bard", "Sorcerer", "Wizard"]
+		},
+		"Dissonant Whispers": {
+			"school": "Enchantment",
+			"casting_time": "1 Action",
+			"range": "60 feet",
+			"duration": "Instantaneous",
+			"components": ["V"],
+			"description": "You whisper a discordant melody that only one creature of your choice within range can hear, wracking it with terrible pain.",
+			"classes": ["Bard"]
+		},
+		"Distort Value": {
+			"school": "Illusion",
+			"casting_time": "1 Minute",
+			"range": "Touch",
+			"duration": "8 hours",
+			"components": ["V"],
+			"description": "You alter the perceived value of an object, making it appear more or less valuable than it truly is.",
+			"classes": ["Bard"]
+		},
+		"Divine Favor": {
+			"school": "Evocation",
+			"casting_time": "1 Bonus Action",
+			"range": "Self",
+			"duration": "Concentration, up to 1 minute",
+			"components": ["V", "S"],
+			"description": "Your prayer empowers you with divine radiance. Until the spell ends, your weapon attacks deal an extra 1d4 radiant damage on a hit.",
+			"classes": ["Paladin"]
+		},
+		"Earth Tremor": {
+			"school": "Evocation",
+			"casting_time": "1 Action",
+			"range": "Self (10-foot radius)",
+			"duration": "Instantaneous",
+			"components": ["V", "S"],
+			"description": "You cause a tremor in the ground in a 10-foot radius. Each creature other than you must make a Dexterity saving throw or take damage and be knocked prone.",
+			"classes": ["Bard", "Druid", "Sorcerer", "Wizard"]
+		},
+		"Ensnaring Strike": {
+			"school": "Conjuration",
+			"casting_time": "1 Bonus Action",
+			"range": "Self",
+			"duration": "Concentration, up to 1 minute",
+			"components": ["V"],
+			"description": "The next time you hit a creature with a weapon attack before this spell ends, a writhing mass of thorny vines appears at the point of impact.",
+			"classes": ["Ranger"]
+		},
+		"Entangle": {
+			"school": "Conjuration",
+			"casting_time": "1 Action",
+			"range": "90 feet",
+			"duration": "Concentration, up to 1 minute",
+			"components": ["V", "S"],
+			"description": "Grasping weeds and vines sprout from the ground in a 20-foot square starting from a point within range.",
+			"classes": ["Druid"]
+		},
+		"Expeditious Retreat": {
+			"school": "Transmutation",
+			"casting_time": "1 Bonus Action",
+			"range": "Self",
+			"duration": "Concentration, up to 10 minutes",
+			"components": ["V", "S"],
+			"description": "This spell allows you to move at an incredible pace. When you cast this spell, and then as a bonus action on each of your turns, you can take the Dash action.",
+			"classes": ["Sorcerer", "Warlock", "Wizard"]
+		},
+		"Faerie Fire": {
+			"school": "Evocation",
+			"casting_time": "1 Action",
+			"range": "60 feet",
+			"duration": "Concentration, up to 1 minute",
+			"components": ["V"],
+			"description": "Each object in a 20-foot cube within range is outlined in blue, green, or violet light. Any creature in the area when the spell is cast is also outlined in light if it fails a Dexterity saving throw.",
+			"classes": ["Bard", "Druid"]
+		},
+		"False Life": {
+			"school": "Necromancy",
+			"casting_time": "1 Action",
+			"range": "Self",
+			"duration": "1 hour",
+			"components": ["V", "S", "M"],
+			"description": "Bolstering yourself with a necromantic facsimile of life, you gain temporary hit points for the duration.",
+			"classes": ["Sorcerer", "Wizard"]
+		},
+		"Feather Fall": {
+			"school": "Transmutation",
+			"casting_time": "1 Reaction",
+			"range": "60 feet",
+			"duration": "1 minute",
+			"components": ["V", "M"],
+			"description": "Choose up to five falling creatures within range. A falling creature’s rate of descent slows to 60 feet per round until the spell ends.",
+			"classes": ["Bard", "Sorcerer", "Wizard"]
+		},
+		"Find Familiar": {
+			"school": "Conjuration",
+			"casting_time": "1 Hour (Ritual)",
+			"range": "10 feet",
+			"duration": "Instantaneous",
+			"components": ["V", "S", "M"],
+			"description": "You gain the service of a familiar, a spirit that takes an animal form you choose. The familiar acts independently of you but obeys your commands.",
+			"classes": ["Wizard"]
+		},
+		"Fog Cloud": {
+			"school": "Conjuration",
+			"casting_time": "1 Action",
+			"range": "120 feet",
+			"duration": "Concentration, up to 1 hour",
+			"components": ["V", "S"],
+			"description": "You create a 20-foot-radius sphere of fog centered on a point within range. The sphere spreads around corners, and its area is heavily obscured.",
+			"classes": ["Druid", "Ranger", "Sorcerer", "Wizard"]
+		},
+		"Frost Fingers": {
+			"school": "Evocation",
+			"casting_time": "1 Action",
+			"range": "Self (15-foot cone)",
+			"duration": "Instantaneous",
+			"components": ["V", "S"],
+			"description": "A burst of freezing cold emanates from your hands. Each creature in a 15-foot cone must make a Constitution saving throw, taking cold damage on a failed save.",
+			"classes": ["Sorcerer", "Wizard"]
+		},
+		"Gift of Alacrity": {
+			"school": "Divination",
+			"casting_time": "1 Minute",
+			"range": "Touch",
+			"duration": "8 hours",
+			"components": ["V", "S"],
+			"description": "You touch a willing creature. For the duration, the target can roll a d8 and add it to its initiative rolls.",
+			"classes": ["Cleric", "Wizard"]
+		},
+		"Goodberry": {
+			"school": "Transmutation",
+			"casting_time": "1 Action",
+			"range": "Touch",
+			"duration": "Instantaneous",
+			"components": ["V", "S", "M"],
+			"description": "Up to ten berries appear in your hand and are infused with magic. A creature can use its action to eat one berry to restore hit points.",
+			"classes": ["Druid", "Ranger"]
+		},
+		"Grease": {
+			"school": "Conjuration",
+			"casting_time": "1 Action",
+			"range": "60 feet",
+			"duration": "1 minute",
+			"components": ["V", "S", "M"],
+			"description": "Slick grease covers the ground in a 10-foot square centered on a point within range. The area becomes difficult terrain for the duration.",
+			"classes": ["Wizard"]
+		},
+		"Guiding Bolt": {
+			"school": "Evocation",
+			"casting_time": "1 Action",
+			"range": "120 feet",
+			"duration": "1 round",
+			"components": ["V", "S"],
+			"description": "A flash of light streaks toward a creature of your choice within range. Make a ranged spell attack against the target. On a hit, the target takes radiant damage, and the next attack roll made against this target before the end of your next turn has advantage.",
+			"classes": ["Cleric"]
+		},
+		"Guiding Hand (UA)": {
+			"school": "Divination",
+			"casting_time": "1 Minute (Ritual)",
+			"range": "5 feet",
+			"duration": "Concentration, up to 8 hours",
+			"components": ["V", "S"],
+			"description": "You create a spectral hand that guides you to a destination you specify.",
+			"classes": ["Cleric", "Wizard"]
+		},
+		"Hail of Thorns": {
+			"school": "Conjuration",
+			"casting_time": "1 Bonus Action",
+			"range": "Self",
+			"duration": "Concentration, up to 1 minute",
+			"components": ["V"],
+			"description": "The next time you hit a creature with a ranged weapon attack, this spell creates a rain of thorns that sprouts from your ranged weapon or ammunition.",
+			"classes": ["Ranger"]
+		},
+		"Healing Elixir (UA)": {
+			"school": "Conjuration",
+			"casting_time": "1 Minute",
+			"range": "Self",
+			"duration": "24 hours",
+			"components": ["V", "S", "M"],
+			"description": "You create a magical elixir in a simple vial that heals a creature when consumed.",
+			"classes": ["Artificer"]
+		},
+		"Healing Word": {
+			"school": "Evocation",
+			"casting_time": "1 Bonus Action",
+			"range": "60 feet",
+			"duration": "Instantaneous",
+			"components": ["V"],
+			"description": "A creature of your choice that you can see within range regains hit points equal to 1d4 + your spellcasting ability modifier.",
+			"classes": ["Bard", "Cleric", "Druid"]
+		},
+		"Hellish Rebuke": {
+			"school": "Evocation",
+			"casting_time": "1 Reaction",
+			"range": "60 feet",
+			"duration": "Instantaneous",
+			"components": ["V", "S"],
+			"description": "You point your finger, and the creature that damaged you is momentarily surrounded by hellish flames.",
+			"classes": ["Warlock"]
+		},
+		"Heroism": {
+			"school": "Enchantment",
+			"casting_time": "1 Action",
+			"range": "Touch",
+			"duration": "Concentration, up to 1 minute",
+			"components": ["V", "S"],
+			"description": "A willing creature you touch is imbued with bravery. It gains temporary hit points at the start of each of its turns and is immune to being frightened.",
+			"classes": ["Bard", "Paladin"]
+		},
+		"Hex": {
+			"school": "Enchantment",
+			"casting_time": "1 Bonus Action",
+			"range": "90 feet",
+			"duration": "Concentration, up to 1 hour",
+			"components": ["V", "S", "M"],
+			"description": "You curse a creature that you can see within range. Until the spell ends, you deal extra necrotic damage to the target whenever you hit it with an attack.",
+			"classes": ["Warlock"]
+		},
+		"Hunter's Mark": {
+			"school": "Divination",
+			"casting_time": "1 Bonus Action",
+			"range": "90 feet",
+			"duration": "Concentration, up to 1 hour",
+			"components": ["V"],
+			"description": "You choose a creature you can see within range and mystically mark it as your quarry. Until the spell ends, you deal extra damage to the target whenever you hit it with a weapon attack.",
+			"classes": ["Ranger"]
+		},
+		"Ice Knife": {
+			"school": "Conjuration",
+			"casting_time": "1 Action",
+			"range": "60 feet",
+			"duration": "Instantaneous",
+			"components": ["S", "M"],
+			"description": "You create a shard of ice and fling it at a creature within range. On a hit, the target takes piercing damage. The shard then explodes, dealing cold damage to creatures within 5 feet of it.",
+			"classes": ["Druid", "Sorcerer", "Wizard"]
+		},
+		"Id Insinuation (UA)": {
+			"school": "Enchantment",
+			"casting_time": "1 Action",
+			"range": "60 feet",
+			"duration": "Concentration, up to 1 minute",
+			"components": ["V", "S"],
+			"description": "You unleash a torrent of conflicting desires in the mind of one creature, incapacitating it if it fails a Wisdom saving throw.",
+			"classes": ["Wizard"]
+		},
+		"Identify": {
+			"school": "Divination",
+			"casting_time": "1 Minute (Ritual)",
+			"range": "Touch",
+			"duration": "Instantaneous",
+			"components": ["V", "S", "M"],
+			"description": "You choose one object that you must touch. You learn its properties, how to use them, and whether it is cursed.",
+			"classes": ["Bard", "Wizard"]
+		},
+		"Illusory Script": {
+			"school": "Illusion",
+			"casting_time": "1 Minute (Ritual)",
+			"range": "Touch",
+			"duration": "10 days",
+			"components": ["S", "M"],
+			"description": "You write on a surface in a way that only a specific group of creatures can understand. To others, the script appears unintelligible.",
+			"classes": ["Bard", "Warlock", "Wizard"]
+		},
+		"Infallible Relay (UA)": {
+			"school": "Divination",
+			"casting_time": "1 Minute",
+			"range": "Self",
+			"duration": "Concentration, up to 10 minutes",
+			"components": ["V", "S", "M"],
+			"description": "You send a telepathic message to a creature within range that you can see or whose location is familiar to you.",
+			"classes": ["Wizard"]
+		},
+		"Inflict Wounds": {
+			"school": "Necromancy",
+			"casting_time": "1 Action",
+			"range": "Touch",
+			"duration": "Instantaneous",
+			"components": ["V", "S"],
+			"description": "Make a melee spell attack against a creature you can reach. On a hit, the target takes necrotic damage.",
+			"classes": ["Cleric"]
+		},
+		"Jim's Magic Missile": {
+			"school": "Evocation",
+			"casting_time": "1 Action",
+			"range": "120 feet",
+			"duration": "Instantaneous",
+			"components": ["V", "S", "M"],
+			"description": "You create three twisting, whistling, hypoallergenic, gluten-free darts of magical force. Each dart hits a creature of your choice within range.",
+			"classes": ["Sorcerer", "Wizard"]
+		},
+		"Jump": {
+			"school": "Transmutation",
+			"casting_time": "1 Action",
+			"range": "Touch",
+			"duration": "1 minute",
+			"components": ["V", "S", "M"],
+			"description": "You touch a creature. The creature's jump distance is tripled until the spell ends.",
+			"classes": ["Druid", "Ranger", "Sorcerer"]
+		},
+		"Longstrider": {
+			"school": "Transmutation",
+			"casting_time": "1 Action",
+			"range": "Touch",
+			"duration": "1 hour",
+			"components": ["V", "S", "M"],
+			"description": "You touch a creature. Its speed increases by 10 feet until the spell ends.",
+			"classes": ["Bard", "Druid", "Ranger", "Wizard"]
+		},
+		"Mage Armor": {
+			"school": "Abjuration",
+			"casting_time": "1 Action",
+			"range": "Touch",
+			"duration": "8 hours",
+			"components": ["V", "S", "M"],
+			"description": "You touch a willing creature who isn’t wearing armor. The target's base AC becomes 13 + its Dexterity modifier.",
+			"classes": ["Sorcerer", "Wizard"]
+		},
+		"Magic Missile": {
+			"school": "Evocation",
+			"casting_time": "1 Action",
+			"range": "120 feet",
+			"duration": "Instantaneous",
+			"components": ["V", "S"],
+			"description": "You create three glowing darts of magical force. Each dart hits a creature of your choice that you can see within range, dealing force damage.",
+			"classes": ["Sorcerer", "Wizard"]
+		},
+		"Magnify Gravity": {
+			"school": "Transmutation",
+			"casting_time": "1 Action",
+			"range": "60 feet",
+			"duration": "1 round",
+			"components": ["V", "S"],
+			"description": "A 10-foot radius sphere of altered gravity appears at a point you can see within range. Each creature in the sphere must make a Strength saving throw or take force damage and have their speed halved.",
+			"classes": ["Sorcerer", "Wizard"]
+		},
+		"Protection from Evil and Good": {
+			"school": "Abjuration",
+			"casting_time": "1 Action",
+			"range": "Touch",
+			"duration": "Concentration, up to 10 minutes",
+			"components": ["V", "S", "M"],
+			"description": "You protect a creature against aberrations, celestials, elementals, fey, fiends, and undead. These creatures have disadvantage on attack rolls against the target.",
+			"classes": ["Cleric", "Paladin", "Wizard"]
+		},
+		"Puppet (UA)": {
+			"school": "Enchantment",
+			"casting_time": "1 Action",
+			"range": "120 feet",
+			"duration": "Instantaneous",
+			"components": ["V"],
+			"description": "You control a creature’s actions for one turn, forcing it to make a single attack or move as you direct.",
+			"classes": ["Wizard"]
+		},
+		"Purify Food and Drink": {
+			"school": "Transmutation",
+			"casting_time": "1 Action (Ritual)",
+			"range": "10 feet",
+			"duration": "Instantaneous",
+			"components": ["V", "S"],
+			"description": "All nonmagical food and drink within a 5-foot radius sphere centered on a point of your choice is purified and rendered free of poison and disease.",
+			"classes": ["Cleric", "Druid", "Paladin"]
+		},
+		"Ray of Sickness": {
+			"school": "Necromancy",
+			"casting_time": "1 Action",
+			"range": "60 feet",
+			"duration": "Instantaneous",
+			"components": ["V", "S"],
+			"description": "A ray of sickening green energy lashes out at a creature within range. Make a ranged spell attack against the target. On a hit, the target takes poison damage and must make a Constitution saving throw or be poisoned until the end of your next turn.",
+			"classes": ["Sorcerer", "Wizard"]
+		},
+		"Remote Access (UA)": {
+			"school": "Transmutation",
+			"casting_time": "1 Action",
+			"range": "120 feet",
+			"duration": "10 minutes",
+			"components": ["V", "S"],
+			"description": "You establish a magical link to a device or magical object, allowing you to manipulate or interact with it from a distance.",
+			"classes": ["Wizard"]
+		},
+		"Sanctuary": {
+			"school": "Abjuration",
+			"casting_time": "1 Bonus Action",
+			"range": "30 feet",
+			"duration": "1 minute",
+			"components": ["V", "S", "M"],
+			"description": "You ward a creature within range against attack. Until the spell ends, any creature who targets the warded creature with an attack or harmful spell must first make a Wisdom saving throw.",
+			"classes": ["Cleric"]
+		},
+		"Searing Smite": {
+			"school": "Evocation",
+			"casting_time": "1 Bonus Action",
+			"range": "Self",
+			"duration": "Concentration, up to 1 minute",
+			"components": ["V"],
+			"description": "The next time you hit a creature with a melee weapon attack, your weapon flares with white-hot intensity, and the attack deals fire damage.",
+			"classes": ["Paladin"]
+		},
+		"Sense Emotion (UA)": {
+			"school": "Divination",
+			"casting_time": "1 Action",
+			"range": "Self",
+			"duration": "Concentration, up to 1 minute",
+			"components": ["V", "S"],
+			"description": "You attune your senses to the emotions of others, gaining insight into their emotional state.",
+			"classes": ["Cleric", "Wizard"]
+		},
+		"Shield": {
+			"school": "Abjuration",
+			"casting_time": "1 Reaction",
+			"range": "Self",
+			"duration": "1 round",
+			"components": ["V", "S"],
+			"description": "An invisible barrier of magical force appears and protects you. Until the start of your next turn, you have a +5 bonus to AC, including against the triggering attack.",
+			"classes": ["Sorcerer", "Wizard"]
+		},
+		"Shield of Faith": {
+			"school": "Abjuration",
+			"casting_time": "1 Bonus Action",
+			"range": "60 feet",
+			"duration": "Concentration, up to 10 minutes",
+			"components": ["V", "S", "M"],
+			"description": "A shimmering field appears and surrounds a creature of your choice within range, granting it a +2 bonus to AC for the duration.",
+			"classes": ["Cleric", "Paladin"]
+		},
+		"Silent Image": {
+			"school": "Illusion",
+			"casting_time": "1 Action",
+			"range": "60 feet",
+			"duration": "Concentration, up to 10 minutes",
+			"components": ["V", "S", "M"],
+			"description": "You create the image of an object, a creature, or some other visible phenomenon that is no larger than a 15-foot cube.",
+			"classes": ["Bard", "Sorcerer", "Wizard"]
+		},
+		"Silvery Barbs": {
+			"school": "Enchantment",
+			"casting_time": "1 Reaction",
+			"range": "60 feet",
+			"duration": "Instantaneous",
+			"components": ["V"],
+			"description": "When a creature you can see within range succeeds on an attack roll, ability check, or saving throw, you magically distract it, causing it to reroll the die and use the lower roll.",
+			"classes": ["Bard", "Sorcerer", "Wizard"]
+		},
+		"Sleep": {
+			"school": "Enchantment",
+			"casting_time": "1 Action",
+			"range": "90 feet",
+			"duration": "1 minute",
+			"components": ["V", "S", "M"],
+			"description": "This spell sends creatures into a magical slumber. Roll 5d8; the total is how many hit points of creatures this spell can affect.",
+			"classes": ["Bard", "Sorcerer", "Wizard"]
+		},
+		"Snare": {
+			"school": "Abjuration",
+			"casting_time": "1 Minute",
+			"range": "Touch",
+			"duration": "Until dispelled or triggered",
+			"components": ["V", "S", "M"],
+			"description": "You create a magical trap in the ground or floor that snares a creature. When triggered, the creature is restrained by the magical tether.",
+			"classes": ["Druid", "Ranger", "Wizard"]
+		},
+		"Speak with Animals": {
+			"school": "Divination",
+			"casting_time": "1 Action (Ritual)",
+			"range": "Self",
+			"duration": "10 minutes",
+			"components": ["V", "S"],
+			"description": "You gain the ability to comprehend and verbally communicate with beasts for the duration.",
+			"classes": ["Bard", "Druid", "Ranger"]
+		},
+		"Sudden Awakening (UA)": {
+			"school": "Enchantment",
+			"casting_time": "1 Bonus Action",
+			"range": "10 feet",
+			"duration": "Instantaneous",
+			"components": ["V"],
+			"description": "You awaken a sleeping creature within range. The creature is no longer unconscious and can take actions immediately.",
+			"classes": ["Cleric", "Wizard"]
+		},
+		"Tasha's Caustic Brew": {
+			"school": "Evocation",
+			"casting_time": "1 Action",
+			"range": "Self (30-foot line)",
+			"duration": "Concentration, up to 1 minute",
+			"components": ["V", "S", "M"],
+			"description": "A stream of acid emanates from you in a 30-foot line. Each creature in the line must make a Dexterity saving throw or take acid damage at the start of its turns.",
+			"classes": ["Sorcerer", "Wizard"]
+		},
+		"Tasha's Hideous Laughter": {
+			"school": "Enchantment",
+			"casting_time": "1 Action",
+			"range": "30 feet",
+			"duration": "Concentration, up to 1 minute",
+			"components": ["V", "S", "M"],
+			"description": "A creature of your choice that you can see within range perceives everything as hilariously funny and falls prone, incapacitated, if it fails a Wisdom saving throw.",
+			"classes": ["Bard", "Sorcerer", "Warlock", "Wizard"]
+		},
+		"Tenser's Floating Disk": {
+			"school": "Conjuration",
+			"casting_time": "1 Action (Ritual)",
+			"range": "30 feet",
+			"duration": "1 hour",
+			"components": ["V", "S", "M"],
+			"description": "This spell creates a circular, horizontal plane of force that floats 3 feet above the ground and can carry up to 500 pounds.",
+			"classes": ["Wizard"]
+		},
+		"Thunderous Smite": {
+			"school": "Evocation",
+			"casting_time": "1 Bonus Action",
+			"range": "Self",
+			"duration": "Concentration, up to 1 minute",
+			"components": ["V"],
+			"description": "The first time you hit with a melee weapon attack during this spell's duration, your weapon rings with thunder and deals additional thunder damage.",
+			"classes": ["Paladin"]
+		},
+		"Thunderwave": {
+			"school": "Evocation",
+			"casting_time": "1 Action",
+			"range": "Self (15-foot cube)",
+			"duration": "Instantaneous",
+			"components": ["V", "S"],
+			"description": "A wave of thunderous force sweeps out from you. Each creature in a 15-foot cube originating from you must make a Constitution saving throw.",
+			"classes": ["Bard", "Druid", "Sorcerer", "Wizard"]
+		},
+		"Unearthly Chorus (UA)": {
+			"school": "Illusion",
+			"casting_time": "1 Action",
+			"range": "Self (30-foot radius)",
+			"duration": "Concentration, up to 10 minutes",
+			"components": ["V"],
+			"description": "You create an illusory melody that inspires awe or dread in creatures of your choice within range.",
+			"classes": ["Bard"]
+		},
+		"Unseen Servant": {
+			"school": "Conjuration",
+			"casting_time": "1 Action (Ritual)",
+			"range": "60 feet",
+			"duration": "1 hour",
+			"components": ["V", "S", "M"],
+			"description": "This spell creates an invisible, mindless, shapeless force that performs simple tasks at your command until the spell ends.",
+			"classes": ["Bard", "Warlock", "Wizard"]
+		},
+		"Wild Cunning (UA)": {
+			"school": "Transmutation",
+			"casting_time": "1 Action (Ritual)",
+			"range": "120 feet",
+			"duration": "Instantaneous",
+			"components": ["V", "S"],
+			"description": "You invoke the spirits of nature to help you locate resources or features in the area, such as water, plants, or animal life.",
+			"classes": ["Druid", "Ranger"]
+		},
+		"Witch Bolt": {
+			"school": "Evocation",
+			"casting_time": "1 Action",
+			"range": "30 feet",
+			"duration": "Concentration, up to 1 minute",
+			"components": ["V", "S", "M"],
+			"description": "A beam of crackling blue energy lances out toward a creature within range, forming a sustained arc of lightning between you and the target.",
+			"classes": ["Sorcerer", "Warlock", "Wizard"]
+		},
+		"Wrathful Smite": {
+			"school": "Evocation",
+			"casting_time": "1 Bonus Action",
+			"range": "Self",
+			"duration": "Concentration, up to 1 minute",
+			"components": ["V"],
+			"description": "The next time you hit with a melee weapon attack, your weapon deals extra psychic damage and forces the target to make a Wisdom saving throw or become frightened.",
+			"classes": ["Paladin"]
+		},
+		"Zephyr Strike": {
+			"school": "Transmutation",
+			"casting_time": "1 Bonus Action",
+			"range": "Self",
+			"duration": "Concentration, up to 1 minute",
+			"components": ["V"],
+			"description": "You move like the wind. Until the spell ends, your movement doesn't provoke opportunity attacks, and your next attack gains an advantage and deals extra force damage.",
+			"classes": ["Ranger"]
+		}
+	}
+}
