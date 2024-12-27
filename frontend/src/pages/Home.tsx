@@ -108,15 +108,6 @@ const Home = () => {
 				<div className="groupCategory">
 					<div className="category">
 						<img src="/redpin.webp" alt="PIN" className="redPin" />
-						<h2>What is Dungeons and Dragons?</h2>
-						<img src="dnd.jpg" alt="What is this app" className="imgCategory" />
-						<p className="description">
-							Dungeons & Dragons is a collaborative storytelling game that invites you to become a hero in a fantasy world of magic and monsters. Whether exploring ancient dungeons or forging alliances, the only limit is your imagination.
-						</p>
-						<button className="btnLearn">About</button>
-					</div>
-					<div className="category">
-						<img src="/redpin.webp" alt="PIN" className="redPin" />
 						<h2>Explore the spells</h2>
 						<img src="spells.jpg" alt="spells" className="imgCategory" />
 						<p className="description">From simple cantrips to legendary incantations, spells are the heart of any magic-wielding character. Unleash arcane energy, manipulate elements, and shape reality itself as you master the art of spellcasting.</p>
@@ -140,19 +131,19 @@ const Home = () => {
 						</p>
 						<button className="btnLearn">Discover</button>
 					</div>
+					<div className="category" id="customCard">
+						<img src="/redpin.webp" alt="PIN" className="redPin" />
+						<h2>Share your characters with your friends</h2>
+						<img src="buildCharacter.jpg" alt="character" className="imgCategory" />
+						<p className="description">Save your characters on your profile, and decide which ones you want to set public for the others to see!</p>
+						<button className="btnLearn">How it works</button>
+					</div>
 					<div className="category">
 						<img src="/redpin.webp" alt="PIN" className="redPin" />
 						<h2>Customize your character</h2>
 						<img src="character.jpg" alt="character" className="imgCategory" />
 						<p className="description">Build a hero as unique as you are! Refine your backstory, choose specialized skills, and select gear that fits your style. Your character’s journey is entirely in your hands, no two adventurers are ever the same.</p>
 						<button className="btnLearn">Start now!</button>
-					</div>
-					<div className="category" id="customCard">
-						<img src="/redpin.webp" alt="PIN" className="redPin" />
-						<h2>Share it with your friends</h2>
-						<img src="buildCharacter.jpg" alt="character" className="imgCategory" />
-						<p className="description">Save your characters on your profile, and decide which ones you want to set public for the others to see!</p>
-						<button className="btnLearn">How it works</button>
 					</div>
 				</div>
 			</section>
