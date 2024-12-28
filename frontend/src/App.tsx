@@ -1,5 +1,4 @@
-import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import axios from "./client/apiClient";
 import { useEffect, useState } from "react";
 import Home from "./pages/Home";

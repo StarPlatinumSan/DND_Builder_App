@@ -20,9 +20,13 @@ body {
 
 a {
 	text-decoration: none;
+	color: $primary;
+	font-weight: 600;
+
+	transition: all 0.3s ease;
 
 	&:hover {
-		text-decoration: underline;
+		color: $primaryAccent;
 	}
 }
 
