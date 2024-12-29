@@ -39,6 +39,9 @@ def parse_section(section, stop_tags):
         sibling = sibling.find_next_sibling()
     return clean_text(content)
 
+def getSubclasses(tableSoup):
+    TODO = 1
+
 def byName(name):
     """Fetch and parse class data from the URL."""
     url = classes[name]
@@ -78,13 +81,18 @@ def byName(name):
         class_specific_feats[sec_name] = parse_section(section, stop_tags={'h3', 'h5'})
     feats['class specific feats'] = class_specific_feats
 
+    subClasses = getSubclasses(soup.findAll('table', class_='wiki-content-table')[-1])
+
+    attributes.append(subClasses)
     attributes.append(feats)
+
+    
     return attributes
 
 # Fetch and process data for all classes
 allClasses = {}
 for name in classes:
-    print(f"Processing: {name}")
+    #print(f"Processing: {name}")
     allClasses[name] = byName(name)
 
 # Convert to DataFrame and save

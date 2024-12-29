@@ -51,6 +51,7 @@ def byLevel(level):
 
         # Store the parsed data
         spells.append({
+            'level': level,
             'name': spell_name,
             'school': school,
             'cast_time': cast_time,
