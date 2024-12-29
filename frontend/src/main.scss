@@ -1,5 +1,7 @@
 @use "./styles/variables" as *;
 @use "./styles/home.scss";
+@use "./styles/vault.scss";
+@use "./styles/login.scss";
 
 * {
 	margin: 0;
@@ -38,6 +40,23 @@ p {
 	text-align: center;
 }
 
+.btn {
+	background-color: $secondary;
+	color: $lightWhite;
+	border: 2px solid $secondaryAccent;
+	border-radius: 0.25rem;
+	padding: 0.5rem 1rem;
+	min-height: 40px;
+	width: 100%;
+	transition: all 0.3s ease;
+	cursor: pointer;
+
+	&:hover {
+		background-color: $secondaryAccent;
+		color: $lightWhite;
+	}
+}
+
 .slideDownContent {
 	border: 1px solid #333333;
 	padding: 1rem;
@@ -52,5 +71,28 @@ p {
 		text-align: left;
 		gap: 0.5rem;
 		padding: 1rem;
+	}
+}
+
+.separation {
+	width: 100%;
+	height: 1px;
+	background-color: $primary;
+	margin: 1rem;
+}
+
+.or {
+	display: flex;
+	align-items: center;
+	text-align: center;
+	position: relative;
+	width: 100%;
+
+	&::before,
+	&::after {
+		content: "";
+		flex: 1;
+		border-bottom: 1px solid $primary;
+		margin: 0 10px;
 	}
 }

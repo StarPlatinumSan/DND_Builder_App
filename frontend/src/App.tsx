@@ -2,6 +2,8 @@ import { Routes, Route } from "react-router-dom";
 import axios from "./client/apiClient";
 import { useEffect, useState } from "react";
 import Home from "./pages/Home";
+import Vault from "./pages/Vault";
+import Login from "./components/Login";
 
 interface Test {
 	id: number;
@@ -36,6 +38,8 @@ function App() {
 	return (
 		<Routes>
 			<Route path="/" element={<Home />}></Route>
+			<Route path="/login" element={<Login />} />
+			<Route path="/Vault" element={<Vault />}></Route>
 		</Routes>
 	);
 }

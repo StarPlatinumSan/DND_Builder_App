@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Flipper, Flipped } from "react-flip-toolkit";
+import { Link } from "react-router-dom";
 
 const Home = () => {
 	const [open, setOpen] = useState(false);
@@ -79,13 +79,13 @@ const Home = () => {
 				<div className="startHero">
 					<h1>D&D Character Builder</h1>
 					<p className="description">Create and level up characters, explore profiles, and effortlessly manage your own, all in one place.</p>
-					<a href="#" className="startButton">
+					<Link to="/vault" className="startButton">
 						Start your adventure
 						<span></span>
 						<span></span>
 						<span></span>
 						<span></span>
-					</a>
+					</Link>
 				</div>
 			</section>
 

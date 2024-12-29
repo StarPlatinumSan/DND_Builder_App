@@ -1,0 +1,13 @@
+@use "./variables" as *;
+
+.vaultContainer {
+	display: flex;
+	flex-direction: column;
+	background-color: $secondary;
+	color: $lightWhite;
+	min-height: 100vh;
+
+	.vaultHeader {
+		display: flex;
+	}
+}

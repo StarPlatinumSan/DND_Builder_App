@@ -1,0 +1,136 @@
+@use "./variables" as *;
+
+.loginContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	min-height: 100vh;
+	padding: 1rem;
+	gap: 0.5rem;
+	position: relative;
+	color: $lightWhite;
+	background-color: $secondary;
+	font-family: "Cormorant Unicase", serif;
+
+	h2 {
+		margin-bottom: 0.5rem;
+		margin-top: 3rem;
+	}
+
+	p {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		margin-top: 0.5rem;
+		justify-content: space-between;
+	}
+
+	form {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		gap: 0.1rem;
+		width: 100%;
+	}
+
+	input {
+		background-color: $secondary;
+		color: $lightWhite;
+		border: 2px solid $secondaryAccent;
+		border-radius: 0.25rem;
+		padding: 0.5rem 1rem;
+		min-height: 40px;
+		margin-bottom: 1rem;
+		width: 100%;
+		font-family: "Cormorant Unicase", serif;
+		transition: all 0.3s ease;
+
+		&:focus {
+			outline: none;
+			border-color: $primary;
+		}
+	}
+
+	.message {
+		margin-top: 0rem;
+		margin-bottom: 1rem;
+	}
+
+	button {
+		font-family: "Cormorant Unicase", serif;
+	}
+
+	.btnGoLogin {
+		background-color: $lightWhite;
+		color: $secondary;
+		font-weight: 900;
+	}
+
+	.btnProvider {
+		position: relative;
+
+		.provider-logo {
+			position: absolute;
+			width: 30px;
+			left: 5px;
+			top: 50%;
+			transform: translateY(-50%);
+		}
+	}
+
+	.btnWithout {
+		background-color: rgb(39, 39, 39);
+		border: none;
+		color: $lightWhite;
+		font-weight: 900;
+	}
+
+	.goBack {
+		width: fit-content;
+		align-self: flex-start;
+		position: absolute;
+		top: 5px;
+		left: 5px;
+		background-color: rgb(46, 46, 46);
+		color: $lightWhite;
+		border: none;
+		font-weight: 900;
+
+		&:hover {
+			background-color: $lightWhite;
+			color: $secondary;
+		}
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.loginContainer > * {
+		max-width: 50%;
+	}
+	.loginContainer {
+		h2 {
+			margin-top: 0rem;
+		}
+
+		.goBack {
+			width: auto;
+			padding: 1rem 2rem;
+			position: absolute;
+			top: 15px;
+			left: 15px;
+			transform: translate(0, 0);
+		}
+	}
+}
+
+@media screen and (min-width: 1024px) {
+	.loginContainer {
+		background-color: $secondary;
+	}
+
+	.loginContainer > * {
+		max-width: 30rem;
+	}
+}
