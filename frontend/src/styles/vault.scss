@@ -3,11 +3,122 @@
 .vaultContainer {
 	display: flex;
 	flex-direction: column;
+	align-items: center;
+	text-align: center;
 	background-color: $secondary;
 	color: $lightWhite;
+	gap: 1rem;
 	min-height: 100vh;
+
+	h1 {
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
+
+	.separation {
+		margin: 0;
+	}
+
+	.createNew {
+		background-color: $secondaryDark;
+		width: 75%;
+		font-size: 1.5rem;
+	}
 
 	.vaultHeader {
 		display: flex;
+		background-color: $secondaryDark;
+		padding: 1rem;
+		align-items: center;
+		justify-content: space-between;
+		width: 100%;
 	}
+
+	.btnLogoutMobile {
+		width: auto;
+		padding: 0.5rem 1.5rem;
+		background-image: url("./logout.svg");
+		border: none;
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: contain;
+
+		&:hover {
+			border: none;
+		}
+	}
+
+	.mobileMenuVault {
+		background-image: url("./book.svg");
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: contain;
+		padding: 1rem;
+		cursor: pointer;
+	}
+
+	.slideMenu {
+		display: flex;
+		flex-direction: column;
+		position: fixed;
+		top: 0;
+		left: 30%;
+		right: 0;
+		bottom: 0;
+		z-index: 10;
+		width: 70vw;
+		height: 100vh;
+		transform: translateX(100%);
+		transition: all 0.3s ease;
+		background-color: $secondary;
+		padding: 1rem;
+		align-items: flex-start;
+		gap: 1rem;
+		border: 2px solid $secondaryDark;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+		.logoutDiv {
+			display: flex;
+			align-items: center;
+			gap: 1rem;
+			align-self: flex-end;
+		}
+
+		.optionsMobile {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 1rem;
+			width: 100%;
+
+			.btn {
+				padding: 1rem;
+				padding-left: 1.5rem;
+				position: relative;
+
+				img {
+					width: 30px;
+					position: absolute;
+					top: 50%;
+					left: 5px;
+					transform: translate(0, -50%);
+				}
+			}
+		}
+	}
+
+	.createButton {
+		background-color: $secondaryDark;
+		color: $lightWhite;
+		margin-top: 3.5rem;
+	}
+}
+
+.vaultCharactersContainer {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	height: 85vh;
+	width: 100%;
+	padding: 0 1rem 0 1rem;
 }

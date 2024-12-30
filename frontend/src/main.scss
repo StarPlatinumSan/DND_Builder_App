@@ -2,6 +2,7 @@
 @use "./styles/home.scss";
 @use "./styles/vault.scss";
 @use "./styles/login.scss";
+@use "./styles/account.scss";
 
 * {
 	margin: 0;
@@ -18,6 +19,10 @@ body {
 	font-family: "Cormorant Unicase", serif;
 	font-weight: 900;
 	font-style: normal;
+}
+
+button {
+	font-family: "Cormorant Unicase", serif;
 }
 
 a {
@@ -54,6 +59,7 @@ p {
 	&:hover {
 		background-color: $secondaryAccent;
 		color: $lightWhite;
+		border: 2px solid #a5a5a5;
 	}
 }
 
@@ -94,5 +100,23 @@ p {
 		flex: 1;
 		border-bottom: 1px solid $lightWhite;
 		margin: 0 10px;
+	}
+}
+
+.closeX {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	border: none;
+	color: $lightWhite;
+	background-image: url("./close.svg");
+	background-color: transparent;
+	background-repeat: no-repeat;
+	padding: 1.2rem;
+	transition: all 0.3s ease;
+	cursor: pointer;
+
+	&:hover {
+		transform: rotate(180deg);
 	}
 }

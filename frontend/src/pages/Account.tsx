@@ -7,7 +7,10 @@ const Account = ({ user }: { user: User }) => {
 	return (
 		<>
 			<section className="accountContainer">
-				<h1>My Vault</h1>
+				<h1>My characters</h1>
+				<div className="plusDiv">
+					<img src="./plus.svg" alt="+" />
+				</div>
 			</section>
 		</>
 	);

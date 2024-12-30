@@ -71,6 +71,10 @@
 		transform: translateX(-50%);
 	}
 
+	.desktopMenu {
+		display: none;
+	}
+
 	.mobileMenu {
 		background-image: url("/menu.svg");
 		background-size: contain;
@@ -299,32 +303,16 @@
 		}
 	}
 
-	/* .btnSlide {
-		background-color: $secondary;
-		color: $lightWhite;
-		padding: 0.5rem 1rem;
-		min-height: 40px;
-		border-radius: 0.25rem;
-
-		border: none;
-		overflow: hidden;
-		position: relative;
-		font-family: "Cormorant Unicase", serif;
-		letter-spacing: 1px;
-		transition: all 0.3s ease;
-
-		&:hover {
-			background-color: $secondaryAccent;
-		}
-	} */
-
 	.btnLearn {
 		background-color: $secondary;
 		color: $lightWhite;
 		padding: 0.5rem 1rem;
 		min-height: 40px;
 		border-radius: 0.25rem;
-
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
 		border: none;
 		overflow: hidden;
 		position: relative;
@@ -403,8 +391,9 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	text-align: center;
 	gap: 2rem;
-	padding: 4rem;
+	padding: 3rem;
 	margin-top: 3rem;
 	margin-bottom: 3rem;
 	border-top: 1px solid $primaryAccent;
@@ -451,6 +440,40 @@
 
 .titleStrong {
 	font-size: 1.5rem;
+}
+
+.slideMenu {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 10;
+	height: 100vh;
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+	width: 100%;
+	transform: translateX(100%);
+	transition: all 0.3s ease;
+	background-color: $secondaryDark;
+
+	h2 {
+		color: $lightWhite;
+	}
+
+	.btnMenuHome {
+		max-width: 80%;
+	}
+
+	.btnLoginMenu {
+		background-color: $secondaryDark;
+	}
+
+	.closeX {
+		width: fit-content;
+	}
 }
 
 .whatIsSection {
@@ -527,6 +550,13 @@
 		.description {
 			font-size: 1.2rem;
 		}
+	}
+
+	.slideMenu {
+		width: 40%;
+		right: 0;
+		left: auto;
+		transform: translateX(200%);
 	}
 
 	.content {
@@ -611,6 +641,53 @@
 		margin-left: 5rem;
 		margin-right: 5rem;
 	}
+
+	.slideMenu {
+		display: none;
+		transform: translateX(100%);
+	}
+
+	.header .mobileMenu {
+		display: none;
+	}
+
+	.header .desktopMenu {
+		display: flex;
+		gap: 1rem;
+
+		button {
+			border: none;
+
+			&:hover {
+				border-radius: 0;
+				background-color: $secondaryDark;
+			}
+		}
+	}
+
+	.btnDesktopHead {
+		padding: auto;
+		height: 50px;
+		padding: 1rem;
+		background-color: inherit;
+		color: $lightWhite;
+		cursor: pointer;
+		transition: all 0.3s ease;
+
+		&:hover {
+			background-color: $secondaryDark;
+		}
+	}
+
+	.btnLoginHead {
+		background-color: $lightWhite;
+		color: $secondaryDark;
+		border-radius: 8px;
+
+		&:hover {
+			color: $lightWhite;
+		}
+	}
 }
 
 @media screen and (min-width: 1600px) {
@@ -621,5 +698,13 @@
 			flex: auto;
 			padding: 1rem;
 		}
+	}
+
+	.header .desktopMenu {
+		gap: 2rem;
+	}
+
+	.btnDesktopHead {
+		font-size: 1rem;
 	}
 }

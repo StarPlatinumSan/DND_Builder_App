@@ -3,7 +3,7 @@ import { supabase } from "../client/supabaseClient";
 import { useState, useEffect } from "react";
 
 const Login = () => {
-	const [isRegistering, setIsRegistering] = useState(true);
+	const [isRegistering, setIsRegistering] = useState(false);
 	const [message, setMessage] = useState("");
 	const navigate = useNavigate();
 

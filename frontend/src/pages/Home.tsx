@@ -43,6 +43,20 @@ const Home = () => {
 		},
 	];
 
+	const slideMenu = (event: React.MouseEvent<HTMLDivElement>) => {
+		event.stopPropagation();
+		const slideMenu = document.querySelector(".slideMenu") as HTMLDivElement;
+		slideMenu.style.transform = "translateX(0)";
+	};
+
+	const slideMenuEvent = (e: React.MouseEvent<HTMLElement>) => {
+		const slideMenu = document.querySelector(".slideMenu") as HTMLDivElement;
+
+		if (!(e.target as HTMLElement).closest(".slideMenu")) {
+			slideMenu.style.transform = "translateX(100%)";
+		}
+	};
+
 	useEffect(() => {
 		const header = document.querySelector(".header");
 
@@ -68,17 +82,42 @@ const Home = () => {
 	}, []);
 
 	return (
-		<div className="homeContainer">
+		<div className="homeContainer" onClick={slideMenuEvent}>
+			<div className="slideMenu">
+				<button className="closeX" onClick={() => ((document.querySelector(".slideMenu") as HTMLDivElement).style.transform = "translateX(100%)")}></button>
+
+				<h2>Menu</h2>
+				<button className="btn btnLoginMenu btnMenuHome"> Login </button>
+				<button className="btn btnMenuHome"> Spells </button>
+				<button className="btn btnMenuHome"> Classes </button>
+				<button className="btn btnMenuHome"> Races </button>
+				<button className="btn btnMenuHome"> Feats </button>
+				<button className="btn btnMenuHome"> Backgrounds </button>
+				<button className="btn btnMenuHome"> Epic Boons </button>
+			</div>
+
 			<header className="header">
 				<p>D&D Character Builder</p>
-				<div className="mobileMenu"></div>
+				<div className="mobileMenu" onClick={slideMenu}></div>
+
+				<div className="desktopMenu">
+					<button className="btnDesktopHead"> Spells </button>
+					<button className="btnDesktopHead"> Classes </button>
+					<button className="btnDesktopHead"> Races </button>
+					<button className="btnDesktopHead"> Feats </button>
+					<button className="btnDesktopHead"> Backgrounds </button>
+					<button className="btnDesktopHead"> Epic Boons </button>
+					<Link to="/login" className="btnDesktopHead btnLoginHead">
+						Login
+					</Link>
+				</div>
 			</header>
 			<section className="hero">
 				<div className="opacity"></div>
 
 				<div className="startHero">
 					<h1>D&D Character Builder</h1>
-					<p className="description">Create and level up characters, explore profiles, and effortlessly manage your own, all in one place.</p>
+					<p className="description">Create and level up characters, explore other creations, and effortlessly manage your own, all in one place.</p>
 					<Link to="/login" className="startButton">
 						Start your adventure
 						<span></span>
@@ -134,7 +173,9 @@ const Home = () => {
 						<h2>Customize your character</h2>
 						<img src="character.jpg" alt="character" className="imgCategory" />
 						<p className="description">Build a hero as unique as you are! Refine your backstory, choose specialized skills, and select gear that fits your style. Your character’s journey is entirely in your hands, no two adventurers are ever the same.</p>
-						<button className="btnLearn">Start now!</button>
+						<Link to="/login" className="btnLearn">
+							Start now!
+						</Link>
 					</div>
 					<div className="category">
 						<img src="/redpin.webp" alt="PIN" className="redPin" />
