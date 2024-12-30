@@ -23,12 +23,6 @@ classes = {
 # Caster-related features to exclude
 caster = ['Cantrips (0-Level Spells)', 'Preparing and Casting Spells', 'Spellcasting Ability', 'Ritual Casting']
 
-def clean_text(text):
-    """Clean and normalize text by replacing line breaks and special characters."""
-    text = text.replace('\n', ' ').strip()
-    text = text.replace('‘', "'").replace('’', "'").replace('“', '"').replace('”', '"')
-    return re.sub(r'\s+', ' ', text)
-
 def parse_section(section, stop_tags):
     """Parse a section and concatenate text from its siblings until a stopping tag is reached."""
     content = ""
@@ -37,10 +31,28 @@ def parse_section(section, stop_tags):
         if sibling.name:  
             content += sibling.get_text(separator=" ", strip=True) + " "
         sibling = sibling.find_next_sibling()
-    return clean_text(content)
+    return content
 
 def getSubclasses(tableSoup):
-    TODO = 1
+    subclasses = []
+    for row in tableSoup.findAll('tr'):
+        column = row.findAll('td')
+        if not column : continue 
+        link_tag = column[0].find('a')
+        subClassName = link_tag.text.strip()
+        link = f"https://dnd5e.wikidot.com{link_tag['href']}"
+
+        source = column[1].text.strip()
+
+        subclass = {
+            'name' : subClassName,
+            'link' : link,
+            'source' : ' '.join(source.split("\n"))
+        }
+
+        subclasses.append(subclass)
+
+    return subclasses
 
 def byName(name):
     """Fetch and parse class data from the URL."""
@@ -81,7 +93,8 @@ def byName(name):
         class_specific_feats[sec_name] = parse_section(section, stop_tags={'h3', 'h5'})
     feats['class specific feats'] = class_specific_feats
 
-    subClasses = getSubclasses(soup.findAll('table', class_='wiki-content-table')[-1])
+    subClasses = getSubclasses(soup.findAll('table', class_='wiki-content-table')[-1 if name != "Sorcerer" else 1])
+    print(subClasses)
 
     attributes.append(subClasses)
     attributes.append(feats)
@@ -92,7 +105,7 @@ def byName(name):
 # Fetch and process data for all classes
 allClasses = {}
 for name in classes:
-    #print(f"Processing: {name}")
+    print(f"Processing: {name}")
     allClasses[name] = byName(name)
 
 # Convert to DataFrame and save
