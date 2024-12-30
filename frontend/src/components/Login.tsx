@@ -50,6 +50,10 @@ const Login = () => {
 		}
 	};
 
+	const accessVault = () => {
+		window.location.href = "/vault";
+	};
+
 	useEffect(() => {
 		const checkUserSession = async () => {
 			const {
@@ -93,7 +97,8 @@ const Login = () => {
 						const password = (form.elements.namedItem("password") as HTMLInputElement).value;
 						const { error } = await supabase.auth.signInWithPassword({ email, password });
 						if (error) {
-							console.error("Erreur lors de la connexion :", error.message);
+							setMessage("Invalid email or password. Please try again.");
+							setTimeout(() => setMessage(""), 3000);
 						} else {
 							navigate("/vault");
 						}
@@ -102,6 +107,7 @@ const Login = () => {
 					<h2>Log in</h2>
 					<input type="email" name="email" placeholder="Email" required />
 					<input type="password" name="password" placeholder="Password" required />
+					<p>{message}</p>
 					<button type="submit" className="btn">
 						Log in with Email
 					</button>
@@ -128,7 +134,9 @@ const Login = () => {
 
 			<div className="or">or</div>
 
-			<button className="btn btnWithout">Continue without logging in</button>
+			<button className="btn btnWithout" onClick={() => accessVault()}>
+				Continue without logging in
+			</button>
 		</div>
 	);
 };

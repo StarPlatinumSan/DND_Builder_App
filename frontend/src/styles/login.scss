@@ -23,7 +23,6 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.5rem;
-		margin-top: 0.5rem;
 		justify-content: space-between;
 	}
 
@@ -31,7 +30,7 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		gap: 0.1rem;
+		gap: 1rem;
 		width: 100%;
 	}
 
@@ -42,7 +41,6 @@
 		border-radius: 0.25rem;
 		padding: 0.5rem 1rem;
 		min-height: 40px;
-		margin-bottom: 1rem;
 		width: 100%;
 		font-family: "Cormorant Unicase", serif;
 		transition: all 0.3s ease;
@@ -51,11 +49,6 @@
 			outline: none;
 			border-color: $primary;
 		}
-	}
-
-	.message {
-		margin-top: 0rem;
-		margin-bottom: 1rem;
 	}
 
 	button {

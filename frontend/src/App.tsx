@@ -39,7 +39,7 @@ function App() {
 		<Routes>
 			<Route path="/" element={<Home />}></Route>
 			<Route path="/login" element={<Login />} />
-			<Route path="/Vault" element={<Vault />}></Route>
+			<Route path="/vault" element={<Vault />}></Route>
 		</Routes>
 	);
 }

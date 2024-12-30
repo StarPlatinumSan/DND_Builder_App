@@ -6,7 +6,7 @@ import { User } from "@supabase/supabase-js";
 import Account from "./Account";
 
 const Vault = () => {
-	const [user, setUser] = useState<User | null>(null);
+	const [user, setUser] = useState<User | null | undefined>(undefined);
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -15,21 +15,27 @@ const Vault = () => {
 				data: { user },
 				error,
 			} = await supabase.auth.getUser();
-			if (error !== null) {
-				navigate("/login");
+
+			if (error) {
+				setUser(null);
 			} else {
 				setUser(user);
 			}
 		};
+
 		fetchUser();
-	}, [navigate]);
+	}, []);
 
 	const handleLogout = async () => {
 		await supabase.auth.signOut();
 		navigate("/");
 	};
 
-	if (!user) return <p>Loading...</p>;
+	if (user === undefined) {
+		return <p>Loading...</p>;
+	}
+
+	const isLoggedIn = !!user;
 
 	return (
 		<>
@@ -51,17 +57,17 @@ const Vault = () => {
 					<div className="mobileMenuVault">Menu</div>
 				</header>
 
-				<div className="vaultCharactersContainer">
-					<h1>
-						Welcome to your Vault,{" "}
-						{user.email
-							? (() => {
-									const namePart = user.email.split(/[@.]/)[0];
-									return namePart.charAt(0).toUpperCase() + namePart.slice(1);
-							  })()
-							: "Guest"}
-					</h1>
-				</div>
+				<h1>
+					Welcome to your Vault,{" "}
+					{user?.email
+						? (() => {
+								const namePart = user.email.split(/[@.]/)[0];
+								return namePart.charAt(0).toUpperCase() + namePart.slice(1);
+						  })()
+						: "Guest"}
+				</h1>
+
+				<div className="vaultCharactersContainer">{isLoggedIn ? <Account user={user} /> : <p>You must be logged in to view your characters.</p>}</div>
 			</section>
 		</>
 	);

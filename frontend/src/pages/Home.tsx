@@ -79,7 +79,7 @@ const Home = () => {
 				<div className="startHero">
 					<h1>D&D Character Builder</h1>
 					<p className="description">Create and level up characters, explore profiles, and effortlessly manage your own, all in one place.</p>
-					<Link to="/vault" className="startButton">
+					<Link to="/login" className="startButton">
 						Start your adventure
 						<span></span>
 						<span></span>
