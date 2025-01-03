@@ -127,7 +127,7 @@
 	display: none;
 }
 
-@media screen and (min-width: 860px) {
+@media screen and (min-width: 960px) {
 	.mobileMenuVault {
 		display: none;
 	}
@@ -145,12 +145,18 @@
 		.btn {
 			background-color: $secondaryDark;
 			color: $lightWhite;
-			min-width: max-content;
+			min-width: fit-content;
 			border: none;
 
 			&:hover {
 				border: none;
 			}
+		}
+
+		.vaultBtn {
+			background-color: #d6d6d6;
+			color: $secondaryDark;
+			font-size: 1rem;
 		}
 
 		.btnLogout {

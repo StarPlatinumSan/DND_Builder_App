@@ -47,7 +47,11 @@ const Vault = () => {
 	};
 
 	if (user === undefined) {
-		return <p>Loading...</p>;
+		return (
+			<div className="vaultContainer">
+				<p>Loading...</p>
+			</div>
+		);
 	}
 
 	const isLoggedIn = !!user;
@@ -58,9 +62,15 @@ const Vault = () => {
 				<header className="vaultHeader">
 					<p className="description">My Vault</p>
 					<div className="desktopVaultHeader">
-						<Link to="/characterCreation" className="btn">
-							Create a Character
-						</Link>
+						{isLoggedIn ? (
+							<Link to="/characterCreation" className="btn vaultBtn">
+								Create a character
+							</Link>
+						) : (
+							<Link to="/login" className="btn vaultBtn">
+								Login to save your characters
+							</Link>
+						)}
 						<button className="btn">Spells</button>
 						<button className="btn">Classes</button>
 						<button className="btn">Races</button>
@@ -74,9 +84,15 @@ const Vault = () => {
 
 					<div className="slideMenu">
 						<div className="optionsMobile">
-							<Link to="/characterCreation" className="btn createButton">
-								Create a Character
-							</Link>
+							{isLoggedIn ? (
+								<Link to="/characterCreation" className="btn btnDarker">
+									Create a character
+								</Link>
+							) : (
+								<Link to="/login" className="btn btnDarker">
+									Login to save your characters
+								</Link>
+							)}
 							<button className="btn spellsButton">
 								<img src="./spellsIcon.svg" alt="" />
 								Spells
@@ -124,15 +140,9 @@ const Vault = () => {
 
 				<div className="separation"></div>
 
-				{isLoggedIn ? (
-					<Link to="/characterCreation" className="btn createNew">
-						Create a character
-					</Link>
-				) : (
-					<Link to="/login" className="btn createNew">
-						Login to save your characters
-					</Link>
-				)}
+				<Link to="/characterCreation" className="btn createNew">
+					Create a character
+				</Link>
 
 				<div className="vaultCharactersContainer">{isLoggedIn ? <Account user={user} /> : <p>You must be logged in to view your characters.</p>}</div>
 			</section>
