@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Vault from "./pages/Vault";
 import Login from "./components/Login";
 import CharacterCreation from "./pages/CharacterCreation";
+import SpellSection from "./pages/SpellSection";
 
 interface Test {
 	id: number;
@@ -40,6 +41,7 @@ function App() {
 		<Routes>
 			<Route path="/" element={<Home />}></Route>
 			<Route path="/login" element={<Login />} />
+			<Route path="/spells" element={<SpellSection />} />
 			<Route path="/vault" element={<Vault />}></Route>
 			<Route path="/characterCreation" element={<CharacterCreation />}></Route>
 		</Routes>

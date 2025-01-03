@@ -101,7 +101,9 @@ const Home = () => {
 				<div className="mobileMenu" onClick={slideMenu}></div>
 
 				<div className="desktopMenu">
-					<button className="btnDesktopHead"> Spells </button>
+					<Link to="/spells" className="btnDesktopHead">
+						Spells
+					</Link>
 					<button className="btnDesktopHead"> Classes </button>
 					<button className="btnDesktopHead"> Races </button>
 					<button className="btnDesktopHead"> Feats </button>
@@ -197,7 +199,9 @@ const Home = () => {
 						<h2>Explore the spells</h2>
 						<img src="spells.jpg" alt="spells" className="imgCategory" />
 						<p className="description">From simple cantrips to legendary incantations, spells are the heart of any magic-wielding character. Unleash arcane energy, manipulate elements, and shape reality itself as you master the art of spellcasting.</p>
-						<button className="btnLearn">Explore</button>
+						<Link to="/spells" className="btnLearn">
+							Explore
+						</Link>
 					</div>
 					<div className="category">
 						<img src="/redpin.webp" alt="PIN" className="redPin" />
