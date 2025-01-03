@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axios from "../client/apiClient";
 import Spell from "../components/Spell";
 
 interface SpellData {
@@ -18,17 +18,11 @@ const SpellSection: React.FC = () => {
 	useEffect(() => {
 		const fetchSpells = async () => {
 			try {
-				const response = await axios.get<{ results: SpellData[] }>(
-					"https://www.dnd5eapi.co/api/spells"
-				);
+				const response = await axios.get<{ results: SpellData[] }>("https://www.dnd5eapi.co/api/spells");
 				const spells = response.data.results;
 
 				// Fetch detailed spell information for classification
-				const detailedSpells = await Promise.all(
-					spells.map((spell) =>
-						axios.get<SpellData>(`https://www.dnd5eapi.co/api/spells/${spell.index}`)
-					)
-				);
+				const detailedSpells = await Promise.all(spells.map((spell) => axios.get<SpellData>(`https://www.dnd5eapi.co/api/spells/${spell.index}`)));
 
 				// Classify spells by level
 				const spellsByLevel: Record<number, SpellData[]> = {};
@@ -40,6 +34,7 @@ const SpellSection: React.FC = () => {
 				setSpellsByLevel(spellsByLevel);
 				setLoading(false);
 			} catch (err) {
+				console.error(err);
 				setError("Failed to fetch spells.");
 				setLoading(false);
 			}
@@ -56,11 +51,7 @@ const SpellSection: React.FC = () => {
 			<h1>Spell Archive</h1>
 			<div className="spell-levels">
 				{Object.keys(spellsByLevel).map((level) => (
-					<button
-						key={level}
-						className={`level-button ${selectedLevel === Number(level) ? "active" : ""}`}
-						onClick={() => setSelectedLevel(Number(level))}
-					>
+					<button key={level} className={`level-button ${selectedLevel === Number(level) ? "active" : ""}`} onClick={() => setSelectedLevel(Number(level))}>
 						{level === "0" ? "Cantrips" : `Level ${level}`}
 					</button>
 				))}
