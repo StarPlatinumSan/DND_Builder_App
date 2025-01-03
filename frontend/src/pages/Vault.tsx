@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "../client/supabaseClient";
 import { useNavigate } from "react-router-dom";
 import { User } from "@supabase/supabase-js";
+import { Link } from "react-router-dom";
 
 import Account from "./Account";
 
@@ -56,7 +57,7 @@ const Vault = () => {
 			<section className="vaultContainer" onClick={slideMenuEvent}>
 				<header className="vaultHeader">
 					<p className="description">My Vault</p>
-					<div className="desktopVaultHeader" style={{ display: "none" }}>
+					<div className="desktopVaultHeader">
 						<button className="btn">Create a Character</button>
 						<button className="btn">Spells</button>
 						<button className="btn">Classes</button>
@@ -64,9 +65,7 @@ const Vault = () => {
 						<button className="btn">Feats</button>
 						<button className="btn">Backgrounds</button>
 						<button className="btn">Epic Boons</button>
-						<button className="btn btnLogout btnLogoutMobile" onClick={handleLogout}>
-							Log Out
-						</button>
+						<button className="btn btnLogout btnLogoutMobile" onClick={handleLogout}></button>
 					</div>
 
 					<div className="mobileMenuVault" onClick={slideMenu}></div>
@@ -121,7 +120,13 @@ const Vault = () => {
 
 				<div className="separation"></div>
 
-				<button className="btn createNew">Create a character</button>
+				{isLoggedIn ? (
+					<button className="btn createNew">Create a character</button>
+				) : (
+					<Link to="/login" className="btn createNew">
+						Login to save your characters
+					</Link>
+				)}
 
 				<div className="vaultCharactersContainer">{isLoggedIn ? <Account user={user} /> : <p>You must be logged in to view your characters.</p>}</div>
 			</section>
