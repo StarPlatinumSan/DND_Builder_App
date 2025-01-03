@@ -58,7 +58,9 @@ const Vault = () => {
 				<header className="vaultHeader">
 					<p className="description">My Vault</p>
 					<div className="desktopVaultHeader">
-						<button className="btn">Create a Character</button>
+						<Link to="/characterCreation" className="btn">
+							Create a Character
+						</Link>
 						<button className="btn">Spells</button>
 						<button className="btn">Classes</button>
 						<button className="btn">Races</button>
@@ -72,7 +74,9 @@ const Vault = () => {
 
 					<div className="slideMenu">
 						<div className="optionsMobile">
-							<button className="btn createButton">Create a Character</button>
+							<Link to="/characterCreation" className="btn createButton">
+								Create a Character
+							</Link>
 							<button className="btn spellsButton">
 								<img src="./spellsIcon.svg" alt="" />
 								Spells
@@ -121,7 +125,9 @@ const Vault = () => {
 				<div className="separation"></div>
 
 				{isLoggedIn ? (
-					<button className="btn createNew">Create a character</button>
+					<Link to="/characterCreation" className="btn createNew">
+						Create a character
+					</Link>
 				) : (
 					<Link to="/login" className="btn createNew">
 						Login to save your characters

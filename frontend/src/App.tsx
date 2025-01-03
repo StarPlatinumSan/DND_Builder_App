@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Home from "./pages/Home";
 import Vault from "./pages/Vault";
 import Login from "./components/Login";
+import CharacterCreation from "./pages/CharacterCreation";
 
 interface Test {
 	id: number;
@@ -40,6 +41,7 @@ function App() {
 			<Route path="/" element={<Home />}></Route>
 			<Route path="/login" element={<Login />} />
 			<Route path="/vault" element={<Vault />}></Route>
+			<Route path="/characterCreation" element={<CharacterCreation />}></Route>
 		</Routes>
 	);
 }

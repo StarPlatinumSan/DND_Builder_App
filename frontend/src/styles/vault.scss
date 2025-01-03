@@ -140,7 +140,8 @@
 		display: flex;
 		gap: 0.5rem;
 
-		button {
+		button,
+		.btn {
 			background-color: $secondaryDark;
 			color: $lightWhite;
 			min-width: max-content;
