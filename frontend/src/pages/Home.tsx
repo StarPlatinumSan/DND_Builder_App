@@ -87,8 +87,13 @@ const Home = () => {
 				<button className="closeX" onClick={() => ((document.querySelector(".slideMenu") as HTMLDivElement).style.transform = "translateX(100%)")}></button>
 
 				<h2>Menu</h2>
-				<button className="btn btnLoginMenu btnMenuHome"> Login </button>
-				<button className="btn btnMenuHome"> Spells </button>
+				<Link to="/login" className="btn btnLoginMenu btnMenuHome">
+					{" "}
+					Login{" "}
+				</Link>
+				<Link to="/spells" className="btn btnMenuHome">
+					Spells
+				</Link>
 				<button className="btn btnMenuHome"> Classes </button>
 				<button className="btn btnMenuHome"> Races </button>
 				<button className="btn btnMenuHome"> Feats </button>
@@ -225,7 +230,7 @@ const Home = () => {
 			</section>
 
 			<footer className="footer">
-				<p>
+				<p className="description footerTxt">
 					By <a href="https://github.com/StarPlatinumSan">StarPlatinumSan</a> and <a href="https://github.com/Gelehead">Gelehead</a>
 				</p>
 				<p className="copyright"> &copy; 2025 D&D Character Builder</p>
