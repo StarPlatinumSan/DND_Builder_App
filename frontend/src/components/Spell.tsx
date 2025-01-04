@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { motion, AnimatePresence } from "framer-motion";
 import "../styles/spellSection.scss";
 
 interface SpellProps {
@@ -20,14 +21,17 @@ const Spell: React.FC<SpellProps> = ({ index }) => {
 	const [error, setError] = useState<string | null>(null);
 	const [expanded, setExpanded] = useState<boolean>(false);
 
+	const toggleExpand = () => {
+		setExpanded((prev) => !prev);
+	};
+
 	useEffect(() => {
 		const fetchSpell = async () => {
 			try {
 				const response = await axios.get<SpellData>(`https://www.dnd5eapi.co/api/spells/${index}`);
 				setSpell(response.data);
-				console.log(response.data);
 				setLoading(false);
-			} catch (err) {
+			} catch (error) {
 				setError("Failed to fetch spell details.");
 				setLoading(false);
 			}
@@ -41,21 +45,25 @@ const Spell: React.FC<SpellProps> = ({ index }) => {
 	if (!spell) return <div>No spell data available.</div>;
 
 	return (
-		<div className="spell" onClick={() => setExpanded(!expanded)}>
+		<div className="spell" onClick={toggleExpand}>
 			<h3 className="spell-title">{spell.name}</h3>
 			<p className="spell-meta">
 				<strong>School:</strong> {spell.school.name}
 			</p>
-			{expanded && (
-				<div className="spell-details">
-					<p>
-						<strong>Components:</strong> {spell.components.join(", ")}
-					</p>
-					<p>
-						<strong>Description:</strong> {spell.desc.join(" ")}
-					</p>
-				</div>
-			)}
+			<AnimatePresence>
+				{expanded && (
+					<motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.2 }} style={{ overflow: "hidden" }}>
+						<div className="spell-details">
+							<p>
+								<strong>Components:</strong> {spell.components.join(", ")}
+							</p>
+							<p>
+								<strong>Description:</strong> {spell.desc.join(" ")}
+							</p>
+						</div>
+					</motion.div>
+				)}
+			</AnimatePresence>
 		</div>
 	);
 };

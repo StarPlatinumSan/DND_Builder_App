@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "../styles/SpellSection.scss";
 import Spell from "../components/Spell";
 
 interface SpellData {
