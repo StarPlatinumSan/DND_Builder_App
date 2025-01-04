@@ -84,7 +84,6 @@ select {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	gap: 0.2rem;
 }
 
 .numberInput input[type="number"] {
@@ -109,6 +108,11 @@ select {
 	font-size: 1.2rem;
 	width: 2rem;
 	cursor: pointer;
+
+	&:disabled {
+		cursor: not-allowed;
+		opacity: 0.3;
+	}
 }
 
 .numberInput .decrement:hover,
@@ -159,6 +163,10 @@ p {
 
 .btnDarker {
 	background-color: $secondaryDark;
+}
+
+.resetBtn {
+	width: 50%;
 }
 
 .info {
@@ -235,4 +243,16 @@ p {
 	&:hover {
 		transform: rotate(180deg);
 	}
+}
+
+.flex-row {
+	display: flex;
+	flex-direction: row;
+	gap: 0.5rem;
+}
+
+.flex-column {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
 }

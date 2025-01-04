@@ -4,6 +4,7 @@ import Stats from "../components/Stats";
 const CharacterCreation = () => {
 	const [step, setStep] = useState(0);
 	const [method, setMethod] = useState("");
+	const [bonusPoints, setBonusPoints] = useState(3);
 	const [message, setMessage] = useState("");
 
 	const [character, setCharacter] = useState({
@@ -38,14 +39,51 @@ const CharacterCreation = () => {
 		spells: [],
 	});
 
+	const [initialStats, setInitialStats] = useState({
+		strength: 0,
+		dexterity: 0,
+		constitution: 0,
+		intelligence: 0,
+		wisdom: 0,
+		charisma: 0,
+	});
+
+	const [selectedLevels, setSelectedLevels] = useState<{ [key: number]: boolean }>({
+		4: false,
+		8: false,
+		12: false,
+		16: false,
+		19: false,
+	});
+
+	const handleFeatClick = (level: number) => {
+		setSelectedLevels((prev) => ({
+			...prev,
+			[level]: true,
+		}));
+	};
+
+	const handleASI = (level: number) => {
+		setSelectedLevels((prev) => ({
+			...prev,
+			[level]: !prev[level],
+		}));
+		setBonusPoints((prev) => prev + 2);
+	};
+
 	const updateStats = (newStats: { [key: string]: number }) => {
-		setCharacter((prevCharacter) => ({
-			...prevCharacter,
-			stats: {
+		setCharacter((prevCharacter) => {
+			const updatedStats = {
 				...prevCharacter.stats,
 				...newStats,
-			},
-		}));
+			};
+
+			setInitialStats(updatedStats);
+			return {
+				...prevCharacter,
+				stats: updatedStats,
+			};
+		});
 	};
 
 	const goNext = () => {
@@ -93,6 +131,13 @@ const CharacterCreation = () => {
 				}
 				break;
 			case 3:
+				if (bonusPoints > 0) {
+					setMessage("Please distribute your bonus points.");
+					setTimeout(() => {
+						setMessage("");
+					}, 3000);
+					return false;
+				}
 				break;
 		}
 		console.log(Object.values(character.stats));
@@ -112,6 +157,30 @@ const CharacterCreation = () => {
 		setCharacter((prev) => ({
 			...prev,
 			level: prev.level - 1,
+		}));
+	};
+
+	const addBonus = (value: number, stat: string) => {
+		const currentStat = character.stats[stat as keyof typeof character.stats];
+
+		if (bonusPoints <= 0 || value > bonusPoints) return;
+
+		setCharacter((prev) => ({
+			...prev,
+			stats: {
+				...prev.stats,
+				[stat]: currentStat + value,
+			},
+		}));
+
+		setBonusPoints((prev) => prev - value);
+	};
+
+	const resetBonus = () => {
+		setBonusPoints(3);
+		setCharacter((prev) => ({
+			...prev,
+			stats: { ...initialStats },
 		}));
 	};
 
@@ -171,7 +240,7 @@ const CharacterCreation = () => {
 								<button className="decrement" onClick={removeInput}>
 									-
 								</button>
-								<input type="number" min="1" max="20" value={character.level} />
+								<input type="number" min="1" max="20" id="level" value={character.level} />
 								<button className="increment" onClick={addInput}>
 									+
 								</button>
@@ -213,17 +282,17 @@ const CharacterCreation = () => {
 						</div>
 
 						<div className="subSectionCreation">
-							<label htmlFor="alignment" className="labelCreation">
-								Choose your alignment
+							<label htmlFor="background" className="labelCreation">
+								Choose your background
 							</label>
-							<input type="text" placeholder="optional" />
+							<button className="btn">View all backgrounds</button>
 						</div>
 
 						<div className="subSectionCreation">
-							<label htmlFor="background" className="labelCreation">
-								Pick your background
+							<label htmlFor="alignment" className="labelCreation">
+								Enter your alignment
 							</label>
-							<button className="btn">View all backgrounds</button>
+							<input type="text" placeholder="optional" />
 						</div>
 
 						<div className="or">---</div>
@@ -275,7 +344,7 @@ const CharacterCreation = () => {
 							</div>
 						)}
 
-						{method === "pointBuy" && (
+						{method === "point" && (
 							<div className="subSectionCreation">
 								<p style={{ color: "green" }}>This option is if you want to build your stats using the 27 points system:</p>
 								<div className="or">-</div>
@@ -292,6 +361,73 @@ const CharacterCreation = () => {
 						)}
 
 						<p style={{ color: "red" }}>{message}</p>
+						<div className="btnContainerCreation">
+							<button className="btn btnBack" onClick={goBack}>
+								Back
+							</button>
+							<button className="btn btnNext" onClick={goNext}>
+								Next
+							</button>
+						</div>
+					</div>
+				)}
+
+				{step === 3 && (
+					<div className="step step3">
+						<h2>Step 4: Add your stat bonuses</h2>
+						<small>
+							You've set your character's stats! Traditionally, races added +2 to one stat and +1 to another, but newer rules tie these bonuses to backgrounds. We allow you to choose where to apply your bonuses, but consult your DM if stricter rules are in
+							play.
+						</small>
+						<div className="subSectionCreation">
+							<p>Select two stats to increase by +2 and +1 (or distribute as three +1s):</p>
+							<div className="numberInput subSectionMap">
+								{Object.entries(character.stats).map(([statName, statValue]) => (
+									<div key={statName} className="stat">
+										<label>
+											<strong>{statName.charAt(0).toUpperCase() + statName.slice(1)}</strong>: {statValue}
+										</label>
+										<div className="bonusButtons">
+											<button className="decrement" onClick={() => addBonus(1, statName as keyof typeof initialStats)} disabled={bonusPoints < 1}>
+												+1
+											</button>
+											<button className="increment" onClick={() => addBonus(2, statName as keyof typeof initialStats)} disabled={bonusPoints < 2}>
+												+2
+											</button>
+										</div>
+									</div>
+								))}
+								<button className="btn resetBtn" onClick={resetBonus}>
+									Reset Bonuses
+								</button>
+							</div>
+						</div>
+						<div className="or">-</div>
+						{character.level >= 4 && (
+							<div className="subSectionCreation featsSection">
+								<p>
+									Your character is also level {character.level}, which means it can either get {Math.floor(character.level / 4)} feat(s) or ability score improvement (ASI).
+								</p>
+								<p>Vous pouvez avoir +2 points à ajouter à vos stats plus haut ou bien obtenir un Feat à certains paliers de niveaux de classe.</p>
+								{[4, 8, 12, 16, 19].map(
+									(lvl) =>
+										character.level >= lvl && (
+											<div key={lvl} className="btnContainerCreation">
+												Level {lvl}:
+												<button className="btn btnFeat" onClick={() => handleFeatClick(lvl)} disabled={selectedLevels[lvl]}>
+													Feat
+												</button>
+												<button className="btn btnFeat" onClick={() => handleASI(lvl)} disabled={selectedLevels[lvl]}>
+													ASI
+												</button>
+											</div>
+										)
+								)}
+							</div>
+						)}
+
+						<p style={{ color: "red" }}>{message}</p>
+
 						<div className="btnContainerCreation">
 							<button className="btn btnBack" onClick={goBack}>
 								Back

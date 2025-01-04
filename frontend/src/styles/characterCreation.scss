@@ -147,10 +147,6 @@
 		gap: 1rem;
 		width: 100%;
 
-		.resetBtn {
-			width: 50%;
-		}
-
 		.statAssignments {
 			display: flex;
 			flex-wrap: wrap;
@@ -168,6 +164,10 @@
 
 				.statValue {
 					font-size: 1.5rem;
+				}
+
+				.inputStats {
+					font-size: 0.8rem;
 				}
 			}
 		}
@@ -195,6 +195,44 @@
 	}
 }
 
+.bonusButtons {
+	display: flex;
+	justify-content: center;
+	gap: 0.5rem;
+}
+
+.subSectionMap {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+
+	& > * {
+		width: calc(50% - 0.5rem);
+	}
+}
+
+.featsSection {
+	gap: 2rem;
+}
+
+.btnFeat {
+	max-width: 30%;
+
+	&:disabled {
+		cursor: not-allowed;
+		opacity: 0.3;
+	}
+}
+
+#level {
+	font-size: 1.5rem;
+	max-width: 5rem;
+}
+
 #promptCancel {
 	display: none;
 	width: 100%;
@@ -217,12 +255,30 @@
 	}
 }
 
+@media screen and (min-width: 768px) {
+	.statsContainer .statsOption .statAssignments .pointStat {
+		width: calc(33% - 0.2rem);
+	}
+}
+
 @media screen and (min-width: 960px) {
 	.characterCreationContainer {
 		justify-content: center;
 
 		.wrapper h1 {
 			margin-top: 0;
+		}
+	}
+
+	.step3 {
+		max-width: 50%;
+
+		.subSectionMap {
+			flex-wrap: wrap;
+
+			& > * {
+				width: calc(33% - 0.5rem);
+			}
 		}
 	}
 
