@@ -52,6 +52,12 @@ const SpellSection = () => {
                     </button>
                 ))}
             </div>
+
+			<div className="spells-list">
+				{filterSpellsByLevel(activeLevel).map((spell) => (
+					<Spell key={spell.index} index={spell.index} />
+				))}
+			</div>
 		</div>
 	);
 };
