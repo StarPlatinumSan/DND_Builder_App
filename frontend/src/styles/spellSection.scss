@@ -102,6 +102,9 @@
 }
 
 .spell-details {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
 	margin-top: 15px;
 	padding: 10px;
 	background-color: $gold;
@@ -119,8 +122,6 @@
 }
 
 .spell-details {
-	max-height: 300px;
-	overflow-y: auto;
 	padding-right: 10px;
 }
 

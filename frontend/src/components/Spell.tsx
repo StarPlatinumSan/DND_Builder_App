@@ -55,10 +55,10 @@ const Spell: React.FC<SpellProps> = ({ index }) => {
 					<motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.2 }} style={{ overflow: "hidden" }}>
 						<div className="spell-details">
 							<p>
-								<strong>Components:</strong> {spell.components.join(", ")}
+								<strong style={{ fontSize: "1.1em" }}>Components:</strong> {spell.components.join(", ")}
 							</p>
 							<p>
-								<strong>Description:</strong> {spell.desc.join(" ")}
+								<strong style={{ fontSize: "1.1em" }}>Description:</strong> {spell.desc.join(" ")}
 							</p>
 						</div>
 					</motion.div>
