@@ -1,63 +1,86 @@
 @use "./variables.scss" as *;
 
 .page-container {
-    max-width: 1200px; /* Optional: Limit the width of the content */
-    margin: 0 auto; /* Centers the container horizontally */
-    padding: 20px; /* Adds padding for spacing */
-    text-align: center; /* Centers text like the title */
-  }
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 auto;
+	padding: 20px;
+	text-align: center;
+	background-image: url("/sandy.png");
+	min-height: 100vh;
+}
 
 .class-page {
-    padding: 20px;
-    background-image: url("/sandy.png");
-  
-    .caster-category {
-      margin-bottom: 40px;
-  
-      h2 {
-        font-size: 1.5rem;
-        color: $primaryDark;
-        margin-bottom: 10px;
-      }
-  
-      .card-grid {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-      }
-    }
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 
-    .class-divider{
-        margin: 10px auto;
-        border: none;
-        border-top: 2px solid $gold;
-        width: 60%;
-    }
-  
-    .class-card {
-      background: $darkblue;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      width: 200px;
-      text-align: center;
-      transition: transform 0.3s;
-  
-      &:hover {
-        transform: translateY(-5px);
-      }
-  
-      img {
-        width: 100%;
-        height: 120px;
-        object-fit: cover;
-      }
-  
-      h3 {
-        font-size: 1.2rem;
-        color: $oldgold;
-        margin: 10px 0;
-      }
-    }
-  }
-  
+	.caster-category {
+		margin-bottom: 40px;
+
+		h2 {
+			font-size: 1.5rem;
+			color: $primaryDark;
+			margin-bottom: 10px;
+		}
+
+		.card-grid {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.5rem;
+
+			& > * {
+				flex: 1 1 calc(50% - 0.5rem);
+			}
+		}
+	}
+
+	.class-divider {
+		margin: 10px auto;
+		border: none;
+		border-top: 2px solid $gold;
+		width: 60%;
+	}
+
+	.class-card {
+		background: $darkblue;
+		padding: 1rem;
+		border-radius: 20px;
+		overflow: hidden;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		text-align: center;
+		transition: transform 0.3s;
+
+		&:hover {
+			transform: translateY(-5px);
+		}
+
+		img {
+			width: 100%;
+			object-fit: cover;
+		}
+
+		h3 {
+			font-size: 1.2rem;
+			color: $oldgold;
+			margin: 10px 0;
+		}
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.class-page {
+		max-width: 50rem;
+
+		.caster-category {
+			.card-grid {
+				justify-content: center;
+				& > * {
+					flex: 1 1 calc(25% - 0.5rem);
+					max-width: 25%;
+				}
+			}
+		}
+	}
+}
