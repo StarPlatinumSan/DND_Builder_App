@@ -20,7 +20,7 @@ const ClassPage: React.FC = () => {
   };
 
   const classImages: { [key: string]: string } = {
-    barbarian: "./barbarian.jpg",
+    barbarian: "../../../public/barbarian.jpg",
     fighter: "../../../public/fighter.jpg",
     rogue: "../../../public/rogue.jpg",
     monk: "../../../public/monk.jpg",
@@ -79,23 +79,25 @@ const ClassPage: React.FC = () => {
   }
 
   return (
-    <div className="class-page">
-      {Object.keys(casterCategories).map((category) => (
-        <div className="caster-category" key={category}>
-          <h2>{category.replace("-", " ").toUpperCase()}</h2>
-          <div className="card-grid">
-            {classes
-              .filter((cls) => cls.caster_type === category)
-              .map((cls) => (
-                <div className="class-card" key={cls.index}>
-                  <img src={cls.image} alt={cls.name} />
-                  <hr className="class-divider" />
-                  <h3>{cls.name}</h3>
-                </div>
-              ))}
-          </div>
+    <div className="page-container">
+        <div className="class-page">
+        {Object.keys(casterCategories).map((category) => (
+            <div className="caster-category" key={category}>
+            <h2>{category.replace("-", " ").toUpperCase()}</h2>
+            <div className="card-grid">
+                {classes
+                .filter((cls) => cls.caster_type === category)
+                .map((cls) => (
+                    <div className="class-card" key={cls.index}>
+                    <img src={cls.image} alt={cls.name} />
+                    <hr className="class-divider" />
+                    <h3>{cls.name}</h3>
+                    </div>
+                ))}
+            </div>
         </div>
       ))}
+      </div>
     </div>
   );
 };
