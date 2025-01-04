@@ -62,15 +62,17 @@ class ClassCard extends Component<ClassProps, ClassState> {
 
 		if (loading) return <div>Loading...</div>;
 		if (error) return <div>{error}</div>;
-		if (!classData) return <div>No class data available.</div>;
+		if (!classData) return null;
 
 		return (
-			<div className="class-card" onClick={this.toggleExpanded}>
-				<img src={image} alt={classData.name} />
-				<hr className="class-divider" />
-				<h3>{classData.name}</h3>
-				{expanded && (
-					<div className="class-details">
+			<div className="flip-card-class" onClick={this.toggleExpanded}>
+				<div className={`flip-card-inner-class ${expanded ? "flipped" : ""}`}>
+					<div className="flip-card-front-class">
+						<img src={image} alt={classData.name} />
+						<h3>{classData.name}</h3>
+						<p>Click to view details</p>
+					</div>
+					<div className="flip-card-back-class">
 						<p>
 							<strong>Hit Die:</strong> d{classData.hit_die}
 						</p>
@@ -80,8 +82,9 @@ class ClassCard extends Component<ClassProps, ClassState> {
 						<p>
 							<strong>Subclasses:</strong> {classData.subclasses.map((sub) => sub.name).join(", ")}
 						</p>
+						<p>Click to close</p>
 					</div>
-				)}
+				</div>
 			</div>
 		);
 	}

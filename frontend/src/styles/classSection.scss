@@ -15,25 +15,28 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	width: 100%;
 
 	.caster-category {
+		width: 100%;
 		margin-bottom: 40px;
 
 		h2 {
-			color: $gold;
+			color: gold;
 			font-size: 1.5rem;
-			margin-bottom: 10px;
+			margin-top: 3rem;
+			margin-bottom: 1rem;
 		}
 
 		.card-grid {
 			display: flex;
 			flex-wrap: wrap;
 			justify-content: center;
-			gap: 0.5rem;
+			gap: 1rem;
+			width: 100%;
 
-			& > * {
-				flex: 1 1 calc(50% - 0.5rem);
-				max-width: calc(50% - 0.5rem);
+			.flip-card {
+				width: 100%;
 			}
 		}
 	}
@@ -41,7 +44,7 @@
 	.class-divider {
 		margin: 10px auto;
 		border: none;
-		border-top: 2px solid $gold;
+		border-top: 2px solid gold;
 		width: 60%;
 	}
 
@@ -54,13 +57,10 @@
 		text-align: center;
 		transition: transform 0.3s;
 
+		cursor: pointer;
+
 		&:hover {
 			transform: translateY(-5px);
-		}
-
-		img {
-			width: 100%;
-			object-fit: cover;
 		}
 
 		h3 {
@@ -77,28 +77,72 @@
 	left: 10px;
 	width: 120px;
 	height: 50px;
-	background-color: $gold;
+	background-color: gold;
 	color: $darkblue;
 	transition: all 0.3s ease;
 
 	&:hover {
 		background-color: $darkblue;
-		color: $gold;
+		color: gold;
 	}
 }
 
-@media screen and (min-width: 768px) {
-	.class-page {
-		max-width: 50rem;
+.flip-card-class {
+	perspective: 1000px;
+	min-height: 500px;
+	min-width: 300px;
+	max-width: 400px;
+	display: flex;
+}
 
-		.caster-category {
-			.card-grid {
-				justify-content: center;
-				& > * {
-					flex: 1 1 calc(25% - 0.5rem);
-					max-width: 25%;
-				}
-			}
-		}
-	}
+.flip-card-inner-class {
+	cursor: pointer;
+	width: 100%;
+	min-height: 450px;
+	padding: 1rem;
+	transform-style: preserve-3d;
+	transition: transform 0.6s ease;
+	position: relative;
+}
+
+.flip-card-front-class,
+.flip-card-back-class {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
+	top: 0;
+	left: 0;
+	border-radius: 10px;
+	padding: 1rem;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.flip-card-front-class {
+	background-color: #1a202c;
+	color: #e2e8f0;
+	transform: rotateY(0deg);
+}
+
+.flip-card-back-class {
+	background-color: #2d3748;
+	color: #edf2f7;
+	transform: rotateY(180deg);
+	padding: 1rem;
+}
+
+.flip-card-inner-class.flipped {
+	transform: rotateY(180deg);
+}
+
+.flip-card-class img {
+	max-width: 100%;
+	height: auto;
+	border-radius: 10px;
 }

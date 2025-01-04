@@ -73,6 +73,17 @@ const Stats: React.FC<StatsProps> = ({ props, updateStats }) => {
 	};
 
 	const addInput = (stat: string) => {
+		if (props === "point") {
+			const currentValue = assignments[stat] || 8;
+			if (currentValue >= 8 && currentValue < 13 && pointBuy > 0) {
+				setPointBuy((prev) => prev - 1);
+			} else if (currentValue >= 13 && currentValue < 15 && pointBuy > 1) {
+				setPointBuy((prev) => prev - 2);
+			} else {
+				return;
+			}
+		}
+
 		setAssignments((prevAssignments) => {
 			const updatedAssignments = {
 				...prevAssignments,
