@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Spell from "../components/Spell";
+import { Link } from "react-router-dom";
 
 interface SpellData {
 	index: string;
@@ -38,6 +39,9 @@ const SpellSection = () => {
 
 	return (
 		<div className="spell-section">
+			<Link to="/" className="btn returnBtnSpells">
+				Go Back
+			</Link>
 			<div className="wrapper">
 				<h1 className="spell-title">Spell Archive</h1>
 
