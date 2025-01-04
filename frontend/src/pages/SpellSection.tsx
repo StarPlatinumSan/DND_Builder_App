@@ -33,7 +33,7 @@ const SpellSection = () => {
 	};
 
 	if (loading) {
-		return <div>Loading spells...</div>;
+		return <div style={{ backgroundColor: "#051B2F;" }}>Loading spells...</div>;
 	}
 
 	return (
