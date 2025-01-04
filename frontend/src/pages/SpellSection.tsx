@@ -1,72 +1,66 @@
-import { useState, useEffect } from "react";
-import axios from "../client/apiClient";
-import Spell from "../components/Spell";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import '../styles/SpellSection.scss'; // Assuming it's a CSS file now
+import Spell from '../components/Spell'; // Import the Spell component
 
 interface SpellData {
-	name: string;
-	index: string;
-	level: number;
-	school: { name: string };
+  index: string;
+  name: string;
+  level: number;
 }
 
-const SpellSection: React.FC = () => {
-	const [spellsByLevel, setSpellsByLevel] = useState<Record<number, SpellData[]>>({});
-	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState<string | null>(null);
-	const [selectedLevel, setSelectedLevel] = useState<number | null>(null);
+const SpellSection = () => {
+  const [spells, setSpells] = useState<SpellData[]>([]); // Explicitly define the state as an array of Spell objects
+  const [activeLevel, setActiveLevel] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(true);
 
-	useEffect(() => {
-		const fetchSpells = async () => {
-			try {
-				const response = await axios.get<{ results: SpellData[] }>("https://www.dnd5eapi.co/api/spells");
-				const spells = response.data.results;
+  useEffect(() => {
+    const fetchSpells = async () => {
+      try {
+        const response = await axios.get('https://www.dnd5eapi.co/api/spells');
+        setSpells(response.data.results || []); // Ensure that we handle cases where results may be empty
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching spells:', error);
+        setLoading(false);
+      }
+    };
 
-				// Fetch detailed spell information for classification
-				const detailedSpells = await Promise.all(spells.map((spell) => axios.get<SpellData>(`https://www.dnd5eapi.co/api/spells/${spell.index}`)));
+    fetchSpells();
+  }, []);
 
-				// Classify spells by level
-				const spellsByLevel: Record<number, SpellData[]> = {};
-				detailedSpells.forEach(({ data }) => {
-					if (!spellsByLevel[data.level]) spellsByLevel[data.level] = [];
-					spellsByLevel[data.level].push(data);
-				});
+  // Function to filter spells based on the selected level
+  const filterSpellsByLevel = (level: number) => {
+    return spells.filter((spell) => spell.level === level);
+  };
 
-				setSpellsByLevel(spellsByLevel);
-				setLoading(false);
-			} catch (err) {
-				console.error(err);
-				setError("Failed to fetch spells.");
-				setLoading(false);
-			}
-		};
+  if (loading) {
+    return <div>Loading spells...</div>; // Show loading text if data is still being fetched
+  }
 
-		fetchSpells();
-	}, []);
+  return (
+    <div className="spell-section">
+      <h1>Spell Archive</h1>
 
-	if (loading) return <div>Loading spells...</div>;
-	if (error) return <div>{error}</div>;
+      <div className="spell-levels">
+        {Array.from({ length: 10 }, (_, i) => i).map((level) => (
+          <button
+            key={level}
+            className={`level-button ${activeLevel === level ? 'active' : ''}`}
+            onClick={() => setActiveLevel(level)}
+          >
+            Level {level === 0 ? 'Cantrip' : level}
+          </button>
+        ))}
+      </div>
 
-	return (
-		<div>
-			<h1>Spell Archive</h1>
-			<div className="spell-levels">
-				{Object.keys(spellsByLevel).map((level) => (
-					<button key={level} className={`level-button ${selectedLevel === Number(level) ? "active" : ""}`} onClick={() => setSelectedLevel(Number(level))}>
-						{level === "0" ? "Cantrips" : `Level ${level}`}
-					</button>
-				))}
-			</div>
-
-			<div className="spells-list">
-				{selectedLevel !== null &&
-					spellsByLevel[selectedLevel]?.map((spell) => (
-						<div key={spell.index} className="spell-item">
-							<Spell spellIndex={spell.index} />
-						</div>
-					))}
-			</div>
-		</div>
-	);
+      <div className="spells-list">
+        {filterSpellsByLevel(activeLevel).map((spell) => (
+          <Spell key={spell.index} index={spell.index} />
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default SpellSection;
