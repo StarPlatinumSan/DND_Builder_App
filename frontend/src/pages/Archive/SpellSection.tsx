@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "../styles/SpellSection.scss"; // Assuming it's a CSS file now
-import Spell from "../components/Spell"; // Import the Spell component
+import "../../styles/SpellSection.scss"; 
+import Spell from "../../components/Spell"; 
 
 interface SpellData {
 	index: string;
@@ -10,7 +10,7 @@ interface SpellData {
 }
 
 const SpellSection = () => {
-	const [spells, setSpells] = useState<SpellData[]>([]); // Explicitly define the state as an array of Spell objects
+	const [spells, setSpells] = useState<SpellData[]>([]);
 	const [activeLevel, setActiveLevel] = useState<number>(0);
 	const [loading, setLoading] = useState<boolean>(true);
 
@@ -18,7 +18,7 @@ const SpellSection = () => {
 		const fetchSpells = async () => {
 			try {
 				const response = await axios.get("https://www.dnd5eapi.co/api/spells");
-				setSpells(response.data.results || []); // Ensure that we handle cases where results may be empty
+				setSpells(response.data.results || []);
 				setLoading(false);
 			} catch (error) {
 				console.error("Error fetching spells:", error);
@@ -29,13 +29,12 @@ const SpellSection = () => {
 		fetchSpells();
 	}, []);
 
-	// Function to filter spells based on the selected level
 	const filterSpellsByLevel = (level: number) => {
 		return spells.filter((spell) => spell.level === level);
 	};
 
 	if (loading) {
-		return <div>Loading spells...</div>; // Show loading text if data is still being fetched
+		return <div>Loading spells...</div>; 
 	}
 
 	return (

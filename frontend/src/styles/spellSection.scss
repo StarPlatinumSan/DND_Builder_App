@@ -1,7 +1,9 @@
+@use "./variables.scss" as *;
+
 .spell-section {
 	font-family: "Garamond", serif;
-	color: #4b3621;
-	background-color: #f4f1e1;
+	color: $secondary;
+    background-color: $beige;
 	padding: 30px;
 	border-radius: 10px;
 	box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
@@ -55,24 +57,25 @@
 }
 
 .spell {
-	background-color: #fff;
-	border: 2px solid #3e2a47;
+    color: $lightWhite;
+	background-color: $secondary;
+	border: 2px solid $primaryAccent;
 	padding: 15px;
 	border-radius: 8px;
 	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 	transition: transform 0.3s ease;
 	cursor: pointer;
+
+    .spell-title {
+        font-family: "Times New Roman", serif;
+        font-size: 1.6em;
+        color: $lightWhite;
+        text-transform: capitalize;
+    }
 }
 
 .spell:hover {
 	transform: scale(1.03);
-}
-
-.spell-title {
-	font-family: "Times New Roman", serif;
-	font-size: 1.6em;
-	color: #3e2a47;
-	text-transform: capitalize;
 }
 
 .spell-meta {
@@ -83,13 +86,17 @@
 .spell-details {
 	margin-top: 15px;
 	padding: 10px;
-	background-color: #f7f0d9;
+	background-color: $secondaryAccent;
 	border: 1px solid #3e2a47;
 	border-radius: 5px;
 }
 
 .spell-details p {
 	font-size: 1em;
+}
+
+.spell-details strong {
+    color: $gold;
 }
 
 .spell-details {

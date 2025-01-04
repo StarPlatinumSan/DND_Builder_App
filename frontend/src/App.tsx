@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import Vault from "./pages/Vault";
 import Login from "./components/Login";
 import CharacterCreation from "./pages/CharacterCreation";
-import SpellSection from "./pages/SpellSection";
+import SpellSection from "./pages/Archive/SpellSection";
 
 interface Test {
 	id: number;
