@@ -42,9 +42,13 @@ const SpellSection = () => {
 			<h1 className="spell-title">Spell Archive</h1>
 
 			<div className="spell-levels">
-				{Array.from({ length: 10 }, (_, i) => i).map((level) => (
+				<button className={`level-button ${activeLevel === 0 ? "active" : ""}`} onClick={() => setActiveLevel(0)}>
+					Cantrip
+				</button>
+
+				{Array.from({ length: 9 }, (_, i) => i + 1).map((level) => (
 					<button key={level} className={`level-button ${activeLevel === level ? "active" : ""}`} onClick={() => setActiveLevel(level)}>
-						Level {level === 0 ? "Cantrip" : level}
+						Level {level}
 					</button>
 				))}
 			</div>
