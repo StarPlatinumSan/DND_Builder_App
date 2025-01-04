@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Class from "../components/Class";
+import { Link } from "react-router-dom";
 
 interface ClassInfo {
 	name: string;
@@ -97,6 +98,9 @@ const ClassPage: React.FC = () => {
 
 	return (
 		<div className="page-container">
+			<Link to="/" className="btn returnBtnClass">
+				Go Back
+			</Link>
 			<div className="class-page">
 				{Object.keys(casterCategories).map((category) => (
 					<div className="caster-category" key={category}>
