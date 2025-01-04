@@ -39,24 +39,26 @@ const SpellSection = () => {
 
 	return (
 		<div className="spell-section">
-			<h1 className="spell-title">Spell Archive</h1>
+			<div className="wrapper">
+				<h1 className="spell-title">Spell Archive</h1>
 
-			<div className="spell-levels">
-				<button className={`level-button ${activeLevel === 0 ? "active" : ""}`} onClick={() => setActiveLevel(0)}>
-					Cantrip
-				</button>
-
-				{Array.from({ length: 9 }, (_, i) => i + 1).map((level) => (
-					<button key={level} className={`level-button ${activeLevel === level ? "active" : ""}`} onClick={() => setActiveLevel(level)}>
-						Level {level}
+				<div className="spell-levels">
+					<button className={`level-button ${activeLevel === 0 ? "active" : ""}`} onClick={() => setActiveLevel(0)}>
+						Cantrip
 					</button>
-				))}
-			</div>
 
-			<div className="spells-list">
-				{filterSpellsByLevel(activeLevel).map((spell) => (
-					<Spell key={spell.index} index={spell.index} />
-				))}
+					{Array.from({ length: 9 }, (_, i) => i + 1).map((level) => (
+						<button key={level} className={`level-button ${activeLevel === level ? "active" : ""}`} onClick={() => setActiveLevel(level)}>
+							Level {level}
+						</button>
+					))}
+				</div>
+
+				<div className="spells-list">
+					{filterSpellsByLevel(activeLevel).map((spell) => (
+						<Spell key={spell.index} index={spell.index} />
+					))}
+				</div>
 			</div>
 		</div>
 	);
