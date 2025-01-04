@@ -94,7 +94,9 @@ const Home = () => {
 				<Link to="/spells" className="btn btnMenuHome">
 					Spells
 				</Link>
-				<button className="btn btnMenuHome"> Classes </button>
+				<Link to="/classes" className="btn btnMenuHome">
+					Classes
+				</Link>
 				<button className="btn btnMenuHome"> Races </button>
 				<button className="btn btnMenuHome"> Feats </button>
 				<button className="btn btnMenuHome"> Backgrounds </button>
@@ -109,7 +111,9 @@ const Home = () => {
 					<Link to="/spells" className="btnDesktopHead">
 						Spells
 					</Link>
-					<button className="btnDesktopHead"> Classes </button>
+					<Link to="/classes" className="btnDesktopHead">
+						Classes
+					</Link>
 					<button className="btnDesktopHead"> Races </button>
 					<button className="btnDesktopHead"> Feats </button>
 					<button className="btnDesktopHead"> Backgrounds </button>
