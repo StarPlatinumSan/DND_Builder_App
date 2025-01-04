@@ -10,6 +10,7 @@ interface SpellProps {
 interface SpellData {
 	name: string;
 	level: number;
+	duration: string;
 	school: { name: string };
 	components: string[];
 	desc: string[];
@@ -47,15 +48,20 @@ const Spell: React.FC<SpellProps> = ({ index }) => {
 	return (
 		<div className="spell" onClick={toggleExpand}>
 			<h3 className="spell-title">{spell.name}</h3>
-			<p className="spell-meta">
-				<strong>School:</strong> {spell.school.name}
-			</p>
+			<div className="spell-meta">
+				<p>
+					<strong>School:</strong> {spell.school.name}
+				</p>
+			</div>
 			<AnimatePresence>
 				{expanded && (
 					<motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.2 }} style={{ overflow: "hidden" }}>
 						<div className="spell-details">
 							<p>
 								<strong style={{ fontSize: "1.1em" }}>Components:</strong> {spell.components.join(", ")}
+							</p>
+							<p>
+								<strong style={{ fontSize: "1.1em" }}>Duration: </strong> {spell.duration}
 							</p>
 							<p>
 								<strong style={{ fontSize: "1.1em" }}>Description:</strong> {spell.desc.join(" ")}

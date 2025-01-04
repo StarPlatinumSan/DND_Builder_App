@@ -96,6 +96,9 @@
 }
 
 .spell-meta {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
 	font-size: 1.1em;
 	margin: 5px 0;
 	color: $gold;
