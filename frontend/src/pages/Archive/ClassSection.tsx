@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "../../styles/classSection.scss";
+import Class from "../../components/Class"; // Import the ClassCard component
 
 interface ClassInfo {
   name: string;
@@ -35,16 +37,10 @@ const ClassPage: React.FC = () => {
   };
 
   useEffect(() => {
-    // Fetch all classes from the D&D API
-    fetch("https://www.dnd5eapi.co/api/classes")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Failed to fetch classes: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        const categorizedClasses = data.results.map((cls: { name: string; index: string }) => {
+    const fetchClasses = async () => {
+      try {
+        const response = await axios.get("https://www.dnd5eapi.co/api/classes");
+        const categorizedClasses = response.data.results.map((cls: { name: string; index: string }) => {
           let caster_type: "non-caster" | "half-caster" | "full-caster" = "non-caster";
 
           if (casterCategories["half-caster"].includes(cls.index)) {
@@ -63,11 +59,13 @@ const ClassPage: React.FC = () => {
 
         setClasses(categorizedClasses);
         setIsLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
+      } catch (err) {
+        setError("Failed to fetch classes.");
         setIsLoading(false);
-      });
+      }
+    };
+
+    fetchClasses();
   }, []);
 
   if (isLoading) {
@@ -80,23 +78,19 @@ const ClassPage: React.FC = () => {
 
   return (
     <div className="page-container">
-        <div className="class-page">
+      <div className="class-page">
         {Object.keys(casterCategories).map((category) => (
-            <div className="caster-category" key={category}>
+          <div className="caster-category" key={category}>
             <h2>{category.replace("-", " ").toUpperCase()}</h2>
             <div className="card-grid">
-                {classes
+              {classes
                 .filter((cls) => cls.caster_type === category)
                 .map((cls) => (
-                    <div className="class-card" key={cls.index}>
-                    <img src={cls.image} alt={cls.name} />
-                    <hr className="class-divider" />
-                    <h3>{cls.name}</h3>
-                    </div>
+                  <Class key={cls.index} index={cls.index} image={cls.image} />
                 ))}
             </div>
-        </div>
-      ))}
+          </div>
+        ))}
       </div>
     </div>
   );
