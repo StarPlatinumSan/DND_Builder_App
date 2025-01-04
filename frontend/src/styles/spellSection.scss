@@ -3,7 +3,7 @@
 .spell-section {
 	font-family: "Garamond", serif;
 	color: $secondary;
-    background-color: $beige;
+	background-color: $beige;
 	padding: 30px;
 	border-radius: 10px;
 	box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
@@ -12,7 +12,7 @@
 }
 
 .spell-title {
-	font-size: 2.5em;
+	font-size: clamp(1.5rem, 5vw, 2.5rem);
 	text-align: center;
 	margin-bottom: 20px;
 	font-family: "Times New Roman", serif;
@@ -23,7 +23,9 @@
 
 .spell-levels {
 	display: flex;
-	justify-content: center;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
 	gap: 15px;
 	margin-bottom: 30px;
 }
@@ -57,7 +59,7 @@
 }
 
 .spell {
-    color: $lightWhite;
+	color: $lightWhite;
 	background-color: $secondary;
 	border: 2px solid $primaryAccent;
 	padding: 15px;
@@ -66,12 +68,12 @@
 	transition: transform 0.3s ease;
 	cursor: pointer;
 
-    .spell-title {
-        font-family: "Times New Roman", serif;
-        font-size: 1.6em;
-        color: $lightWhite;
-        text-transform: capitalize;
-    }
+	.spell-title {
+		font-family: "Times New Roman", serif;
+		font-size: 1.6em;
+		color: $lightWhite;
+		text-transform: capitalize;
+	}
 }
 
 .spell:hover {
@@ -96,7 +98,7 @@
 }
 
 .spell-details strong {
-    color: $gold;
+	color: $gold;
 }
 
 .spell-details {
