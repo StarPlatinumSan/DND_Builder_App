@@ -7,6 +7,12 @@ interface ClassInfo {
 	index: string;
 	caster_type: "non-caster" | "half-caster" | "full-caster";
 	image: string;
+	manualData?: {
+		name: string;
+		hit_die: number;
+		proficiencies: { name: string }[];
+		subclasses: { name: string }[];
+	};
 }
 
 const ClassPage: React.FC = () => {
@@ -16,11 +22,12 @@ const ClassPage: React.FC = () => {
 
 	const casterCategories = {
 		"non-caster": ["barbarian", "fighter", "rogue", "monk"],
-		"half-caster": ["paladin", "ranger"],
+		"half-caster": ["paladin", "ranger", "artificier"],
 		"full-caster": ["bard", "cleric", "druid", "sorcerer", "wizard", "warlock"],
 	};
 
 	const classImages: { [key: string]: string } = {
+		artificier: "../../../public/artificer.jpg",
 		barbarian: "../../../public/barbarian.jpg",
 		fighter: "../../../public/fighter.jpg",
 		rogue: "../../../public/rogue.jpg",
@@ -52,13 +59,26 @@ const ClassPage: React.FC = () => {
 						name: cls.name,
 						index: cls.index,
 						caster_type,
-						image: classImages[cls.index] || "../../assets/default.png", // Default image fallback
+						image: classImages[cls.index] || "../../assets/default.png",
 					};
 				});
 
-				setClasses(categorizedClasses);
+				const artificerClass: ClassInfo = {
+					name: "Artificer",
+					index: "artificer",
+					caster_type: "half-caster",
+					image: "../../../public/artificer.jpg",
+					manualData: {
+						name: "Artificer",
+						hit_die: 8,
+						proficiencies: [{ name: "Tinker's Tools" }, { name: "Light Armor" }, { name: "Simple Weapons" }],
+						subclasses: [{ name: "Alchemist" }, { name: "Artillerist" }],
+					},
+				};
+
+				setClasses([...categorizedClasses, artificerClass]);
 				setIsLoading(false);
-			} catch (err) {
+			} catch (error) {
 				setError("Failed to fetch classes.");
 				setIsLoading(false);
 			}
@@ -85,7 +105,7 @@ const ClassPage: React.FC = () => {
 							{classes
 								.filter((cls) => cls.caster_type === category)
 								.map((cls) => (
-									<Class key={cls.index} index={cls.index} image={cls.image} />
+									<Class key={cls.index} index={cls.index} image={cls.image} manualData={cls.manualData} />
 								))}
 						</div>
 					</div>
