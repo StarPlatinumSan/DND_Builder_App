@@ -1,11 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { supabase } from "../client/supabaseClient";
+import axios from "../client/apiClient";
 import Stats from "../components/Stats";
+
+interface subraces {
+	id: number;
+	race_id: number;
+	name: string;
+	features: string;
+}
+
+interface Race {
+	id: number;
+	name: string;
+	description: string;
+	features: string;
+	subraces?: subraces[];
+}
 
 const CharacterCreation = () => {
 	const [step, setStep] = useState(0);
 	const [method, setMethod] = useState("");
 	const [bonusPoints, setBonusPoints] = useState(3);
 	const [message, setMessage] = useState("");
+	const [showDiv, setShowDiv] = useState("");
+	const [races, setRaces] = useState<Race[]>([]);
+	const [error, setError] = useState("");
 
 	const [character, setCharacter] = useState({
 		level: 1,
@@ -28,6 +48,7 @@ const CharacterCreation = () => {
 		armorClass: 0,
 		initiative: 0,
 		speed: 0,
+		gold: 0,
 		skills: [],
 		proficiencies: [],
 		equipment: [],
@@ -184,6 +205,21 @@ const CharacterCreation = () => {
 		}));
 	};
 
+	const removeGold = () => {
+		if (character.gold <= 0) return;
+		setCharacter((prev) => ({
+			...prev,
+			gold: prev.gold - 1,
+		}));
+	};
+
+	const addGold = () => {
+		setCharacter((prev) => ({
+			...prev,
+			gold: prev.gold + 1,
+		}));
+	};
+
 	const promptCancel = () => {
 		const prompt = document.getElementById("promptCancel") as HTMLDivElement;
 		prompt.style.display = "flex";
@@ -200,10 +236,80 @@ const CharacterCreation = () => {
 		setMethod(method);
 	};
 
+	const showDivSelection = (name: string) => {
+		if (name === "races") {
+			setShowDiv("races");
+		}
+	};
+
+	useEffect(() => {
+		if (showDiv === "races") {
+			const fetchRaces = async () => {
+				const { data, error } = await supabase.from("races").select(`
+						id,
+						name,
+						description,
+						features,
+						subraces (id, race_id, name, features)
+					`);
+
+				if (error) {
+					console.log("Error fetching races:", error);
+				} /* else {
+					setRaces(data as Race[]);
+					console.log(races);
+				} */
+
+				if (!data) {
+					console.warn("No data returned from Supabase.");
+					setRaces([]);
+					return;
+				}
+
+				if (!Array.isArray(data) || data.length === 0) {
+					console.warn("No races found in the database (empty array).");
+					setRaces([]);
+					return;
+				}
+
+				setRaces(data);
+			};
+			fetchRaces();
+		}
+	}, [showDiv]);
+
 	return (
 		<div className="characterCreationContainer">
+			{showDiv === "races" && (
+				<div className="raceSelectionDiv">
+					<div className="showDiv allRaces">
+						<div className="opacity"></div>
+						<div className="divSelection races">
+							<h2>Select a race</h2>
+							{races.length === 0 && <p>No races found</p>}
+
+							{races.map((race) => (
+								<div key={race.id}>
+									<h3>{race.name}</h3>
+									<p>{race.description}</p>
+									{race.subraces && race.subraces.length > 0 && (
+										<ul>
+											{race.subraces.map((subrace) => (
+												<li key={subrace.race_id}>
+													<h4>{subrace.name}</h4>
+												</li>
+											))}
+										</ul>
+									)}
+								</div>
+							))}
+						</div>
+					</div>
+				</div>
+			)}
+
 			<div className="wrapper">
-				<h1>Welcome to your Forge</h1>
+				<h1>The Forge</h1>
 
 				<div id="promptCancel">
 					<p>Are you sure you want to cancel the creation of your character?</p>
@@ -251,7 +357,9 @@ const CharacterCreation = () => {
 							<label htmlFor="race" className="labelCreation">
 								Pick your race
 							</label>
-							<button className="btn">View all races</button>
+							<button className="btn" onClick={() => showDivSelection("races")}>
+								View all races
+							</button>
 						</div>
 
 						<div className="subSectionCreation">
@@ -435,6 +543,86 @@ const CharacterCreation = () => {
 							<button className="btn btnNext" onClick={goNext}>
 								Next
 							</button>
+						</div>
+					</div>
+				)}
+
+				{step === 4 && (
+					<div className="step step4">
+						<h2>Step 5: Polish your identity</h2>
+						<div className="subSectionCreation">
+							<p>This is the last step before creating your character.</p>
+							<p>Note that usually those stats are related to your class, although, we want to let you choose them more freely in case your DM is more flexible about them.</p>
+							<p style={{ color: "darkgreen" }}>You can always edit those sections later.</p>
+						</div>
+
+						<div className="or">-</div>
+
+						<div className="subSectionCreation">
+							<p>Select your character's proficiencies:</p>
+							<button className="btn maxWidth50">View all Proficiencies</button>
+							<small>
+								View your class proficiencies on <a onClick={() => window.open("https://www.dndbeyond.com/classes", "_blank")}>dndbeyond.com</a> to know which one are available for your character usually. Typically, you get 2 from a small list.
+							</small>
+						</div>
+
+						<div className="or">-</div>
+
+						<div className="subSectionCreation">
+							<p>Choose your character's languages:</p>
+							<button className="btn maxWidth50">View all Languages</button>
+							<small>Typically, your character knows Common and 1-2 more languages.</small>
+						</div>
+
+						<div className="or">-</div>
+
+						<div className="subSectionCreation">
+							<p>Choose your character's equipment:</p>
+							<button className="btn maxWidth50">View all Equipment</button>
+							<small>Typically, you'd have the base equipment for your class. But your DM and level could decide otherwise.</small>
+						</div>
+
+						<div className="subSectionCreation">
+							<p>Select your starting gold:</p>
+							<div className="numberInput">
+								<button className="decrement" onClick={removeGold}>
+									-
+								</button>
+								<input type="number" min="1" max="20" id="gold" value={character.gold} />
+								<button className="increment" onClick={addGold}>
+									+
+								</button>
+							</div>
+							<p>Enter your starting items:</p>
+							<textarea className="inputCreation" placeholder="Enter any items you may have"></textarea>
+							<small>You should discuss your starting gold and items with your DM.</small>
+						</div>
+
+						<div className="or">-</div>
+
+						<div className="subSectionCreation">
+							<p>Add a description about your character and its personality:</p>
+							<textarea className="inputCreation" placeholder="Enter your character's description here..."></textarea>
+						</div>
+
+						<div className="or">-</div>
+
+						<div className="btnContainerCreation">
+							<button className="btn btnBack" onClick={goBack}>
+								Back
+							</button>
+							<button className="btn btnNext" onClick={goNext}>
+								Next
+							</button>
+						</div>
+					</div>
+				)}
+
+				{step === 5 && (
+					<div className="step step5">
+						<h2>Step 6: Select your spells</h2>
+						<div className="subSectionCreation">
+							<p>If your character is a full-caster.</p>
 						</div>
 					</div>
 				)}

@@ -82,6 +82,26 @@ select {
 	}
 }
 
+textarea {
+	background-color: $secondary;
+	color: $lightWhite;
+	border: 2px solid $secondaryAccent;
+	border-radius: 0.25rem;
+	padding: 0.5rem 1rem;
+	min-height: 50px;
+	width: 100%;
+	max-width: 100%;
+	min-width: 100%;
+
+	font-family: "Cormorant Unicase", serif;
+	transition: all 0.3s ease;
+
+	&:focus {
+		outline: none;
+		border-color: $primary;
+	}
+}
+
 .numberInput {
 	display: flex;
 	justify-content: center;
@@ -257,4 +277,9 @@ p {
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
+}
+
+.maxWidth50 {
+	max-width: 50%;
+	align-self: center;
 }
