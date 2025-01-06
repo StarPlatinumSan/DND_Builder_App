@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Spell from "../components/Spell";
+import Spell from "../../components/Spell";
 import { Link } from "react-router-dom";
 
 interface SpellData {

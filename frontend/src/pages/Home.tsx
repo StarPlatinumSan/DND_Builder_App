@@ -98,7 +98,9 @@ const Home = () => {
 					Classes
 				</Link>
 				<button className="btn btnMenuHome"> Races </button>
-				<button className="btn btnMenuHome"> Feats </button>
+				<Link to="/feats" className="btn btnMenuHome">
+					Feats
+				</Link>
 				<button className="btn btnMenuHome"> Backgrounds </button>
 				<button className="btn btnMenuHome"> Epic Boons </button>
 			</div>
@@ -115,7 +117,9 @@ const Home = () => {
 						Classes
 					</Link>
 					<button className="btnDesktopHead"> Races </button>
-					<button className="btnDesktopHead"> Feats </button>
+					<Link to="/feats" className="btnDesktopHead">
+						Feats
+					</Link>
 					<button className="btnDesktopHead"> Backgrounds </button>
 					<button className="btnDesktopHead"> Epic Boons </button>
 					<Link to="/login" className="btnDesktopHead btnLoginHead">

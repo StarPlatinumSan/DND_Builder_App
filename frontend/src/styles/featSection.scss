@@ -1,0 +1,44 @@
+.feat-page {
+    padding: 20px;
+    text-align: center;
+  
+    h1 {
+      margin-bottom: 20px;
+      font-size: 2rem;
+    }
+  
+    .feat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      justify-items: center;
+    }
+  }
+  
+  .feat-card {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    width: 100%;
+    max-width: 300px;
+    text-align: left;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+  
+    h3 {
+      margin-bottom: 8px;
+      font-size: 1.25rem;
+      color: #333;
+    }
+  
+    .feat-details {
+      margin-top: 10px;
+  
+      p {
+        margin: 4px 0;
+        font-size: 0.9rem;
+      }
+    }
+  }
+  
