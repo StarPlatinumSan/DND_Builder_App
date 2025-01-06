@@ -108,7 +108,10 @@ const CharacterCreation = () => {
 	};
 
 	const goNext = () => {
-		if (validateStep()) setStep((prev) => prev + 1);
+		if (validateStep()) {
+			setStep((prev) => prev + 1);
+			console.log(character);
+		}
 	};
 	const goBack = () => {
 		setStep((prev) => prev - 1);
@@ -242,6 +245,15 @@ const CharacterCreation = () => {
 		}
 	};
 
+	const setRaceCharacter = (raceName: string) => {
+		setCharacter((prev) => ({
+			...prev,
+			race: raceName,
+		}));
+
+		setShowDiv("");
+	};
+
 	useEffect(() => {
 		if (showDiv === "races") {
 			const fetchRaces = async () => {
@@ -284,23 +296,13 @@ const CharacterCreation = () => {
 				<div className="raceSelectionDiv">
 					<div className="showDiv allRaces">
 						<div className="opacity"></div>
+
 						<div className="divSelection races">
-							<h2>Select a race</h2>
 							{races.length === 0 && <p>No races found</p>}
 
 							{races.map((race) => (
-								<div key={race.id}>
+								<div key={race.id} className={`card ${race.name === "Exotic" ? "exotic" : ""}`} onClick={() => setRaceCharacter(race.name)}>
 									<h3>{race.name}</h3>
-									<p>{race.description}</p>
-									{race.subraces && race.subraces.length > 0 && (
-										<ul>
-											{race.subraces.map((subrace) => (
-												<li key={subrace.race_id}>
-													<h4>{subrace.name}</h4>
-												</li>
-											))}
-										</ul>
-									)}
 								</div>
 							))}
 						</div>
