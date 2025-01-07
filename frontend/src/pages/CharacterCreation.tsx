@@ -25,7 +25,6 @@ const CharacterCreation = () => {
 	const [message, setMessage] = useState("");
 	const [showDiv, setShowDiv] = useState("");
 	const [races, setRaces] = useState<Race[]>([]);
-	const [error, setError] = useState("");
 
 	const [character, setCharacter] = useState({
 		level: 1,
