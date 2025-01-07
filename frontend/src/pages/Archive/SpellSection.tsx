@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import Spell from "../../components/Spell";
 import { Link } from "react-router-dom";
+import { supabase } from "../../client/supabaseClient";
+import Spell from "../../components/Spell";
 
 interface SpellData {
-	index: string;
-	name: string;
 	level: number;
+	name: string;
+	school: string;
+	cast_time: string;
+	range: string;
+	duration: string;
+	components: string;
+	description: string;
+	atHigherLevels: string;
+	spellLists: string;
 }
 
 const SpellSection = () => {
@@ -17,11 +24,29 @@ const SpellSection = () => {
 	useEffect(() => {
 		const fetchSpells = async () => {
 			try {
-				const response = await axios.get("https://www.dnd5eapi.co/api/spells");
-				setSpells(response.data.results || []);
+				const response = await supabase.from("spells").select(`
+					level,
+					name,
+					school,
+					cast_time,
+					range,
+					duration,
+					components,
+					description,
+					atHigherLevels,
+					spellLists
+				`);
+
+				if (response.error) {
+					console.error("Error fetching spells:", response.error);
+					setLoading(false);
+					return;
+				}
+
+				setSpells(response.data! || []);
 				setLoading(false);
 			} catch (error) {
-				console.error("Error fetching spells:", error);
+				console.error("Unexpected error fetching spells:", error);
 				setLoading(false);
 			}
 		};
@@ -58,8 +83,20 @@ const SpellSection = () => {
 				</div>
 
 				<div className="spells-list">
-					{filterSpellsByLevel(activeLevel).map((spell) => (
-						<Spell key={spell.index} index={spell.index} />
+					{filterSpellsByLevel(activeLevel).map((spell, index) => (
+						<Spell
+							index={index}
+							name={spell.name}
+							level={spell.level}
+							school={spell.school}
+							castTime={spell.cast_time}
+							range={spell.range}
+							duration={spell.duration}
+							components={spell.components}
+							description={spell.description}
+							atHigherLevels={spell.atHigherLevels}
+							spellLists={spell.spellLists}
+						/>
 					))}
 				</div>
 			</div>

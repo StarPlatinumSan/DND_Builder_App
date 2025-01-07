@@ -116,7 +116,10 @@ const Home = () => {
 					<Link to="/classes" className="btnDesktopHead">
 						Classes
 					</Link>
-					<button className="btnDesktopHead"> Races </button>
+					<Link to="/races" className="btnDesktopHead">
+						{" "}
+						Races{" "}
+					</Link>
 					<Link to="/feats" className="btnDesktopHead">
 						Feats
 					</Link>
@@ -223,7 +226,9 @@ const Home = () => {
 						<p className="description">
 							Will you take up the sword as a mighty Fighter, delve into forbidden lore as a Warlock, or heal the party’s wounds as a Cleric? Each class offers distinct abilities and playstyles, choose the one that speaks to your heroic spirit.
 						</p>
-						<button className="btnLearn">Dive into</button>
+						<Link to="/classes" className="btnLearn">
+							Dive into
+						</Link>
 					</div>
 					<div className="category">
 						<img src="/redpin.webp" alt="PIN" className="redPin" />
@@ -232,7 +237,9 @@ const Home = () => {
 						<p className="description">
 							From the stout Dwarves to the graceful Elves, every playable race brings its own history and culture to the table. Embrace unique traits, lore, and heritage that can shape the way your character views, and changes the world.
 						</p>
-						<button className="btnLearn">Discover</button>
+						<Link to="/races" className="btnLearn">
+							Discover
+						</Link>
 					</div>
 				</div>
 			</section>

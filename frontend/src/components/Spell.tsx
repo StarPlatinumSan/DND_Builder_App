@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
+import { supabase } from "../client/supabaseClient";
 import "../styles/spellSection.scss";
 
 interface SpellProps {
-	index: string;
-}
-
-interface SpellData {
+	index: number;
 	name: string;
 	level: number;
+	school: string;
+	castTime: string;
+	range: string;
 	duration: string;
-	school: { name: string };
-	components: string[];
-	desc: string[];
+	components: string;
+	description: string;
+	atHigherLevels: string;
+	spellLists: string;
 }
 
-const Spell: React.FC<SpellProps> = ({ index }) => {
-	const [spell, setSpell] = useState<SpellData | null>(null);
+const Spell: React.FC<SpellProps> = ({ index, name, level, school, castTime, range, duration, components, description, atHigherLevels, spellLists }) => {
+	const [spellDetails, setSpellDetails] = useState<SpellProps | null>(null);
 	const [loading, setLoading] = useState<boolean>(true);
 	const [error, setError] = useState<string | null>(null);
 	const [expanded, setExpanded] = useState<boolean>(false);
@@ -27,30 +28,44 @@ const Spell: React.FC<SpellProps> = ({ index }) => {
 	};
 
 	useEffect(() => {
-		const fetchSpell = async () => {
+		const fetchSpellDetails = async () => {
 			try {
-				const response = await axios.get<SpellData>(`https://www.dnd5eapi.co/api/spells/${index}`);
-				setSpell(response.data);
+				const { data, error } = await supabase.from("spells").select("*").eq("name", name).single();
+
+				if (error) {
+					setError("Failed to fetch spell details.");
+					console.error(error);
+				} else {
+					setSpellDetails(data as SpellProps);
+				}
+
 				setLoading(false);
 			} catch (error) {
-				setError("Failed to fetch spell details.");
+				console.error("Unexpected error fetching spell details:", error);
+				setError("Unexpected error occurred.");
 				setLoading(false);
 			}
 		};
 
-		fetchSpell();
-	}, [index]);
+		fetchSpellDetails();
+	}, [name]);
 
 	if (loading) return <div>Loading spell...</div>;
 	if (error) return <div>{error}</div>;
-	if (!spell) return <div>No spell data available.</div>;
+	if (!spellDetails) return <div>No spell data available.</div>;
 
 	return (
-		<div className="spell" onClick={toggleExpand}>
-			<h3 className="spell-title">{spell.name}</h3>
+		<div className="spell" key={index} onClick={toggleExpand}>
+			<h3 className="spell-title">{name}</h3>
 			<div className="spell-meta">
 				<p>
-					<strong>School:</strong> {spell.school.name}
+					<strong>Level:</strong> {level}
+				</p>
+				<p>
+					<strong>Cast Time:</strong> {castTime}
+				</p>
+				<p>
+					<strong>School:</strong> {school}
 				</p>
 			</div>
 			<AnimatePresence>
@@ -58,13 +73,24 @@ const Spell: React.FC<SpellProps> = ({ index }) => {
 					<motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.2 }} style={{ overflow: "hidden" }}>
 						<div className="spell-details">
 							<p>
-								<strong style={{ fontSize: "1.1em" }}>Components:</strong> {spell.components.join(", ")}
+								<strong>Range:</strong> {range}
 							</p>
 							<p>
-								<strong style={{ fontSize: "1.1em" }}>Duration: </strong> {spell.duration}
+								<strong>Duration:</strong> {duration}
 							</p>
 							<p>
-								<strong style={{ fontSize: "1.1em" }}>Description:</strong> {spell.desc.join(" ")}
+								<strong>Components:</strong> {components}
+							</p>
+							<p>
+								<strong>Description:</strong> {description}
+							</p>
+							{atHigherLevels && (
+								<p>
+									<strong>At Higher Levels:</strong> {atHigherLevels}
+								</p>
+							)}
+							<p>
+								<strong>Spell Lists:</strong> {spellLists}
 							</p>
 						</div>
 					</motion.div>

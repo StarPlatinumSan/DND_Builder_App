@@ -71,12 +71,24 @@ const Vault = () => {
 								Login to save your characters
 							</Link>
 						)}
-						<button className="btn">Spells</button>
-						<button className="btn">Classes</button>
-						<button className="btn">Races</button>
-						<button className="btn">Feats</button>
-						<button className="btn">Backgrounds</button>
-						<button className="btn">Epic Boons</button>
+						<Link to="/spells" className="btn">
+							Spells
+						</Link>
+						<Link to="/classes" className="btn">
+							Classes
+						</Link>
+						<Link to="/races" className="btn">
+							Races
+						</Link>
+						<Link to="/feats" className="btn">
+							Feats
+						</Link>
+						<Link to="/backgrounds" className="btn">
+							Backgrounds
+						</Link>
+						<Link to="/epicBoons" className="btn">
+							Epic Boons
+						</Link>
 						<button className="btn btnLogout btnLogoutMobile" onClick={handleLogout}></button>
 					</div>
 
@@ -93,30 +105,30 @@ const Vault = () => {
 									Login to save your characters
 								</Link>
 							)}
-							<button className="btn spellsButton">
+							<Link to="/spells" className="btn spellsLink">
 								<img src="./spellsIcon.svg" alt="" />
 								Spells
-							</button>
-							<button className="btn classesButton">
+							</Link>
+							<Link to="/classes" className="btn classesLink">
 								<img src="./classesIcon.svg" alt="" />
 								Classes
-							</button>
-							<button className="btn racesButton">
+							</Link>
+							<Link to="/races" className="btn racesLink">
 								<img src="./racesIcon.svg" alt="" />
 								Races
-							</button>
-							<button className="btn featsButton">
+							</Link>
+							<Link to="/feats" className="btn featsLink">
 								<img src="./featsIcon.svg" alt="" />
 								Feats
-							</button>
-							<button className="btn backgroundsButton">
+							</Link>
+							<Link to="/backgrounds" className="btn backgroundsLink">
 								<img src="./backgroundsIcon.svg" alt="" />
 								Backgrounds
-							</button>
-							<button className="btn epicBoonsButton">
+							</Link>
+							<Link to="/epicBoons" className="btn epicBoonsLink">
 								<img src="./epicIcon.svg" alt="" />
 								Epic Boons
-							</button>
+							</Link>
 
 							<div className="logoutDiv">
 								Log out

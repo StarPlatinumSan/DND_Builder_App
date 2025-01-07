@@ -98,7 +98,7 @@ const ClassPage: React.FC = () => {
 
 	return (
 		<div className="page-container">
-			<Link to="/" className="btn returnBtnClass">
+			<Link to={"/"} className="btn returnBtnClass">
 				Go Back
 			</Link>
 			<div className="class-page">

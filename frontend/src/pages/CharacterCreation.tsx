@@ -18,6 +18,21 @@ interface Race {
 	subraces?: subraces[];
 }
 
+interface subclasses {
+	id: number;
+	class_id: number;
+	name: string;
+	features: string;
+}
+
+interface Class {
+	id: number;
+	name: string;
+	description: string;
+	features: string;
+	subclasses?: subraces[];
+}
+
 const CharacterCreation = () => {
 	const [step, setStep] = useState(0);
 	const [method, setMethod] = useState("");
@@ -25,6 +40,7 @@ const CharacterCreation = () => {
 	const [message, setMessage] = useState("");
 	const [showDiv, setShowDiv] = useState("");
 	const [races, setRaces] = useState<Race[]>([]);
+	const [classes, setClasses] = useState<Class[]>([]);
 
 	const [character, setCharacter] = useState({
 		level: 1,
@@ -241,6 +257,8 @@ const CharacterCreation = () => {
 	const showDivSelection = (name: string) => {
 		if (name === "races") {
 			setShowDiv("races");
+		} else if (name === "classes") {
+			setShowDiv("classes");
 		}
 	};
 
@@ -248,6 +266,15 @@ const CharacterCreation = () => {
 		setCharacter((prev) => ({
 			...prev,
 			race: raceName,
+		}));
+
+		setShowDiv("");
+	};
+
+	const setClassCharacter = (className: string) => {
+		setCharacter((prev) => ({
+			...prev,
+			class: className,
 		}));
 
 		setShowDiv("");
@@ -266,10 +293,7 @@ const CharacterCreation = () => {
 
 				if (error) {
 					console.log("Error fetching races:", error);
-				} /* else {
-					setRaces(data as Race[]);
-					console.log(races);
-				} */
+				}
 
 				if (!data) {
 					console.warn("No data returned from Supabase.");
@@ -286,6 +310,35 @@ const CharacterCreation = () => {
 				setRaces(data);
 			};
 			fetchRaces();
+		} else if (showDiv === "classes") {
+			const fetchClasses = async () => {
+				const { data, error } = await supabase.from("classes").select(`
+						id,
+						name,
+						description,
+						features,
+						subclasses (id, class_id, name, features)
+					`);
+
+				if (error) {
+					console.log("Error fetching races:", error);
+				}
+
+				if (!data) {
+					console.warn("No data returned from Supabase.");
+					setClasses([]);
+					return;
+				}
+
+				if (!Array.isArray(data) || data.length === 0) {
+					console.warn("No classes found in the database (empty array).");
+					setClasses([]);
+					return;
+				}
+
+				setClasses(data);
+			};
+			fetchClasses();
 		}
 	}, [showDiv]);
 
@@ -302,6 +355,22 @@ const CharacterCreation = () => {
 							{races.map((race) => (
 								<div key={race.id} className={`card ${race.name === "Exotic" ? "exotic" : ""}`} onClick={() => setRaceCharacter(race.name)}>
 									<h3>{race.name}</h3>
+								</div>
+							))}
+						</div>
+					</div>
+				</div>
+			)}
+
+			{showDiv === "classes" && (
+				<div className="classSelectionDiv">
+					<div className="showDiv">
+						<div className="opacity"></div>
+
+						<div className="divSelection">
+							{classes.map((cls) => (
+								<div key={cls.id} className={`card ${cls.name === "Exotic" ? "exotic" : ""}`} onClick={() => setClassCharacter(cls.name)}>
+									<h3>{cls.name}</h3>
 								</div>
 							))}
 						</div>
@@ -359,7 +428,7 @@ const CharacterCreation = () => {
 								Pick your race
 							</label>
 							<button className="btn" onClick={() => showDivSelection("races")}>
-								View all races
+								{character.race || "View all races"}
 							</button>
 						</div>
 
@@ -367,7 +436,9 @@ const CharacterCreation = () => {
 							<label htmlFor="class" className="labelCreation">
 								Pick your class
 							</label>
-							<button className="btn">View all classes</button>
+							<button className="btn" onClick={() => showDivSelection("classes")}>
+								{character.class || "View all classes"}
+							</button>
 						</div>
 
 						<div className="or">---</div>
