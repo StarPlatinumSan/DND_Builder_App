@@ -3,6 +3,39 @@ import { supabase } from "../client/supabaseClient";
 import axios from "../client/apiClient";
 import Stats from "../components/Stats";
 
+interface Character {
+	level: number;
+	name: string;
+	race: string;
+	class: string;
+	subclass: string;
+	background: string;
+	alignment: string;
+	stats: {
+		strength: number;
+		dexterity: number;
+		constitution: number;
+		intelligence: number;
+		wisdom: number;
+		charisma: number;
+	};
+	hitPoints: number;
+	hitDie: number;
+	armorClass: number;
+	initiative: number;
+	speed: number;
+	gold: number;
+	skills: string[];
+	proficiencies: string[];
+	equipment: string[];
+	languages: string[];
+	traits: string[];
+	features: string[];
+	subFeatures: string[];
+	feats: string[];
+	spells: string[];
+}
+
 interface subraces {
 	id: number;
 	race_id: number;
@@ -15,10 +48,10 @@ interface Race {
 	name: string;
 	description: string;
 	features: string;
-	subraces?: subraces[];
+	subraces: subraces[];
 }
 
-interface subclasses {
+interface Subclasses {
 	id: number;
 	class_id: number;
 	name: string;
@@ -30,7 +63,7 @@ interface Class {
 	name: string;
 	description: string;
 	features: string;
-	subclasses?: subraces[];
+	subclasses: Subclasses[];
 }
 
 const CharacterCreation = () => {
@@ -42,7 +75,7 @@ const CharacterCreation = () => {
 	const [races, setRaces] = useState<Race[]>([]);
 	const [classes, setClasses] = useState<Class[]>([]);
 
-	const [character, setCharacter] = useState({
+	const [character, setCharacter] = useState<Character>({
 		level: 1,
 		name: "",
 		race: "",
@@ -70,7 +103,7 @@ const CharacterCreation = () => {
 		languages: [],
 		traits: [] /* features de race */,
 		features: [] /* features de class */,
-		subFeatures: [],
+		subFeatures: [] /* features de subclass */,
 		feats: [],
 		spells: [],
 	});
@@ -259,13 +292,18 @@ const CharacterCreation = () => {
 			setShowDiv("races");
 		} else if (name === "classes") {
 			setShowDiv("classes");
+		} else if (name === "subraces") {
+			setShowDiv("subraces");
 		}
 	};
 
 	const setRaceCharacter = (raceName: string) => {
+		const selectedRace = races.find((race) => race.name === raceName);
+
 		setCharacter((prev) => ({
 			...prev,
 			race: raceName,
+			traits: [...prev.traits, ...(selectedRace?.features ? [selectedRace.features] : [])],
 		}));
 
 		setShowDiv("");
@@ -275,6 +313,18 @@ const CharacterCreation = () => {
 		setCharacter((prev) => ({
 			...prev,
 			class: className,
+		}));
+
+		setShowDiv("");
+	};
+
+	const setSubraceCharacter = (subraceName: string) => {
+		const selectedSubrace = races.find((race) => race.name === character.race)?.subraces.find((subrace) => subrace.name === subraceName);
+
+		setCharacter((prev) => ({
+			...prev,
+			subrace: subraceName,
+			traits: [...prev.traits, ...(selectedSubrace?.features ? [selectedSubrace.features] : [])],
 		}));
 
 		setShowDiv("");
@@ -378,6 +428,45 @@ const CharacterCreation = () => {
 				</div>
 			)}
 
+			{showDiv === "subraces" && (
+				<div className="subraceSelectionDiv">
+					<div className="showDiv">
+						<div className="opacity"></div>
+
+						<div className="divSelection">
+							{(() => {
+								const selectedRace = races.find((race) => race.name === character.race);
+								const subraces = selectedRace?.subraces || [];
+
+								if (subraces.length === 0) {
+									return <p>No subraces found</p>;
+								}
+
+								if (subraces.length === 1) {
+									return (
+										<div className={`card ${subraces[0].name === "Exotic" ? "exotic" : ""}`} onClick={() => setSubraceCharacter(subraces[0].name)}>
+											<h3>{subraces[0].name}</h3>
+										</div>
+									);
+								}
+
+								return subraces.map((subrace) => (
+									<div key={subrace.id} className={`card ${subrace.name === "Exotic" ? "exotic" : ""}`} onClick={() => setSubraceCharacter(subrace.name)}>
+										<h3>{subrace.name}</h3>
+									</div>
+								));
+							})()}
+
+							<div className="separation"></div>
+
+							<button className="btn maxWidth50" onClick={() => setShowDiv("")}>
+								Return
+							</button>
+						</div>
+					</div>
+				</div>
+			)}
+
 			<div className="wrapper">
 				<h1>The Forge</h1>
 
@@ -459,6 +548,15 @@ const CharacterCreation = () => {
 								Pick your subclass
 							</label>
 							<button className="btn">View all your subclasses</button>
+						</div>
+
+						<div className="subSectionCreation">
+							<label htmlFor="alignment" className="labelCreation">
+								Pick your subrace
+							</label>
+							<button className="btn" onClick={() => showDivSelection("subraces")}>
+								View all your subraces
+							</button>
 						</div>
 
 						<div className="subSectionCreation">

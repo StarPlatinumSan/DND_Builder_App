@@ -317,6 +317,33 @@
 	}
 }
 
+.subSelectionDiv {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 1rem;
+
+	.card {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		background-color: $secondary;
+		color: $lightWhite;
+		border: 1px solid $secondaryAccent;
+		border-radius: 0.25rem;
+		padding: 0.5rem;
+	}
+
+	h3 {
+		text-align: center;
+	}
+}
+
+.divSubSelection {
+	flex-direction: row;
+}
+
 @keyframes fadeIn {
 	to {
 		opacity: 1;
