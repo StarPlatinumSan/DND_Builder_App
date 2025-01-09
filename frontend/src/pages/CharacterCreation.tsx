@@ -70,7 +70,7 @@ const CharacterCreation = () => {
 		languages: [],
 		traits: [] /* features de race */,
 		features: [] /* features de class */,
-		subFeatures: [] /* features de subclass */,
+		subFeatures: [],
 		feats: [],
 		spells: [],
 	});
