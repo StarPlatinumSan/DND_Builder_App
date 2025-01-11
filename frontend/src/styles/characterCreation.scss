@@ -290,6 +290,10 @@
 	background-color: $secondaryDark;
 	padding: 2rem;
 
+	.btn {
+		margin-top: 1rem;
+	}
+
 	.card {
 		display: flex;
 		justify-content: center;
@@ -342,6 +346,10 @@
 
 .divSubSelection {
 	flex-direction: row;
+}
+
+.step4 {
+	max-width: 50%;
 }
 
 @keyframes fadeIn {

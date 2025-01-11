@@ -66,6 +66,16 @@ interface Class {
 	subclasses: Subclasses[];
 }
 
+interface Background {
+	id: number;
+	name: string;
+	proficiencies: string;
+	tool_proficiencies: string;
+	languages: string;
+	equipment: string;
+	features: string;
+}
+
 const CharacterCreation = () => {
 	const [step, setStep] = useState(0);
 	const [method, setMethod] = useState("");
@@ -74,6 +84,7 @@ const CharacterCreation = () => {
 	const [showDiv, setShowDiv] = useState("");
 	const [races, setRaces] = useState<Race[]>([]);
 	const [classes, setClasses] = useState<Class[]>([]);
+	const [backgrounds, setBackgrounds] = useState<Background[]>([]);
 
 	const [character, setCharacter] = useState<Character>({
 		level: 1,
@@ -294,6 +305,10 @@ const CharacterCreation = () => {
 			setShowDiv("classes");
 		} else if (name === "subraces") {
 			setShowDiv("subraces");
+		} else if (name === "subclasses") {
+			setShowDiv("subclasses");
+		} else if (name === "backgrounds") {
+			setShowDiv("backgrounds");
 		}
 	};
 
@@ -325,6 +340,24 @@ const CharacterCreation = () => {
 			...prev,
 			subrace: subraceName,
 			traits: [...prev.traits, ...(selectedSubrace?.features ? [selectedSubrace.features] : [])],
+		}));
+
+		setShowDiv("");
+	};
+
+	const setSubclassCharacter = (subclassName: string) => {
+		setCharacter((prev) => ({
+			...prev,
+			subclass: subclassName,
+		}));
+
+		setShowDiv("");
+	};
+
+	const setBackgroundCharacter = (backgroundName: string) => {
+		setCharacter((prev) => ({
+			...prev,
+			background: backgroundName,
 		}));
 
 		setShowDiv("");
@@ -389,6 +422,29 @@ const CharacterCreation = () => {
 				setClasses(data);
 			};
 			fetchClasses();
+		} else if (showDiv === "backgrounds") {
+			const fetchBackgrounds = async () => {
+				const { data, error } = await supabase.from("backgrounds").select("*");
+
+				if (error) {
+					console.log("Error fetching races:", error);
+				}
+
+				if (!data) {
+					console.warn("No data returned from Supabase.");
+					setBackgrounds([]);
+					return;
+				}
+
+				if (!Array.isArray(data) || data.length === 0) {
+					console.warn("No backgrounds found in the database (empty array).");
+					setBackgrounds([]);
+					return;
+				}
+
+				setBackgrounds(data);
+			};
+			fetchBackgrounds();
 		}
 	}, [showDiv]);
 
@@ -400,7 +456,7 @@ const CharacterCreation = () => {
 						<div className="opacity"></div>
 
 						<div className="divSelection races">
-							{races.length === 0 && <p>No races found</p>}
+							{races.length === 0 && <p>Fetching races...</p>}
 
 							{races.map((race) => (
 								<div key={race.id} className={`card ${race.name === "Exotic" ? "exotic" : ""}`} onClick={() => setRaceCharacter(race.name)}>
@@ -439,7 +495,7 @@ const CharacterCreation = () => {
 								const subraces = selectedRace?.subraces || [];
 
 								if (subraces.length === 0) {
-									return <p>No subraces found</p>;
+									return <p>Fetching subraces...</p>;
 								}
 
 								if (subraces.length === 1) {
@@ -457,7 +513,68 @@ const CharacterCreation = () => {
 								));
 							})()}
 
-							<div className="separation"></div>
+							<button className="btn maxWidth50" onClick={() => setShowDiv("")}>
+								Return
+							</button>
+						</div>
+					</div>
+				</div>
+			)}
+
+			{showDiv === "subclasses" && (
+				<div className="subraceSelectionDiv">
+					<div className="showDiv">
+						<div className="opacity"></div>
+
+						<div className="divSelection">
+							{(() => {
+								const selectedClass = classes.find((cls) => cls.name === character.class);
+								const subclasses = selectedClass?.subclasses || [];
+
+								if (subclasses.length === 0) {
+									return <p>Fetching subclasses...</p>;
+								}
+
+								if (subclasses.length === 1) {
+									return (
+										<div className={`card ${subclasses[0].name === "Exotic" ? "exotic" : ""}`} onClick={() => setSubclassCharacter(subclasses[0].name)}>
+											<h3>{subclasses[0].name}</h3>
+										</div>
+									);
+								}
+
+								return subclasses.map((subclass) => (
+									<div key={subclass.id} className={`card ${subclass.name === "Exotic" ? "exotic" : ""}`} onClick={() => setSubclassCharacter(subclass.name)}>
+										<h3>{subclass.name}</h3>
+									</div>
+								));
+							})()}
+
+							<button className="btn maxWidth50" onClick={() => setShowDiv("")}>
+								Return
+							</button>
+						</div>
+					</div>
+				</div>
+			)}
+
+			{showDiv === "backgrounds" && (
+				<div className="backgroundSelectionDiv">
+					<div className="showDiv">
+						<div className="opacity"></div>
+
+						<div className="divSelection">
+							{(() => {
+								if (backgrounds.length === 0) {
+									return <p>Fetching backgrounds...</p>;
+								}
+
+								return backgrounds.map((background) => (
+									<div key={background.id} className={`card ${background.name === "Exotic" ? "exotic" : ""}`} onClick={() => setBackgroundCharacter(background.name)}>
+										<h3>{background.name}</h3>
+									</div>
+								));
+							})()}
 
 							<button className="btn maxWidth50" onClick={() => setShowDiv("")}>
 								Return
@@ -547,7 +664,9 @@ const CharacterCreation = () => {
 							<label htmlFor="alignment" className="labelCreation">
 								Pick your subclass
 							</label>
-							<button className="btn">View all your subclasses</button>
+							<button className="btn" onClick={() => showDivSelection("subclasses")}>
+								View all your subclasses
+							</button>
 						</div>
 
 						<div className="subSectionCreation">
@@ -563,7 +682,9 @@ const CharacterCreation = () => {
 							<label htmlFor="background" className="labelCreation">
 								Choose your background
 							</label>
-							<button className="btn">View all backgrounds</button>
+							<button className="btn" onClick={() => showDivSelection("backgrounds")}>
+								View all backgrounds
+							</button>
 						</div>
 
 						<div className="subSectionCreation">
@@ -726,8 +847,6 @@ const CharacterCreation = () => {
 							<p style={{ color: "darkgreen" }}>You can always edit those sections later.</p>
 						</div>
 
-						<div className="or">-</div>
-
 						<div className="subSectionCreation">
 							<p>Select your character's proficiencies:</p>
 							<button className="btn maxWidth50">View all Proficiencies</button>
@@ -736,15 +855,11 @@ const CharacterCreation = () => {
 							</small>
 						</div>
 
-						<div className="or">-</div>
-
 						<div className="subSectionCreation">
 							<p>Choose your character's languages:</p>
 							<button className="btn maxWidth50">View all Languages</button>
 							<small>Typically, your character knows Common and 1-2 more languages.</small>
 						</div>
-
-						<div className="or">-</div>
 
 						<div className="subSectionCreation">
 							<p>Choose your character's equipment:</p>
@@ -753,29 +868,15 @@ const CharacterCreation = () => {
 						</div>
 
 						<div className="subSectionCreation">
-							<p>Select your starting gold:</p>
-							<div className="numberInput">
-								<button className="decrement" onClick={removeGold}>
-									-
-								</button>
-								<input type="number" min="1" max="20" id="gold" value={character.gold} />
-								<button className="increment" onClick={addGold}>
-									+
-								</button>
-							</div>
 							<p>Enter your starting items:</p>
-							<textarea className="inputCreation" placeholder="Enter any items you may have"></textarea>
+							<textarea className="inputCreation" placeholder="Enter any items and gold you may have"></textarea>
 							<small>You should discuss your starting gold and items with your DM.</small>
 						</div>
-
-						<div className="or">-</div>
 
 						<div className="subSectionCreation">
 							<p>Add a description about your character and its personality:</p>
 							<textarea className="inputCreation" placeholder="Enter your character's description here..."></textarea>
 						</div>
-
-						<div className="or">-</div>
 
 						<div className="btnContainerCreation">
 							<button className="btn btnBack" onClick={goBack}>
@@ -790,10 +891,8 @@ const CharacterCreation = () => {
 
 				{step === 5 && (
 					<div className="step step5">
-						<h2>Step 6: Select your spells</h2>
-						<div className="subSectionCreation">
-							<p>If your character is a full-caster.</p>
-						</div>
+						<h2>You are done!</h2>
+						<div className="subSectionCreation"></div>
 					</div>
 				)}
 			</div>
