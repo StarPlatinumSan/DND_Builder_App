@@ -284,11 +284,14 @@
 	justify-content: center;
 	gap: 1rem;
 	z-index: 11;
-	width: 90%;
+	width: 100%;
+	max-height: 100vh;
+	overflow-y: scroll;
 	margin: 1rem;
 	max-width: 40rem;
 	background-color: $secondaryDark;
-	padding: 2rem;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
 
 	.btn {
 		margin-top: 1rem;
@@ -296,9 +299,10 @@
 
 	.card {
 		display: flex;
-		justify-content: center;
+		flex-direction: column;
+		justify-content: space-between;
 		align-items: center;
-		width: calc(50% - 0.5rem);
+		width: calc(50% - 1rem);
 		background-color: $secondary;
 		color: $lightWhite;
 		border: 1px solid $secondaryAccent;
@@ -307,6 +311,13 @@
 		font-size: 0.9rem;
 		transition: all 0.2s ease;
 		cursor: pointer;
+
+		img {
+			display: none;
+			max-width: 100%;
+			height: 110px;
+			width: 100%;
+		}
 
 		&:hover {
 			background-color: $secondaryAccent;
@@ -329,6 +340,7 @@
 
 	.card {
 		display: flex;
+		flex-direction: column;
 		justify-content: center;
 		align-items: center;
 		width: 100%;
@@ -337,6 +349,10 @@
 		border: 1px solid $secondaryAccent;
 		border-radius: 0.25rem;
 		padding: 0.5rem;
+
+		img {
+			max-width: 100%;
+		}
 	}
 
 	h3 {
@@ -344,8 +360,17 @@
 	}
 }
 
-.divSubSelection {
-	flex-direction: row;
+.subDivSelection {
+	max-width: 60rem;
+
+	.card {
+		display: flex;
+		justify-content: center;
+		height: 70px;
+		width: calc(50% - 0.5rem);
+		padding: 0.5rem;
+		font-size: 0.8rem;
+	}
 }
 
 .step4 {
@@ -362,6 +387,17 @@
 @media screen and (min-width: 768px) {
 	.statsContainer .statsOption .statAssignments .pointStat {
 		width: calc(33% - 0.2rem);
+	}
+
+	.divSelection .card {
+		width: calc(33% - 1rem);
+		img {
+			display: block;
+		}
+	}
+
+	.subDivSelection .card {
+		width: calc(33% - 1rem);
 	}
 }
 

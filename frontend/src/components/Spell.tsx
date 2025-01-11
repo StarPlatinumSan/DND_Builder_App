@@ -81,9 +81,7 @@ const Spell: React.FC<SpellProps> = ({ index, name, level, school, castTime, ran
 							<p>
 								<strong>Components:</strong> {components}
 							</p>
-							<p>
-								<strong>Description:</strong> {description}
-							</p>
+							<p>{description}</p>
 							{atHigherLevels && (
 								<p>
 									<strong>At Higher Levels:</strong> {atHigherLevels}

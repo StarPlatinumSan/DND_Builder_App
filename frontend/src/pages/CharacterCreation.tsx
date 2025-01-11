@@ -9,6 +9,7 @@ interface Character {
 	race: string;
 	class: string;
 	subclass: string;
+	subrace: string;
 	background: string;
 	alignment: string;
 	stats: {
@@ -92,6 +93,7 @@ const CharacterCreation = () => {
 		race: "",
 		class: "",
 		subclass: "",
+		subrace: "",
 		background: "",
 		alignment: "",
 		stats: {
@@ -135,6 +137,45 @@ const CharacterCreation = () => {
 		16: false,
 		19: false,
 	});
+
+	const imageRaceMap: { [key: string]: string } = {
+		Aasimar: "/Aasimar.jpg",
+		Artificer: "/Artificer.jpg",
+		Barbarian: "/Barbarian.jpg",
+		Bard: "/Bard.jpg",
+		Cleric: "/Cleric.jpg",
+		Dragonborn: "/Dragonborn.jpg",
+		Druid: "/Druid.jpg",
+		Dwarf: "/Dwarf.jpg",
+		Elf: "/Elf.jpg",
+		Exotic: "/Exotic.jpg",
+		Fighter: "/Fighter.jpg",
+		Genasi: "/Genasi.jpg",
+		Gnome: "/Gnome.jpg",
+		"Half-Elf": "/Half-Elf.png",
+		"Half-Orc": "/Half-Orc.jpg",
+		Halfling: "/Halfling.jpg",
+		Human: "/Human.png",
+		Monk: "/Monk.jpg",
+		Paladin: "/Paladin.jpg",
+		Tiefling: "Tiefling.jpg",
+	};
+
+	const imageClassMap: { [key: string]: string } = {
+		Rogue: "/Rogue.png",
+		Cleric: "/cleric.png",
+		Monk: "/monk.png",
+		Bard: "/bard.png",
+		Paladin: "/paladin.png",
+		Druid: "/druid.png",
+		Ranger: "/ranger.png",
+		Fighter: "/fighter.png",
+		Warlock: "/warlock.png",
+		Barbarian: "/barbarian.png",
+		Wizard: "/wizard.png",
+		Sorcerer: "/sorcerer.png",
+		Artificer: "/artificer.png",
+	};
 
 	const handleFeatClick = (level: number) => {
 		setSelectedLevels((prev) => ({
@@ -264,21 +305,6 @@ const CharacterCreation = () => {
 		setCharacter((prev) => ({
 			...prev,
 			stats: { ...initialStats },
-		}));
-	};
-
-	const removeGold = () => {
-		if (character.gold <= 0) return;
-		setCharacter((prev) => ({
-			...prev,
-			gold: prev.gold - 1,
-		}));
-	};
-
-	const addGold = () => {
-		setCharacter((prev) => ({
-			...prev,
-			gold: prev.gold + 1,
 		}));
 	};
 
@@ -460,6 +486,7 @@ const CharacterCreation = () => {
 
 							{races.map((race) => (
 								<div key={race.id} className={`card ${race.name === "Exotic" ? "exotic" : ""}`} onClick={() => setRaceCharacter(race.name)}>
+									<img src={imageRaceMap[race.name] || ""} alt="" />
 									<h3>{race.name}</h3>
 								</div>
 							))}
@@ -476,6 +503,7 @@ const CharacterCreation = () => {
 						<div className="divSelection">
 							{classes.map((cls) => (
 								<div key={cls.id} className={`card ${cls.name === "Exotic" ? "exotic" : ""}`} onClick={() => setClassCharacter(cls.name)}>
+									<img src={imageClassMap[cls.name] || ""} alt={`${cls.name}`} />
 									<h3>{cls.name}</h3>
 								</div>
 							))}
@@ -489,7 +517,7 @@ const CharacterCreation = () => {
 					<div className="showDiv">
 						<div className="opacity"></div>
 
-						<div className="divSelection">
+						<div className="divSelection subDivSelection">
 							{(() => {
 								const selectedRace = races.find((race) => race.name === character.race);
 								const subraces = selectedRace?.subraces || [];
@@ -513,9 +541,9 @@ const CharacterCreation = () => {
 								));
 							})()}
 
-							<button className="btn maxWidth50" onClick={() => setShowDiv("")}>
+							{/* <button className="btn maxWidth50" onClick={() => setShowDiv("")}>
 								Return
-							</button>
+							</button> */}
 						</div>
 					</div>
 				</div>
@@ -526,7 +554,7 @@ const CharacterCreation = () => {
 					<div className="showDiv">
 						<div className="opacity"></div>
 
-						<div className="divSelection">
+						<div className="divSelection subDivSelection">
 							{(() => {
 								const selectedClass = classes.find((cls) => cls.name === character.class);
 								const subclasses = selectedClass?.subclasses || [];
@@ -550,9 +578,9 @@ const CharacterCreation = () => {
 								));
 							})()}
 
-							<button className="btn maxWidth50" onClick={() => setShowDiv("")}>
+							{/* <button className="btn maxWidth50" onClick={() => setShowDiv("")}>
 								Return
-							</button>
+							</button> */}
 						</div>
 					</div>
 				</div>
@@ -563,7 +591,7 @@ const CharacterCreation = () => {
 					<div className="showDiv">
 						<div className="opacity"></div>
 
-						<div className="divSelection">
+						<div className="divSelection subDivSelection">
 							{(() => {
 								if (backgrounds.length === 0) {
 									return <p>Fetching backgrounds...</p>;
@@ -576,9 +604,9 @@ const CharacterCreation = () => {
 								));
 							})()}
 
-							<button className="btn maxWidth50" onClick={() => setShowDiv("")}>
+							{/* <button className="btn maxWidth50" onClick={() => setShowDiv("")}>
 								Return
-							</button>
+							</button> */}
 						</div>
 					</div>
 				</div>
@@ -665,7 +693,7 @@ const CharacterCreation = () => {
 								Pick your subclass
 							</label>
 							<button className="btn" onClick={() => showDivSelection("subclasses")}>
-								View all your subclasses
+								{character.subclass || "View all subclasses"}
 							</button>
 						</div>
 
@@ -674,7 +702,7 @@ const CharacterCreation = () => {
 								Pick your subrace
 							</label>
 							<button className="btn" onClick={() => showDivSelection("subraces")}>
-								View all your subraces
+								{character.subrace || "View all subraces"}
 							</button>
 						</div>
 
@@ -683,14 +711,15 @@ const CharacterCreation = () => {
 								Choose your background
 							</label>
 							<button className="btn" onClick={() => showDivSelection("backgrounds")}>
-								View all backgrounds
+								{character.background || "View all backgrounds"}
 							</button>
 						</div>
 
 						<div className="subSectionCreation">
 							<label htmlFor="alignment" className="labelCreation">
-								Enter your alignment
+								Enter your alignment <button className="btn info"></button>
 							</label>
+
 							<input type="text" placeholder="optional" />
 						</div>
 

@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { supabase } from "../../client/supabaseClient";
 import Class from "../../components/Class";
 import { Link } from "react-router-dom";
 
 interface ClassInfo {
+	id: number;
 	name: string;
-	index: string;
+	description: string;
+	features: string;
 	caster_type: "non-caster" | "half-caster" | "full-caster";
 	image: string;
-	manualData?: {
-		name: string;
-		hit_die: number;
-		proficiencies: { name: string }[];
-		subclasses: { name: string }[];
-	};
+	wikidot_link: string;
 }
 
 const ClassPage: React.FC = () => {
@@ -22,65 +19,56 @@ const ClassPage: React.FC = () => {
 	const [error, setError] = useState<string | null>(null);
 
 	const casterCategories = {
-		"non-caster": ["barbarian", "fighter", "rogue", "monk"],
-		"half-caster": ["paladin", "ranger", "artificier"],
-		"full-caster": ["bard", "cleric", "druid", "sorcerer", "wizard", "warlock"],
+		"non-caster": ["Barbarian", "Fighter", "Rogue", "Monk"],
+		"half-caster": ["Paladin", "Ranger", "Artificer"],
+		"full-caster": ["Bard", "Cleric", "Druid", "Sorcerer", "Wizard", "Warlock"],
 	};
 
 	const classImages: { [key: string]: string } = {
-		artificier: "../../../public/artificer.jpg",
-		barbarian: "../../../public/barbarian.jpg",
-		fighter: "../../../public/fighter.jpg",
-		rogue: "../../../public/rogue.jpg",
-		monk: "../../../public/monk.jpg",
-		paladin: "../../../public/paladin.jpg",
-		ranger: "../../../public/ranger.jpg",
-		bard: "../../../public/bard.jpg",
-		cleric: "../../../public/cleric.jpg",
-		druid: "../../../public/druid.jpg",
-		sorcerer: "../../../public/sorcerer.jpg",
-		wizard: "../../../public/wizard.jpg",
-		warlock: "../../../public/warlock.jpg",
+		Artificer: "Artificer.jpg",
+		Barbarian: "Barbarian.jpg",
+		Fighter: "Fighter.jpg",
+		Rogue: "Rogue.jpg",
+		Monk: "Monk.jpg",
+		Paladin: "Paladin.jpg",
+		Ranger: "Ranger.jpg",
+		Bard: "Bard.jpg",
+		Cleric: "Cleric.jpg",
+		Druid: "Druid.jpg",
+		Sorcerer: "Sorcerer.jpg",
+		Wizard: "Wizard.jpg",
+		Warlock: "Warlock.jpg",
 	};
 
 	useEffect(() => {
 		const fetchClasses = async () => {
 			try {
-				const response = await axios.get("https://www.dnd5eapi.co/api/classes");
-				const categorizedClasses = response.data.results.map((cls: { name: string; index: string }) => {
+				const { data, error } = await supabase.from("classes").select("id, name, description, features, wikidot_link");
+
+				if (error) {
+					throw new Error("Failed to fetch classes from Supabase.");
+				}
+
+				const categorizedClasses = data.map((cls) => {
 					let caster_type: "non-caster" | "half-caster" | "full-caster" = "non-caster";
 
-					if (casterCategories["half-caster"].includes(cls.index)) {
+					if (casterCategories["half-caster"].includes(cls.name)) {
 						caster_type = "half-caster";
-					} else if (casterCategories["full-caster"].includes(cls.index)) {
+					} else if (casterCategories["full-caster"].includes(cls.name)) {
 						caster_type = "full-caster";
 					}
 
 					return {
-						name: cls.name,
-						index: cls.index,
+						...cls,
 						caster_type,
-						image: classImages[cls.index] || "../../assets/default.png",
+						image: classImages[cls.name] || "/images/default.png",
 					};
 				});
 
-				const artificerClass: ClassInfo = {
-					name: "Artificer",
-					index: "artificer",
-					caster_type: "half-caster",
-					image: "../../../public/artificer.jpg",
-					manualData: {
-						name: "Artificer",
-						hit_die: 8,
-						proficiencies: [{ name: "Tinker's Tools" }, { name: "Light Armor" }, { name: "Simple Weapons" }],
-						subclasses: [{ name: "Alchemist" }, { name: "Artillerist" }],
-					},
-				};
-
-				setClasses([...categorizedClasses, artificerClass]);
+				setClasses(categorizedClasses);
 				setIsLoading(false);
 			} catch (error) {
-				setError("Failed to fetch classes.");
+				setError(error instanceof Error ? error.message : "Unknown error occurred.");
 				setIsLoading(false);
 			}
 		};
@@ -109,7 +97,17 @@ const ClassPage: React.FC = () => {
 							{classes
 								.filter((cls) => cls.caster_type === category)
 								.map((cls) => (
-									<Class key={cls.index} index={cls.index} image={cls.image} manualData={cls.manualData} />
+									<Class
+										index={cls.name}
+										image={classImages[cls.name]}
+										manualData={{
+											id: cls.id,
+											name: cls.name,
+											description: cls.description,
+											features: cls.features,
+											wikidot_link: cls.wikidot_link,
+										}}
+									/>
 								))}
 						</div>
 					</div>
