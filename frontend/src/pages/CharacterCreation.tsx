@@ -981,7 +981,9 @@ const CharacterCreation = () => {
 								<strong>Gold:</strong> <input type="number" value={character.gold} onChange={(e) => setCharacter({ ...character, gold: parseInt(e.target.value) })} />
 							</p>
 
-							<button onClick={() => console.log("Character saved:", character)}>Save Changes</button>
+							<button className="btn" onClick={() => console.log("Character saved:", character)}>
+								Save Changes
+							</button>
 						</div>
 					</div>
 				)}
