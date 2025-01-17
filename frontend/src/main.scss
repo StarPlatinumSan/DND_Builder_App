@@ -6,6 +6,7 @@
 @use "./styles/characterCreation.scss";
 @use "./styles/spellSection.scss";
 @use "./styles/classSection.scss";
+@use "./styles/featsSection.scss";
 
 * {
 	margin: 0;
@@ -22,6 +23,10 @@ body {
 	font-family: "Cormorant Unicase", serif;
 	font-weight: 900;
 	font-style: normal;
+}
+
+a {
+	cursor: pointer;
 }
 
 button {

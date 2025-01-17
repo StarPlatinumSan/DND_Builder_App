@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../client/supabaseClient";
 import Stats from "../components/Stats";
+import FeatsSection from "../components/FeatsSection";
 
 interface Character {
 	level: number;
@@ -77,6 +78,12 @@ interface Background {
 	features: string;
 }
 
+interface Feat {
+	id: number;
+	name: string;
+	description: string;
+}
+
 const CharacterCreation = () => {
 	const [step, setStep] = useState(0);
 	const [method, setMethod] = useState("");
@@ -86,6 +93,7 @@ const CharacterCreation = () => {
 	const [races, setRaces] = useState<Race[]>([]);
 	const [classes, setClasses] = useState<Class[]>([]);
 	const [backgrounds, setBackgrounds] = useState<Background[]>([]);
+	const [feats, setFeats] = useState<Feat[]>([]);
 
 	const [character, setCharacter] = useState<Character>({
 		level: 1,
@@ -176,13 +184,6 @@ const CharacterCreation = () => {
 		Wizard: "/wizard.png",
 		Sorcerer: "/sorcerer.png",
 		Artificer: "/artificer.png",
-	};
-
-	const handleFeatClick = (level: number) => {
-		setSelectedLevels((prev) => ({
-			...prev,
-			[level]: true,
-		}));
 	};
 
 	const handleASI = (level: number) => {
@@ -307,6 +308,18 @@ const CharacterCreation = () => {
 			...prev,
 			stats: { ...initialStats },
 		}));
+
+		setSelectedLevels({
+			1: false,
+			2: false,
+			3: false,
+			4: false,
+			5: false,
+			6: false,
+			7: false,
+			8: false,
+			9: false,
+		});
 	};
 
 	const promptCancel = () => {
@@ -336,6 +349,8 @@ const CharacterCreation = () => {
 			setShowDiv("subclasses");
 		} else if (name === "backgrounds") {
 			setShowDiv("backgrounds");
+		} else if (name === "feats") {
+			setShowDiv("feats");
 		}
 	};
 
@@ -396,6 +411,13 @@ const CharacterCreation = () => {
 
 		setShowDiv("");
 	};
+
+	/* const resetFeats = () => {
+		setCharacter((prev) => ({
+			...prev,
+			feats: [],
+		}));
+	}; */
 
 	useEffect(() => {
 		if (showDiv === "races") {
@@ -479,6 +501,29 @@ const CharacterCreation = () => {
 				setBackgrounds(data);
 			};
 			fetchBackgrounds();
+		} else if (showDiv === "feats") {
+			const fetchFeats = async () => {
+				const { data, error } = await supabase.from("feats").select("*");
+
+				if (error) {
+					console.log("Error fetching races:", error);
+				}
+
+				if (!data) {
+					console.warn("No data returned from Supabase.");
+					setFeats([]);
+					return;
+				}
+
+				if (!Array.isArray(data) || data.length === 0) {
+					console.warn("No feats found in the database (empty array).");
+					setFeats([]);
+					return;
+				}
+
+				setFeats(data);
+			};
+			fetchFeats();
 		}
 	}, [showDiv]);
 
@@ -615,6 +660,17 @@ const CharacterCreation = () => {
 							{/* <button className="btn maxWidth50" onClick={() => setShowDiv("")}>
 								Return
 							</button> */}
+						</div>
+					</div>
+				</div>
+			)}
+
+			{showDiv === "feats" && (
+				<div className="featSelectionDiv">
+					<div className="showDiv">
+						<div className="opacity"></div>
+						<div className="divSelection subDivSelection">
+							<FeatsSection feats={feats} />
 						</div>
 					</div>
 				</div>
@@ -850,7 +906,7 @@ const CharacterCreation = () => {
 										character.level >= lvl && (
 											<div key={lvl} className="btnContainerCreation">
 												Level {lvl}:
-												<button className="btn btnFeat" onClick={() => handleFeatClick(lvl)} disabled={selectedLevels[lvl]}>
+												<button className="btn btnFeat" onClick={() => showDivSelection("feats")} disabled={selectedLevels[lvl]}>
 													Feat
 												</button>
 												<button className="btn btnFeat" onClick={() => handleASI(lvl)} disabled={selectedLevels[lvl]}>

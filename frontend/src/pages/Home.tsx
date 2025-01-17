@@ -246,7 +246,7 @@ const Home = () => {
 
 			<footer className="footer">
 				<p className="description footerTxt">
-					By <a href="https://github.com/StarPlatinumSan">StarPlatinumSan</a> and <a href="https://github.com/Gelehead">Gelehead</a>
+					By <a href="https://github.com/StarPlatinumSan">StarPlatinumSan</a>
 				</p>
 				<p className="copyright"> &copy; 2025 D&D Character Builder</p>
 			</footer>
