@@ -1,82 +1,45 @@
-import React, { Component } from "react";
-import axios from "axios";
-import "../styles/featSection.scss";
+import React, { useState } from "react";
+import SlideDown from "react-slidedown";
+import "react-slidedown/lib/slidedown.css";
 
-interface FeatProps {
-  index: string;
+interface Feat {
+	id: number;
+	name: string;
+	description: string;
+	boni?: string;
+	prerequisite?: string;
 }
 
-interface FeatData {
-  name: string;
-  desc: string[];
-  prerequisites?: { type: string; value: string }[];
-}
+const FeatCard: React.FC<{ feat: Feat; addFeatToCharacter: (feat: Feat) => void }> = ({ feat, addFeatToCharacter }) => {
+	const [isOpen, setIsOpen] = useState(false);
 
-interface FeatState {
-  featData: FeatData | null;
-  loading: boolean;
-  error: string | null;
-  expanded: boolean;
-}
+	const toggleFeat = () => {
+		setIsOpen((prev) => !prev);
+	};
 
-class FeatCard extends Component<FeatProps, FeatState> {
-  constructor(props: FeatProps) {
-    super(props);
-    this.state = {
-      featData: null,
-      loading: true,
-      error: null,
-      expanded: false,
-    };
-  }
+	const handleSelect = (e: React.MouseEvent) => {
+		e.stopPropagation();
+		addFeatToCharacter(feat);
+	};
 
-  componentDidMount() {
-    this.fetchFeatData();
-  }
+	return (
+		<div className="featCard" onClick={toggleFeat}>
+			<h3>{feat.name}</h3>
+			<SlideDown>
+				{isOpen && (
+					<div className="featContent">
+						<p>{feat.description}</p>
+						<p>{feat.boni || "No bonus available"}</p>
+						{feat.prerequisite && <span className="prerequisite">{feat.prerequisite || null}</span>}
 
-  fetchFeatData = async () => {
-    const { index } = this.props;
-    try {
-      const response = await axios.get<FeatData>(`https://www.dnd5eapi.co/api/feats/${index}`);
-      this.setState({ featData: response.data, loading: false });
-    } catch (error) {
-      this.setState({
-        error: "Failed to fetch feat details.",
-        loading: false,
-      });
-    }
-  };
-
-  toggleExpanded = () => {
-    this.setState((prevState) => ({ expanded: !prevState.expanded }));
-  };
-
-  render() {
-    const { featData, loading, error, expanded } = this.state;
-
-    if (loading) return <div className="feat-card">Loading...</div>;
-    if (error) return <div className="feat-card">{error}</div>;
-    if (!featData) return <div className="feat-card">No feat data available.</div>;
-
-    return (
-      <div className="feat-card" onClick={this.toggleExpanded}>
-        <h3>{featData.name}</h3>
-        {expanded && (
-          <div className="feat-details">
-            <p>
-              <strong>Description:</strong> {featData.desc.join(" ")}
-            </p>
-            {featData.prerequisites && featData.prerequisites.length > 0 && (
-              <p>
-                <strong>Prerequisites:</strong>{" "}
-                {featData.prerequisites.map((prereq) => `${prereq.type}: ${prereq.value}`).join(", ")}
-              </p>
-            )}
-          </div>
-        )}
-      </div>
-    );
-  }
-}
+						<button className="btn maxWidth50" onClick={handleSelect}>
+							Select
+						</button>
+					</div>
+				)}
+			</SlideDown>
+		</div>
+	);
+};
 
 export default FeatCard;

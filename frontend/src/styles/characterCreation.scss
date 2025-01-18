@@ -57,6 +57,7 @@
 		align-items: center;
 		gap: 0.5rem;
 		text-align: center;
+		width: 100%;
 	}
 
 	.radioContainer {
@@ -221,7 +222,7 @@
 }
 
 .btnFeat {
-	max-width: 30%;
+	max-width: 50%;
 
 	&:disabled {
 		cursor: not-allowed;

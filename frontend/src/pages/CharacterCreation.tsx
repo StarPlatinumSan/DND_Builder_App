@@ -33,7 +33,7 @@ interface Character {
 	traits: string[];
 	features: string[];
 	subFeatures: string[];
-	feats: string[];
+	feats: { name: string; description?: string; boni?: string }[];
 	spells: string[];
 	description: string;
 }
@@ -82,6 +82,8 @@ interface Feat {
 	id: number;
 	name: string;
 	description: string;
+	boni: string;
+	prerequisite?: string;
 }
 
 const CharacterCreation = () => {
@@ -139,12 +141,12 @@ const CharacterCreation = () => {
 		charisma: 0,
 	});
 
-	const [selectedLevels, setSelectedLevels] = useState<{ [key: number]: boolean }>({
-		4: false,
-		8: false,
-		12: false,
-		16: false,
-		19: false,
+	const [selectedLevels, setSelectedLevels] = useState<{ [key: number]: string | null }>({
+		4: null,
+		8: null,
+		12: null,
+		16: null,
+		19: null,
 	});
 
 	const imageRaceMap: { [key: string]: string } = {
@@ -189,9 +191,21 @@ const CharacterCreation = () => {
 	const handleASI = (level: number) => {
 		setSelectedLevels((prev) => ({
 			...prev,
-			[level]: !prev[level],
+			[level]: "asi",
 		}));
+
 		setBonusPoints((prev) => prev + 2);
+
+		setShowDiv("");
+	};
+
+	const handleFeatSelection = (level: number) => {
+		setSelectedLevels((prev) => ({
+			...prev,
+			[level]: "feat",
+		}));
+
+		setShowDiv("feats");
 	};
 
 	const updateStats = (newStats: { [key: string]: number }) => {
@@ -270,6 +284,23 @@ const CharacterCreation = () => {
 		return true;
 	};
 
+	const addFeatToCharacter = (feat: Feat) => {
+		setCharacter((prev) => ({
+			...prev,
+			feats: [
+				...prev.feats,
+				{
+					name: feat.name,
+					description: feat.description,
+					boni: feat.boni,
+					prerequisite: feat.prerequisite,
+				},
+			],
+		}));
+
+		setShowDiv("");
+	};
+
 	const addInput = () => {
 		if (character.level >= 20) return;
 
@@ -278,6 +309,7 @@ const CharacterCreation = () => {
 			level: prev.level + 1,
 		}));
 	};
+
 	const removeInput = () => {
 		if (character.level <= 1) return;
 		setCharacter((prev) => ({
@@ -304,21 +336,19 @@ const CharacterCreation = () => {
 
 	const resetBonus = () => {
 		setBonusPoints(3);
+
 		setCharacter((prev) => ({
 			...prev,
 			stats: { ...initialStats },
+			feats: [],
 		}));
 
 		setSelectedLevels({
-			1: false,
-			2: false,
-			3: false,
-			4: false,
-			5: false,
-			6: false,
-			7: false,
-			8: false,
-			9: false,
+			4: null,
+			8: null,
+			12: null,
+			16: null,
+			19: null,
 		});
 	};
 
@@ -411,13 +441,6 @@ const CharacterCreation = () => {
 
 		setShowDiv("");
 	};
-
-	/* const resetFeats = () => {
-		setCharacter((prev) => ({
-			...prev,
-			feats: [],
-		}));
-	}; */
 
 	useEffect(() => {
 		if (showDiv === "races") {
@@ -669,9 +692,7 @@ const CharacterCreation = () => {
 				<div className="featSelectionDiv">
 					<div className="showDiv">
 						<div className="opacity"></div>
-						<div className="divSelection subDivSelection">
-							<FeatsSection feats={feats} />
-						</div>
+						<div className="divSelection subDivSelection">{showDiv === "feats" && <FeatsSection feats={feats} addFeatToCharacter={addFeatToCharacter} />}</div>
 					</div>
 				</div>
 			)}
@@ -889,8 +910,8 @@ const CharacterCreation = () => {
 										</div>
 									</div>
 								))}
-								<button className="btn resetBtn" onClick={resetBonus}>
-									Reset Bonuses
+								<button className="btn resetBtn redReset" onClick={resetBonus}>
+									Reset Bonuses and feats
 								</button>
 							</div>
 						</div>
@@ -905,12 +926,12 @@ const CharacterCreation = () => {
 									(lvl) =>
 										character.level >= lvl && (
 											<div key={lvl} className="btnContainerCreation">
-												Level {lvl}:
-												<button className="btn btnFeat" onClick={() => showDivSelection("feats")} disabled={selectedLevels[lvl]}>
-													Feat
+												<p>Level {lvl}:</p>
+												<button className="btn btnFeat" onClick={() => handleFeatSelection(lvl)} disabled={selectedLevels[lvl] !== null}>
+													{selectedLevels[lvl] === "feat" ? "Feat Selected" : "Feat"}
 												</button>
-												<button className="btn btnFeat" onClick={() => handleASI(lvl)} disabled={selectedLevels[lvl]}>
-													ASI
+												<button className="btn btnFeat" onClick={() => handleASI(lvl)} disabled={selectedLevels[lvl] !== null}>
+													{selectedLevels[lvl] === "asi" ? "ASI Selected" : "ASI"}
 												</button>
 											</div>
 										)
@@ -935,7 +956,6 @@ const CharacterCreation = () => {
 					<div className="step step4">
 						<h2>Step 5: Polish your identity</h2>
 						<div className="subSectionCreation">
-							<p>This is the last step before creating your character.</p>
 							<p>Note that usually those stats are related to your class, although, we want to let you choose them more freely in case your DM is more flexible about them.</p>
 							<p style={{ color: "darkgreen" }}>You can always edit those sections later.</p>
 						</div>
@@ -960,17 +980,6 @@ const CharacterCreation = () => {
 							<small>Typically, you'd have the base equipment for your class. But your DM and level could decide otherwise.</small>
 						</div>
 
-						<div className="subSectionCreation">
-							<p>Enter your starting items:</p>
-							<textarea className="inputCreation" placeholder="Enter any items and gold you may have"></textarea>
-							<small>You should discuss your starting gold and items with your DM.</small>
-						</div>
-
-						<div className="subSectionCreation">
-							<p>Add a description about your character and its personality:</p>
-							<textarea className="inputCreation" placeholder="Enter your character's description here..."></textarea>
-						</div>
-
 						<div className="btnContainerCreation">
 							<button className="btn btnBack" onClick={goBack}>
 								Back
@@ -984,6 +993,44 @@ const CharacterCreation = () => {
 
 				{step === 5 && (
 					<div className="step step5">
+						<h2>You are almost there!</h2>
+						<p>This is the last step before creating your character.</p>
+
+						<div className="subSectionCreation">
+							<p>Enter your starting items:</p>
+							<textarea className="inputCreation" placeholder="Enter any items and gold you may have"></textarea>
+							<small>You should discuss your starting items with your DM.</small>
+						</div>
+
+						<div className="subSectionCreation">
+							<p>Enter your character's starting gold:</p>
+							<input type="text" className="inputCreation" placeholder="Enter your character's starting gold" />
+							<small>You should discuss your starting gold with your DM.</small>
+						</div>
+
+						<div className="subSectionCreation">
+							<p>Add a description about your character and its personality:</p>
+							<textarea className="inputCreation" placeholder="Enter your character's description here..."></textarea>
+						</div>
+
+						<div className="subSectionCreation">
+							<p>Add a backstory for your character:</p>
+							<textarea className="inputCreation" placeholder="Enter your character's backstory here..."></textarea>
+						</div>
+
+						<div className="btnContainerCreation">
+							<button className="btn btnBack" onClick={goBack}>
+								Back
+							</button>
+							<button className="btn btnNext" onClick={goNext}>
+								Next
+							</button>
+						</div>
+					</div>
+				)}
+
+				{step === 6 && (
+					<div className="step step6">
 						<h2>You are done!</h2>
 						<div className="subSectionCreation">
 							<h3>Character Overview</h3>

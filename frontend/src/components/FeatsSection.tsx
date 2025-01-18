@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import FeatCard from "./Feat";
 
 interface Feat {
 	id: number;
@@ -6,21 +7,25 @@ interface Feat {
 	description: string;
 }
 
-const FeatsSection: React.FC<{ feats: Feat[] }> = ({ feats }) => {
-	const [openFeatId, setOpenFeatId] = useState<number | null>(null);
+const FeatsSection: React.FC<{ feats: Feat[]; addFeatToCharacter: (feat: Feat) => void }> = ({ feats, addFeatToCharacter }) => {
+	const [filteredFeats, setFilteredFeats] = useState<Feat[]>(feats);
 
-	const toggleFeat = (id: number) => {
-		setOpenFeatId((prevId) => (prevId === id ? null : id));
+	const filterFeats = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const searchTerm = event.target.value.toLowerCase();
+		setFilteredFeats(feats.filter((feat) => feat.name.toLowerCase().includes(searchTerm)));
 	};
 
+	useEffect(() => {
+		setFilteredFeats(feats);
+	}, [feats]);
+
 	return (
-		<div className="feats-container">
-			<div className="feats-list">
-				{feats.map((feat) => (
-					<div key={feat.id} className="feat-card">
-						<h3 onClick={() => toggleFeat(feat.id)}>{feat.name}</h3>
-						<div className={`feat-description ${openFeatId === feat.id ? "open" : ""}`}>{feat.description}</div>
-					</div>
+		<div className="featsContainer">
+			<h2>Feats</h2>
+			<input type="text" placeholder="Search Feats" onChange={filterFeats} />
+			<div className="featsList">
+				{filteredFeats.map((feat) => (
+					<FeatCard key={feat.id} feat={feat} addFeatToCharacter={addFeatToCharacter} />
 				))}
 			</div>
 		</div>
