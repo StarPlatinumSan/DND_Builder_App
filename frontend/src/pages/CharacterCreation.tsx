@@ -96,6 +96,7 @@ const CharacterCreation = () => {
 	const [classes, setClasses] = useState<Class[]>([]);
 	const [backgrounds, setBackgrounds] = useState<Background[]>([]);
 	const [feats, setFeats] = useState<Feat[]>([]);
+	const [isPointBuyValid, setIsPointBuyValid] = useState(false);
 
 	const [character, setCharacter] = useState<Character>({
 		level: 1,
@@ -260,9 +261,17 @@ const CharacterCreation = () => {
 			case 1:
 				break;
 			case 2:
-				for (const statValue of Object.values(character.stats)) {
-					if (statValue === 0) {
-						setMessage("Please fill in all the fields.");
+				if (method === "point") {
+					if (!isPointBuyValid) {
+						setMessage("Please distribute your 27 points among all the stats.");
+						setTimeout(() => {
+							setMessage("");
+						}, 3000);
+						return false;
+					}
+				} else if (method === "roll") {
+					if (Object.values(character.stats).some((stat) => stat === 0)) {
+						setMessage("Please asign all rolled values to your stats.");
 						setTimeout(() => {
 							setMessage("");
 						}, 3000);
@@ -382,6 +391,12 @@ const CharacterCreation = () => {
 		} else if (name === "feats") {
 			setShowDiv("feats");
 		}
+	};
+
+	const validPointBuy = (isValid: boolean): boolean => {
+		setIsPointBuyValid(isValid);
+		console.log(isPointBuyValid);
+		return isValid;
 	};
 
 	const setRaceCharacter = (raceName: string) => {
@@ -861,7 +876,7 @@ const CharacterCreation = () => {
 							<div className="subSectionCreation">
 								<p style={{ color: "green" }}>This option is if you want to build your stats using the 27 points system:</p>
 								<div className="or">-</div>
-								<Stats props={"point"} updateStats={updateStats} />
+								<Stats props={"point"} updateStats={updateStats} validPointBuy={validPointBuy} />
 							</div>
 						)}
 
