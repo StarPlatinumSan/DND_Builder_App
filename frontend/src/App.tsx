@@ -44,7 +44,6 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/classes" element={<ClassSection />} />
       <Route path="/spells" element={<SpellSection />} />
-      <Route path="/feats" element={<FeatSection />}></Route>
       <Route path="/vault" element={<Vault />}></Route>
       <Route path="/characterCreation" element={<CharacterCreation />}></Route>
     </Routes>
