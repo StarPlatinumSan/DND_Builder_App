@@ -3,13 +3,14 @@ import React, { useEffect, useState } from "react";
 interface StatsProps {
 	props: string;
 	updateStats: (newStats: { [key: string]: number }) => void;
+	validPointBuy?: (bool: boolean) => boolean;
 }
 
 interface Assignments {
 	[key: string]: number | null;
 }
 
-const Stats: React.FC<StatsProps> = ({ props, updateStats }) => {
+const Stats: React.FC<StatsProps> = ({ props, updateStats, validPointBuy }) => {
 	const [pointBuy, setPointBuy] = useState(27);
 	const [assignments, setAssignments] = useState<Assignments>({
 		strength: 8,
@@ -135,6 +136,12 @@ const Stats: React.FC<StatsProps> = ({ props, updateStats }) => {
 		if (pointBuy === 0) {
 			const newStats = Object.fromEntries(Object.entries(assignments).map(([key, value]) => [key, value !== null ? value : 0]));
 			updateStats(newStats);
+
+			if (validPointBuy) validPointBuy(true);
+			console.log("All 27 points have been spent.");
+		} else {
+			if (validPointBuy) validPointBuy(false);
+			console.log(`${pointBuy} points remaining...`);
 		}
 	}, [pointBuy]);
 

@@ -57,6 +57,7 @@
 		align-items: center;
 		gap: 0.5rem;
 		text-align: center;
+		width: 100%;
 	}
 
 	.radioContainer {
@@ -217,10 +218,11 @@
 
 .featsSection {
 	gap: 2rem;
+	align-items: center;
 }
 
 .btnFeat {
-	max-width: 30%;
+	max-width: 50%;
 
 	&:disabled {
 		cursor: not-allowed;
@@ -286,7 +288,7 @@
 	z-index: 11;
 	width: 100%;
 	max-height: 100vh;
-	overflow-y: scroll;
+	overflow-y: auto;
 	margin: 1rem;
 	max-width: 40rem;
 	background-color: $secondaryDark;

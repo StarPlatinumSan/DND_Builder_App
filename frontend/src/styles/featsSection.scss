@@ -1,0 +1,53 @@
+@use "./variables" as *;
+
+.featsContainer {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	padding: 2rem;
+	width: 100%;
+	font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+	font-weight: 500;
+}
+
+.featsList {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	width: 100%;
+}
+
+.searchInput {
+	width: 20vw !important;
+	align-self: center;
+}
+
+.featCard {
+	display: flex;
+	flex-direction: column;
+	background-color: $secondary;
+	color: $lightWhite;
+	border: 1px solid $secondaryAccent;
+	border-radius: 0.25rem;
+	padding: 1rem;
+	gap: 1rem;
+	width: 100%;
+	cursor: pointer;
+}
+
+.featContent {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	padding: 1rem;
+}
+
+.boni {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	color: gold;
+}
+.prerequisite {
+	color: rgb(255, 95, 95);
+}

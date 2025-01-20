@@ -7,7 +7,6 @@ import Login from "./components/Login";
 import CharacterCreation from "./pages/CharacterCreation";
 import SpellSection from "./pages/Archive/SpellSection";
 import ClassSection from "./pages/Archive/ClassSection";
-import FeatSection from "./pages/Archive/FeatsSection";
 
 interface Test {
   id: number;
