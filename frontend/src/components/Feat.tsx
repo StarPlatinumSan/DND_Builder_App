@@ -28,9 +28,9 @@ const FeatCard: React.FC<{ feat: Feat; addFeatToCharacter: (feat: Feat) => void 
 			<SlideDown>
 				{isOpen && (
 					<div className="featContent">
-						<p>{feat.description}</p>
-						<p>{feat.boni || "No bonus available"}</p>
-						{feat.prerequisite && <span className="prerequisite">{feat.prerequisite || null}</span>}
+						{feat.description.length > 0 && <p>{feat.description}</p>}
+						{feat.boni && feat.boni.length > 2 && <p>{feat.boni}</p>}
+						{feat.prerequisite && <span className="prerequisite">Prerequisite {feat.prerequisite || null}</span>}
 
 						<button className="btn maxWidth50" onClick={handleSelect}>
 							Select

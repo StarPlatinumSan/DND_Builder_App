@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 interface StatsProps {
 	props: string;
 	updateStats: (newStats: { [key: string]: number }) => void;
-	validPointBuy?: (bool: boolean) => boolean;
+	validPointBuy?: (bool: boolean) => void;
 }
 
 interface Assignments {
@@ -122,6 +122,8 @@ const Stats: React.FC<StatsProps> = ({ props, updateStats, validPointBuy }) => {
 		});
 	};
 
+	const isRollUsed = (rollIndex: number) => Object.values(assignments).includes(rollIndex);
+
 	useEffect(() => {
 		if (props === "point") {
 			setPointBuy(27);
@@ -133,19 +135,16 @@ const Stats: React.FC<StatsProps> = ({ props, updateStats, validPointBuy }) => {
 	}, [props]);
 
 	useEffect(() => {
-		if (pointBuy === 0) {
-			const newStats = Object.fromEntries(Object.entries(assignments).map(([key, value]) => [key, value !== null ? value : 0]));
-			updateStats(newStats);
-
-			if (validPointBuy) validPointBuy(true);
-			console.log("All 27 points have been spent.");
-		} else {
-			if (validPointBuy) validPointBuy(false);
-			console.log(`${pointBuy} points remaining...`);
+		if (props === "point") {
+			if (pointBuy === 0) {
+				const newStats = Object.fromEntries(Object.entries(assignments).map(([key, value]) => [key, value !== null ? value : 0]));
+				updateStats(newStats);
+				if (validPointBuy) validPointBuy(true);
+			} else {
+				if (validPointBuy) validPointBuy(false);
+			}
 		}
-	}, [pointBuy]);
-
-	const isRollUsed = (rollIndex: number) => Object.values(assignments).includes(rollIndex);
+	}, [pointBuy, props]);
 
 	return (
 		<div className="statsContainer">
@@ -169,7 +168,9 @@ const Stats: React.FC<StatsProps> = ({ props, updateStats, validPointBuy }) => {
 							<div key={stat} className="stat">
 								<h3>{stat.charAt(0).toUpperCase() + stat.slice(1)}</h3>
 								<select onChange={(e) => handleAssign(stat, parseInt(e.target.value))} value={assignments[stat] !== null ? assignments[stat]!.toString() : ""} disabled={rolls.length === 0}>
-									<option>{assignments[stat] !== null ? rolls[assignments[stat]!] : "Select a roll"}</option>
+									<option value="" disabled>
+										{assignments[stat] !== null ? rolls[assignments[stat]!] : "Select a roll"}
+									</option>
 									{rolls.map(
 										(roll, index) =>
 											!isRollUsed(index) && (
@@ -200,7 +201,7 @@ const Stats: React.FC<StatsProps> = ({ props, updateStats, validPointBuy }) => {
 										-
 									</button>
 
-									<input type="number" min="1" max="20" className="inputStats" value={assignments[stat] || 8} />
+									<input type="number" min="1" max="20" className="inputStats" value={assignments[stat] || 8} readOnly />
 
 									<button className="increment" onClick={() => addInput(stat)}>
 										+
@@ -226,7 +227,7 @@ const Stats: React.FC<StatsProps> = ({ props, updateStats, validPointBuy }) => {
 										-
 									</button>
 
-									<input type="number" min="1" max="50" className="inputStats" value={assignments[stat] || 8} />
+									<input type="number" min="1" max="50" className="inputStats" value={assignments[stat] || 8} readOnly />
 
 									<button className="increment" onClick={() => addInput(stat)}>
 										+
