@@ -25,12 +25,13 @@
 .featCard {
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 	background-color: $secondary;
 	color: $lightWhite;
 	border: 1px solid $secondaryAccent;
 	border-radius: 0.25rem;
 	padding: 1rem;
-	gap: 1rem;
 	width: 100%;
 	cursor: pointer;
 }
