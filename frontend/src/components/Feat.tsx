@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import SlideDown from "react-slidedown";
-import "react-slidedown/lib/slidedown.css";
 
 interface Feat {
 	id: number;
