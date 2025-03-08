@@ -62,11 +62,7 @@ const Vault = () => {
 				<header className="vaultHeader">
 					<p className="description">My Vault</p>
 					<div className="desktopVaultHeader">
-						{isLoggedIn ? (
-							<Link to="/characterCreation" className="btn vaultBtn">
-								Create a character
-							</Link>
-						) : (
+						{!isLoggedIn && (
 							<Link to="/login" className="btn vaultBtn">
 								Login to save your characters
 							</Link>
@@ -96,11 +92,7 @@ const Vault = () => {
 
 					<div className="slideMenu">
 						<div className="optionsMobile">
-							{isLoggedIn ? (
-								<Link to="/characterCreation" className="btn btnDarker">
-									Create a character
-								</Link>
-							) : (
+							{!isLoggedIn && (
 								<Link to="/login" className="btn btnDarker">
 									Login to save your characters
 								</Link>

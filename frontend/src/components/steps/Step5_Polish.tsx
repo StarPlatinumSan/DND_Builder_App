@@ -22,9 +22,7 @@ const Step5_Polish: React.FC<Step5_PolishProps> = ({ character, setCharacter, go
 			<h2>Step 5: Polish your identity</h2>
 			<div className="subSectionCreation">
 				<p>Select your character's proficiencies:</p>
-				<button className="btn maxWidth50" onClick={handleProficiencies}>
-					View all Proficiencies
-				</button>
+				<input type="text" placeholder="Enter proficiencies" onClick={handleProficiencies}></input>
 				<small>
 					View your class proficiencies on{" "}
 					<a href="https://www.dndbeyond.com/classes" target="_blank" rel="noopener noreferrer">
@@ -35,18 +33,14 @@ const Step5_Polish: React.FC<Step5_PolishProps> = ({ character, setCharacter, go
 			</div>
 
 			<div className="subSectionCreation">
-				<p>Choose your character's languages:</p>
-				<button className="btn maxWidth50" onClick={handleLanguages}>
-					View all Languages
-				</button>
+				<p>Enter your character's languages:</p>
+				<input type="text" placeholder="Enter languages" onClick={handleLanguages}></input>
 				<small>Typically, your character knows Common and 1-2 more languages.</small>
 			</div>
 
 			<div className="subSectionCreation">
-				<p>Choose your character's equipment:</p>
-				<button className="btn maxWidth50" onClick={handleEquipment}>
-					View all Equipment
-				</button>
+				<p>Enter your character's equipment:</p>
+				<input type="text" placeholder="Enter equipment" onClick={handleEquipment}></input>
 				<small>Typically, you'd have the base equipment for your class. But your DM and level could decide otherwise.</small>
 			</div>
 

@@ -36,7 +36,8 @@ button {
 input[type="text"],
 input[type="email"],
 input[type="password"],
-input[type="number"] {
+input[type="number"],
+input[type="numeric"] {
 	background-color: $secondary;
 	color: $lightWhite;
 	border: 2px solid $secondaryAccent;

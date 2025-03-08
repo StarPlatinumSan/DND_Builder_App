@@ -17,7 +17,7 @@ const Step6_Finalize: React.FC<Step6_FinalizeProps> = ({ character, setCharacter
 		if (name === "gold") {
 			setCharacter((prev) => ({
 				...prev,
-				gold: parseInt(value),
+				gold: value,
 			}));
 		} else if (name === "equipment") {
 			setCharacter((prev) => ({
@@ -48,7 +48,7 @@ const Step6_Finalize: React.FC<Step6_FinalizeProps> = ({ character, setCharacter
 
 			<div className="subSectionCreation">
 				<p>Enter your character's starting gold:</p>
-				<input type="number" className="inputCreation" placeholder="Enter your character's starting gold" name="gold" value={character.gold} onChange={handleChange} />
+				<input type="text" className="inputCreation" placeholder="Enter your character's starting gold" name="gold" value={character.gold} onChange={handleChange} />
 				<small>You should discuss your starting gold with your DM.</small>
 			</div>
 

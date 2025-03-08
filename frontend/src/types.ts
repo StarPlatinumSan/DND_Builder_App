@@ -21,7 +21,7 @@ export interface Character {
 	armorClass: number;
 	initiative: number;
 	speed: number;
-	gold: number;
+	gold: string;
 	skills: string[];
 	proficiencies: string[];
 	equipment: string[];

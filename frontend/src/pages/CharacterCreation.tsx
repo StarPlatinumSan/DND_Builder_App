@@ -45,7 +45,7 @@ const CharacterCreation = () => {
 		armorClass: 0,
 		initiative: 0,
 		speed: 0,
-		gold: 0,
+		gold: "0",
 		skills: [],
 		proficiencies: [],
 		equipment: [],
