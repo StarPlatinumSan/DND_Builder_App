@@ -14,33 +14,34 @@ interface Step7_OverviewProps {
 const Step7_Overview: React.FC<Step7_OverviewProps> = ({ character, setCharacter, goBack, goNext, message, setMessage }) => {
 	const handleSave = () => {
 		console.log("Character saved:", character);
+		// If you have some actual save functionality, call it here
 	};
 
 	return (
-		<div className="step step6">
+		<div className="step step7">
 			<h2>You are almost there!</h2>
 			<div className="subSectionCreation">
 				<h3>Character Overview</h3>
 				<p>
-					<strong>Name:</strong> <input type="text" value={character.name} onChange={(e) => setCharacter({ ...character, name: e.target.value })} />
+					<strong>Name:</strong> {character.name}
 				</p>
 				<p>
-					<strong>Race:</strong> <input type="text" value={character.race} onChange={(e) => setCharacter({ ...character, race: e.target.value })} />
+					<strong>Race:</strong> {character.race}
 				</p>
 				<p>
-					<strong>Subrace:</strong> <input type="text" value={character.subrace} onChange={(e) => setCharacter({ ...character, subrace: e.target.value })} />
+					<strong>Subrace:</strong> {character.subrace}
 				</p>
 				<p>
-					<strong>Class:</strong> <input type="text" value={character.class} onChange={(e) => setCharacter({ ...character, class: e.target.value })} />
+					<strong>Class:</strong> {character.class}
 				</p>
 				<p>
-					<strong>Subclass:</strong> <input type="text" value={character.subclass} onChange={(e) => setCharacter({ ...character, subclass: e.target.value })} />
+					<strong>Subclass:</strong> {character.subclass}
 				</p>
 				<p>
-					<strong>Background:</strong> <input type="text" value={character.background} onChange={(e) => setCharacter({ ...character, background: e.target.value })} />
+					<strong>Background:</strong> {character.background}
 				</p>
 				<p>
-					<strong>Alignment:</strong> <input type="text" value={character.alignment || "Unknown"} onChange={(e) => setCharacter({ ...character, alignment: e.target.value })} />
+					<strong>Alignment:</strong> {character.alignment || "Unknown"}
 				</p>
 
 				<h4>Stats:</h4>
@@ -53,28 +54,29 @@ const Step7_Overview: React.FC<Step7_OverviewProps> = ({ character, setCharacter
 				</ul>
 
 				<p>
-					<strong>Hit Points:</strong> <input type="number" value={character.hitPoints} onChange={(e) => setCharacter({ ...character, hitPoints: parseInt(e.target.value) })} />
+					<strong>Hit Points:</strong> {character.hitPoints}
 				</p>
 				<p>
-					<strong>Hit Die:</strong> <input type="number" value={character.hitDie} onChange={(e) => setCharacter({ ...character, hitDie: parseInt(e.target.value) })} />
+					<strong>Hit Die:</strong> {character.hitDie}
 				</p>
 				<p>
-					<strong>Armor Class:</strong> <input type="number" value={character.armorClass} onChange={(e) => setCharacter({ ...character, armorClass: parseInt(e.target.value) })} />
+					<strong>Armor Class:</strong> {character.armorClass}
 				</p>
 				<p>
-					<strong>Initiative:</strong> <input type="number" value={character.initiative} onChange={(e) => setCharacter({ ...character, initiative: parseInt(e.target.value) })} />
+					<strong>Initiative:</strong> {character.initiative}
 				</p>
 				<p>
-					<strong>Speed:</strong> <input type="number" value={character.speed} onChange={(e) => setCharacter({ ...character, speed: parseInt(e.target.value) })} />
+					<strong>Speed:</strong> {character.speed}
 				</p>
 				<p>
-					<strong>Gold:</strong> <input type="number" value={character.gold} onChange={(e) => setCharacter({ ...character, gold: parseInt(e.target.value) })} />
+					<strong>Gold:</strong> {character.gold}
 				</p>
 
 				<button className="btn" onClick={handleSave}>
 					Save Changes
 				</button>
 			</div>
+
 			<div className="btnContainerCreation">
 				<button className="btn btnBack" onClick={goBack}>
 					Back
@@ -83,6 +85,7 @@ const Step7_Overview: React.FC<Step7_OverviewProps> = ({ character, setCharacter
 					Finish
 				</button>
 			</div>
+
 			{message && <p style={{ color: "red" }}>{message}</p>}
 		</div>
 	);
