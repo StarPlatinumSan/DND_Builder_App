@@ -12,11 +12,6 @@ interface Step7_OverviewProps {
 }
 
 const Step7_Overview: React.FC<Step7_OverviewProps> = ({ character, setCharacter, goBack, goNext, message, setMessage }) => {
-	const handleSave = () => {
-		console.log("Character saved:", character);
-		// If you have some actual save functionality, call it here
-	};
-
 	return (
 		<div className="step step7">
 			<h2>You are almost there!</h2>
@@ -72,9 +67,7 @@ const Step7_Overview: React.FC<Step7_OverviewProps> = ({ character, setCharacter
 					<strong>Gold:</strong> {character.gold}
 				</p>
 
-				<button className="btn" onClick={handleSave}>
-					Save Changes
-				</button>
+				<button className="btn">Save Changes</button>
 			</div>
 
 			<div className="btnContainerCreation">
